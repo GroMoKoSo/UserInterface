@@ -1,0 +1,19 @@
+@startuml Component Diagram
+
+skinparam component {
+  backgroundColor<<presentation>> Lightblue
+  backgroundColor<<container>> Lightgreen
+}
+
+package Groups.page {
+    component "GroupsPage"  as g <<container>> 
+
+    component "TwoCollumnLayout" as t <<container>> 
+
+    component "MyTable" as my <<presentation>> 
+}
+
+g --> t
+t --> my
+
+@enduml

@@ -1,0 +1,80 @@
+@startuml C4_Component
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+
+LAYOUT_WITH_LEGEND()
+LAYOUT_LEFT_RIGHT()
+
+
+Person(user, "User", "Manages the tools")
+
+System(gromokoso, "GroMoKoSo") {
+    Container(reactApp, "Frontend", "React", "Displays content to users") {
+        Component(router, "Router", "React Router", "Handles navigation and routing between pages")
+        Component(app, "App", "React Component", "Main application component")
+
+        Boundary(pages, "Pages", "React Page Components") {
+            Component(homePage, "Home Page", "React Component", "Displays the home page content")
+            
+            Boundary(userPages, "User Pages", "React Page Components") {
+                Component(users, "/users", "React Component", "Displays the list of users")
+                Component(userDetails, "/users/:id", "React Component", "Displays details of a specific user")
+                Component(userEdit, "/users/:id/edit", "React Component", "Form to edit an existing user")
+                Component(userNew, "/users/new", "React Component", "Form to create a new user")
+            }
+
+            Boundary(groupsPages, "Groups Pages", "React Page Components") {
+                Component(groups, "/groups", "React Component", "Displays the list of groups")
+                Component(groupDetails, "/groups/:id", "React Component", "Displays details of a specific group")
+                Component(groupEdit, "/groups/:id/edit", "React Component", "Form to edit an existing group")
+                Component(groupNew, "/groups/new", "React Component", "Form to create a new group")
+            }
+
+            Boundary(apisPages, "APIs Pages", "React Page Components") {
+                Component(apis, "/apis", "React Component", "Displays the list of APIs")
+                Component(apiDetails, "/apis/:id", "React Component", "Displays details of a specific API")
+                Component(apiEdit, "/apis/:id/edit", "React Component", "Form to edit an existing API")
+                Component(apiNew, "/apis/new", "React Component", "Form to create a new API")
+            }    
+        }
+
+        Boundary(utils, "Utils", "Utility & API Code") {
+            Component(apiHelper, "apiHelper", "TS Utility Module", "Provides helper functions for API communication")
+            'Component(httpClient, "HTTP Client", "Axios", "Handles HTTP requests to the CMS")
+        }
+    }
+    Container(apiManagement, "Api-Management", "Java SpringBoot", "Manages the api's")
+    Container(userManagement, "User-Management", "Java SpringBoot", "Manages the Users")
+}
+
+AddRelTag("white", $textColor="white", $lineColor="white")
+
+
+Rel(user, reactApp, "uses")
+
+Rel(app, router, "Routes to")
+Rel(router, pages, "Routes to")
+Rel(pages, apiHelper, "Fetches or posts content")
+
+Rel(apiHelper, apiManagement, "Manages API", "REST", "white", $tags='white') 
+Rel(apiHelper, userManagement, "Manages API", "REST", "white", $tags='white')
+
+' >> Pages
+
+Rel(homePage, users, "Links to")
+Rel(homePage, groups, "Links to")
+Rel(homePage, apis, "Links to")
+
+Rel(users, userDetails, "Links to")
+Rel(users, userNew, "Links to")
+Rel(userDetails, userEdit, "Links to")
+
+Rel(groups, groupDetails, "Links to")
+Rel(groups, groupNew, "Links to")
+Rel(groupDetails, groupEdit, "Links to")
+
+Rel(apis, apiDetails, "Links to")
+Rel(apis, apiNew, "Links to")
+Rel(apiDetails, apiEdit, "Links to")
+
+@enduml
