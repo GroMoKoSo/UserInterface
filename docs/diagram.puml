@@ -14,18 +14,20 @@ System(gromokoso, "GroMoKoSo") {
         Component(app, "App", "React Component", "Main application component")
 
         Boundary(pages, "Pages", "React Page Components") {
-            Component(homePage, "Home Page", "React Component", "Displays the home page content")
+            Component(homePage, "/dashboard", "React Component", "Displays the home page content")
+            Component(loginPage, "/login", "React Component", "Displays the login form")
+            Component(myProfilePage, "/me", "React Component", "Displays the user's profile information")
             
             Boundary(userPages, "User Pages", "React Page Components") {
                 Component(users, "/users", "React Component", "Displays the list of users")
-                Component(userDetails, "/users/:id", "React Component", "Displays details of a specific user")
+                Component(userDetails, "/users/:id", "React Component", "Displays profile of a specific user")
                 Component(userEdit, "/users/:id/edit", "React Component", "Form to edit an existing user")
-                Component(userNew, "/users/new", "React Component", "Form to create a new user")
             }
 
             Boundary(groupsPages, "Groups Pages", "React Page Components") {
                 Component(groups, "/groups", "React Component", "Displays the list of groups")
-                Component(groupDetails, "/groups/:id", "React Component", "Displays details of a specific group")
+                Component(groupsPublic, "/groups/public", "React Component", "Displays the list of public groups")
+                Component(groupDetails, "/groups/:id", "React Component", "Displays profile of a specific group")
                 Component(groupEdit, "/groups/:id/edit", "React Component", "Form to edit an existing group")
                 Component(groupNew, "/groups/new", "React Component", "Form to create a new group")
             }
@@ -34,8 +36,8 @@ System(gromokoso, "GroMoKoSo") {
                 Component(apis, "/apis", "React Component", "Displays the list of APIs")
                 Component(apiDetails, "/apis/:id", "React Component", "Displays details of a specific API")
                 Component(apiEdit, "/apis/:id/edit", "React Component", "Form to edit an existing API")
-                Component(apiNew, "/apis/new", "React Component", "Form to create a new API")
             }    
+
         }
 
         Boundary(utils, "Utils", "Utility & API Code") {
@@ -59,22 +61,5 @@ Rel(pages, apiHelper, "Fetches or posts content")
 Rel(apiHelper, apiManagement, "Manages API", "REST", "white", $tags='white') 
 Rel(apiHelper, userManagement, "Manages API", "REST", "white", $tags='white')
 
-' >> Pages
-
-Rel(homePage, users, "Links to")
-Rel(homePage, groups, "Links to")
-Rel(homePage, apis, "Links to")
-
-Rel(users, userDetails, "Links to")
-Rel(users, userNew, "Links to")
-Rel(userDetails, userEdit, "Links to")
-
-Rel(groups, groupDetails, "Links to")
-Rel(groups, groupNew, "Links to")
-Rel(groupDetails, groupEdit, "Links to")
-
-Rel(apis, apiDetails, "Links to")
-Rel(apis, apiNew, "Links to")
-Rel(apiDetails, apiEdit, "Links to")
 
 @enduml
