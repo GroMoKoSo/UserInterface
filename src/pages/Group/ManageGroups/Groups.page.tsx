@@ -12,7 +12,7 @@ type MyGroupT = GroupT & {
     size: number;
 };
 
-export function GroupsPage() {
+export function ManageGroupsPage() {
     const [groups, setGroups] = useState<GroupT[]>([]);
     const { setColorScheme } = useMantineColorScheme();
     const navigate = useNavigate();
@@ -54,6 +54,7 @@ export function GroupsPage() {
                         columns={['id', 'name', 'size']}
                         onEdit={(row) => navigate(row.id.toString())}
                         onDelete={onDelete}
+                        initialSortKey='id'
                     />
                 }
             />

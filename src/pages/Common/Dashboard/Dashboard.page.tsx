@@ -1,11 +1,11 @@
 import { Title, useMantineColorScheme } from '@mantine/core';
 
-export function HomePage() {
+export function DashboardPage() {
   const { setColorScheme } = useMantineColorScheme();
   setColorScheme('light')
   return (
     <>
-      <Title>GroMoKoSo</Title>
+      <Title>GroMoKoSo Dashboard</Title>
     </>
   );
 }

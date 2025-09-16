@@ -3,6 +3,7 @@ import {
     IconGauge,
     IconApi,
     IconUsersGroup,
+    IconUsersPlus,
 } from '@tabler/icons-react';
 import { Code, Group, ScrollArea, Title } from '@mantine/core';
 import { LinksGroup } from '../NavbarLinksGroup/NavbarLinksGroup';
@@ -12,9 +13,11 @@ import { link } from 'fs';
 
 const mockdata = [
     { label: 'Dashboard', icon: IconGauge, link: '/' },
-    { label: 'Users', icon: IconUser, link: '/users' },
-    { label: 'Groups', icon: IconUsersGroup, link: '/groups' },
-    { label: "Api's", icon: IconApi, link: '/apis' },
+    { label: "My Api's", icon: IconApi, link: '/apis' },
+    { label: 'Public Groups', icon: IconUsersPlus, link: '/groups/public' },
+    { label: 'Manage Users', icon: IconUser, link: '/users' },
+    { label: 'Manage Groups', icon: IconUsersGroup, link: '/groups' },
+    
 ];
 
 export function NavbarNested() {

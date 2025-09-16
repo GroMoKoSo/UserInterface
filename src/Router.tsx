@@ -1,13 +1,17 @@
-import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-import { HomePage } from './pages/Home.page';
+import { createBrowserRouter, RouterProvider, Outlet, Navigate } from 'react-router-dom';
+import { DashboardPage } from './pages/Common/Dashboard/Dashboard.page';
 import { NavbarNested } from './components/sidebar/NavbarNested/NavbarNested';
 import { Container, Stack } from '@mantine/core';
-import { UsersPage } from './pages/User/Users.page';
+import { ManageUsersPage } from './pages/User/ManageUsers/ManageUsers.page';
 import { ApisPage } from './pages/Api/Apis.page';
-import { GroupsPage } from './pages/Group/Groups.page';
+import { ManageGroupsPage } from './pages/Group/ManageGroups/Groups.page';
+import { PublicGroupsPage } from './pages/Group/PublicGroups/PublicGroups.page';
 import path from 'path';
 import { UserDetailsPage } from './pages/User/UserDetails/UsersDetails.page';
 import { GroupDetailsPage } from './pages/Group/GroupDetails/GroupDetails.page';
+import { LoginPage } from './pages/Common/Login/Login.page';
+import { ProfilePage } from './pages/Common/Profile/Profile.page';
+import { NotFoundPage } from './pages/Common/NotFound/NotFound.page';
 
 function Layout() {
     return (
@@ -33,31 +37,63 @@ const router = createBrowserRouter([
         path: '/',
         element: <Layout />, // Wrap routes with Layout
         children: [
+            // Common routes
             {
                 path: '/',
-                element: <HomePage />,
+                element: <DashboardPage />,
             },
             {
+                path: '/profile',
+                element: <ProfilePage />,
+            },
+            // User routes
+            {
                 path: '/users',
-                element: <UsersPage />
+                element: <ManageUsersPage />
             },
             {
                 path: '/users/:id',
                 element: <UserDetailsPage />
             },
+            // Group routes
             {
                 path: '/groups',
-                element: <GroupsPage />,
+                element: <ManageGroupsPage />,
+            },
+            {
+                path: '/groups/public',
+                element: <PublicGroupsPage />,
             },
             {
                 path: '/groups/:id',
                 element: <GroupDetailsPage />,
             },
+            // API routes
+            // currently disabled due to incomplete implementation
+            // {
+            //     path: '/apis',
+            //     element: <ApisPage />,
+            // },
+            // Forward unknown routes to NotFound
             {
-                path: '/apis',
-                element: <ApisPage />,
+                path: '*',
+                element: <Navigate to="/not-found" replace />,
             },
         ],
+    },
+    // Route NOT wrapped in Layout
+    {
+        path: '/login',
+        element: <LoginPage />,
+    },
+    // Fallback for unknown routes outside Layout
+    {
+        path: '/not-found',
+        element: <NotFoundPage />,
+    },
+    {
+        path: '*',
+        element: <Navigate to="/not-found" replace />,
     },
 ]);
 

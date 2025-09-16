@@ -8,7 +8,7 @@ import type { UserT } from '@/types/Types';
 import { deleteUser, getAllUsers } from '@/utils/UserApiHelper';
 import { useConfirm } from '@/components/confirm/useConfirm'; // Pfad anpassen
 
-export function UsersPage() {
+export function ManageUsersPage() {
     const [users, setUsers] = useState<UserT[]>([]);
     const { setColorScheme } = useMantineColorScheme();
     const navigate = useNavigate();
