@@ -1,0 +1,45 @@
+@startuml "Sequence"
+title useConfirm mit Payload (Promise-basiertes Confirm-Modal)
+
+actor User
+participant "Aufrufer-Komponente\n(z.B. UsersPage)" as Caller
+participant "useConfirm Hook\n(confirm, modal)" as Hook
+participant "Modal" as Modal
+
+== confirm() aufrufen ==
+Caller -> Hook: confirm(options{ title, content, payload, ... })
+activate Hook
+Hook -> Hook: create Promise\nstore resolver in state
+Hook -> Hook: setOpts(options)\nsetOpened(true)
+Hook -> Caller: return Promise<false | Payload>
+deactivate Hook
+
+== Modal wird gerendert ==
+Caller -> Modal: {modal} wird sichtbar (opened = true)
+Modal -> Modal: Content-Render\ncontent(payload?)
+
+note right of Modal
+  content kann eine Funktion sein,
+  die das payload erhält, z.B.:
+  content: (p) => <p>Delete {p.name}?</p>
+end note
+
+== Nutzer-Interaktion ==
+alt User klickt "Cancel"
+  User -> Modal: Klick "Cancel"
+  Modal -> Hook: handleCancel()
+  Hook -> Hook: setOpened(false)\nresolver(false); clear resolver
+  Hook --> Caller: Promise resolved mit false
+  Caller -> Caller: if (res === false)\nAbbruch
+else User klickt "OK"
+  User -> Modal: Klick "OK"
+  Modal -> Hook: handleOk()
+  Hook -> Hook: setOpened(false)\nresolver(payload || true); clear resolver
+  Hook --> Caller: Promise resolved mit payload oder true
+  Caller -> Caller: if (res !== false)\nAktion ausführen (z.B. deleteUser(res.id))
+end
+
+== Aufräumen ==
+Caller -> Modal: Modal unmounted/hidden (opened=false)
+
+@enduml
