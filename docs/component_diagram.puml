@@ -1,4 +1,4 @@
-@startuml C4_Component
+@startuml C4 Component Diagram: User Interface
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
 
 
@@ -9,7 +9,7 @@ LAYOUT_LEFT_RIGHT()
 Person(user, "User", "Manages the tools")
 
 System(gromokoso, "GroMoKoSo") {
-    Container(reactApp, "Frontend", "React", "Displays content to users") {
+    Container(userInterface, "User-Interface", "React", "Displays content to users") {
         Component(router, "Router", "React Router", "Handles navigation and routing between pages")
         Component(app, "App", "React Component", "Main application component")
 
@@ -21,21 +21,17 @@ System(gromokoso, "GroMoKoSo") {
             Boundary(userPages, "User Pages", "React Page Components") {
                 Component(users, "/users", "React Component", "Displays the list of users")
                 Component(userDetails, "/users/:id", "React Component", "Displays profile of a specific user")
-                Component(userEdit, "/users/:id/edit", "React Component", "Form to edit an existing user")
             }
 
             Boundary(groupsPages, "Groups Pages", "React Page Components") {
                 Component(groups, "/groups", "React Component", "Displays the list of groups")
                 Component(groupsPublic, "/groups/public", "React Component", "Displays the list of public groups")
                 Component(groupDetails, "/groups/:id", "React Component", "Displays profile of a specific group")
-                Component(groupEdit, "/groups/:id/edit", "React Component", "Form to edit an existing group")
-                Component(groupNew, "/groups/new", "React Component", "Form to create a new group")
             }
 
             Boundary(apisPages, "APIs Pages", "React Page Components") {
                 Component(apis, "/apis", "React Component", "Displays the list of APIs")
                 Component(apiDetails, "/apis/:id", "React Component", "Displays details of a specific API")
-                Component(apiEdit, "/apis/:id/edit", "React Component", "Form to edit an existing API")
             }    
 
         }
@@ -52,14 +48,14 @@ System(gromokoso, "GroMoKoSo") {
 AddRelTag("white", $textColor="white", $lineColor="white")
 
 
-Rel(user, reactApp, "uses")
+Rel(user, userInterface, "uses")
 
 Rel(app, router, "Routes to")
 Rel(router, pages, "Routes to")
 Rel(pages, apiHelper, "Fetches or posts content")
 
-Rel(apiHelper, apiManagement, "Manages API", "REST", "white", $tags='white') 
-Rel(apiHelper, userManagement, "Manages API", "REST", "white", $tags='white')
+Rel(apiHelper, apiManagement, "uses", "REST", $tags='white') 
+Rel(apiHelper, userManagement, "uses", "REST", $tags='white')
 
 
 @enduml

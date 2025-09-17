@@ -4,7 +4,7 @@ import { NavbarNested } from './components/sidebar/NavbarNested/NavbarNested';
 import { Container, Stack } from '@mantine/core';
 import { ManageUsersPage } from './pages/User/ManageUsers/ManageUsers.page';
 import { ApisPage } from './pages/Api/Apis.page';
-import { ManageGroupsPage } from './pages/Group/ManageGroups/Groups.page';
+import { ManageGroupsPage } from './pages/Group/ManageGroups/ManageGroups.page';
 import { PublicGroupsPage } from './pages/Group/PublicGroups/PublicGroups.page';
 import path from 'path';
 import { UserDetailsPage } from './pages/User/UserDetails/UsersDetails.page';
@@ -43,7 +43,11 @@ const router = createBrowserRouter([
                 element: <DashboardPage />,
             },
             {
-                path: '/profile',
+                path: '/dashboard',
+                element: <DashboardPage />,
+            },
+            {
+                path: '/me',
                 element: <ProfilePage />,
             },
             // User routes
