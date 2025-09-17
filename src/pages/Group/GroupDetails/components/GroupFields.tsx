@@ -1,5 +1,5 @@
-import { GroupT, UserT } from "@/types/Types";
-import { getAllUsers } from "@/utils/UserApiHelper";
+import { AggregatedUserT, SimpleGroupT, SimpleUserT } from "@/types/Types";
+import { getAllUsers } from "@/utils/api/UserApiService";
 import { Accordion, Button, Fieldset, Group, Modal, Select, Stack, TextInput } from "@mantine/core";
 import { useEffect, useState } from "react";
 import accordionClasses from "../../../User/UserDetails/components/UserGroups.module.css"
@@ -7,80 +7,31 @@ import { MyTable } from "@/components/Table/Table";
 import { useDisclosure } from "@mantine/hooks";
 import {IconLink} from "@tabler/icons-react"
 import { useNavigate } from "react-router-dom";
+import { getAggregatedGroup } from "@/utils/api/GroupApiService";
+import { useAddModal } from "../hooks/UseAddModal";
+import { useEditModal } from "../hooks/UseEditModal";
 
 
-type GroupMemberT = UserT & {
-    groupRole: "Admin" | "User"
+export type GroupMemberT = SimpleUserT & {
+    groupRole: AggregatedUserT['groupMemberships'][number]['roleInGroup'];
 };
 
-function useAddModal() {
-    const [opened, { open, close }] = useDisclosure(false);
-
-    const element = (
-        <Modal
-            opened={opened}
-            onClose={close}
-            title="Add a User to the Group"
-            overlayProps={{ backgroundOpacity: 0.55, blur: 3 }}
-        >
-            <Button>Add User</Button>
-        </Modal>
-    );
-
-    return { opened, open, close, element };
-}
-
-function useEditModal(member: GroupMemberT | null, group?: GroupT | null) {
-    const [opened, { open, close }] = useDisclosure(false);
-    const navigate = useNavigate()
-
-    const element = member && group ? (
-        <Modal
-            opened={opened}
-            onClose={close}
-            title={<strong>{member.name}</strong>}
-            overlayProps={{ backgroundOpacity: 0.55, blur: 3 }}
-        >
-            <Stack>
-
-                <Button
-                    variant="light"
-                    onClick={() => navigate(`/users/${member.id}`)}
-                >
-                    Go to User Details
-                </Button>             
-
-                <Select
-                    label={`Role in ${group.name}`}
-                    placeholder="Pick a role"
-                    data={["Admin", "User"]}
-                    defaultValue={member.groupRole}
-                />
-
-
-
-                <Button mt="md" color="green" onClick={close}>
-                    Save
-                </Button>
-
-            </Stack>
-        </Modal>
-    ) : null;
-    return { opened, open, close, element };
-}
-
-export default function GroupFields({ group }: { group: GroupT | null }) {
+export default function GroupFields({ group }: { group: SimpleGroupT  }) {
     const [groupMembers, setGroupMembers] = useState<GroupMemberT[]>([]);
     const [currentlyEditingMember, setCurrentlyEditingMember] = useState<GroupMemberT | null>(null);
 
     useEffect(() => {
-        const user: UserT[] = getAllUsers();
-        const temp = user
-            .filter((u) => u.groups.map((g) => g.id).includes(group?.id || 0))
-            .map((u) => {
-                const roleHere = u.groups.find((g) => g.id === group?.id)?.role || "User";
-                return { ...u, groupRole: roleHere };
-            });
+        const users: SimpleUserT[] = getAllUsers();
+        const aggregatedGroup = getAggregatedGroup(group.id);
+
+        if (!users || !aggregatedGroup) {
+            return
+        }
+
+        const temp: GroupMemberT[] = aggregatedGroup.members.map((member: { roleInGroup: "Group-Admin" | "Group-Editor" | "Group-Member"; user: SimpleUserT }) => ({
+            ...member.user,
+            groupRole: member.roleInGroup,
+        }));
         setGroupMembers(temp);
     }, [group]);
 

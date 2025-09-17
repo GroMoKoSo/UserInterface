@@ -1,236 +1,184 @@
-import type { UserT } from "@/types/Types";
+import type { SimpleUserT } from "@/types/Types";
 
-export const userMockData:UserT[] = [
+export const userMockData: SimpleUserT[] = [
   {
-    "id": 1,
-    "name": "Alice Müller",
-    "firstName": "Alice",
-    "lastName": "Müller",
-    "role": "Admin",
-    "email": "alice.mueller@example.com",
-    "groups": [
-      { "id": 1, "role": "User" },
-      { "id": 2, "role": "Admin" }
-    ]
+    id: 1,
+    username: "alice.mueller",
+    name: "Alice Müller",
+    firstName: "Alice",
+    lastName: "Müller",
+    systemrole: "System-Admin",
+    email: "alice.mueller@example.com",
   },
   {
-    "id": 2,
-    "name": "Bob Schneider",
-    "firstName": "Bob",
-    "lastName": "Schneider",
-    "role": "User",
-    "email": "bob.schneider@example.com",
-    "groups": [
-      { "id": 2, "role": "Admin" },
-      { "id": 3, "role": "User" }
-    ]
+    id: 2,
+    username: "bob.schneider",
+    name: "Bob Schneider",
+    firstName: "Bob",
+    lastName: "Schneider",
+    systemrole: "System-Member",
+    email: "bob.schneider@example.com",
   },
   {
-    "id": 3,
-    "name": "Clara Fischer",
-    "firstName": "Clara",
-    "lastName": "Fischer",
-    "role": "Manager",
-    "email": "clara.fischer@example.com",
-    "groups": [
-      { "id": 1, "role": "User" }
-    ]
+    id: 3,
+    username: "clara.fischer",
+    name: "Clara Fischer",
+    firstName: "Clara",
+    lastName: "Fischer",
+    systemrole: "System-Member",
+    email: "clara.fischer@example.com",
   },
   {
-    "id": 4,
-    "name": "David Becker",
-    "firstName": "David",
-    "lastName": "Becker",
-    "role": "User",
-    "email": "david.becker@example.com",
-    "groups": [
-      { "id": 3, "role": "Admin" }
-    ]
+    id: 4,
+    username: "david.becker",
+    name: "David Becker",
+    firstName: "David",
+    lastName: "Becker",
+    systemrole: "System-Member",
+    email: "david.becker@example.com",
   },
   {
-    "id": 5,
-    "name": "Eva Wagner",
-    "firstName": "Eva",
-    "lastName": "Wagner",
-    "role": "Admin",
-    "email": "eva.wagner@example.com",
-    "groups": [
-      { "id": 1, "role": "User" },
-      { "id": 4, "role": "Admin" }
-    ]
+    id: 5,
+    username: "eva.wagner",
+    name: "Eva Wagner",
+    firstName: "Eva",
+    lastName: "Wagner",
+    systemrole: "System-Admin",
+    email: "eva.wagner@example.com",
   },
   {
-    "id": 6,
-    "name": "Felix Braun",
-    "firstName": "Felix",
-    "lastName": "Braun",
-    "role": "User",
-    "email": "felix.braun@example.com",
-    "groups": [
-      { "id": 2, "role": "Admin" }
-    ]
+    id: 6,
+    username: "felix.braun",
+    name: "Felix Braun",
+    firstName: "Felix",
+    lastName: "Braun",
+    systemrole: "System-Member",
+    email: "felix.braun@example.com",
   },
   {
-    "id": 7,
-    "name": "Greta Hofmann",
-    "firstName": "Greta",
-    "lastName": "Hofmann",
-    "role": "User",
-    "email": "greta.hofmann@example.com",
-    "groups": [
-      { "id": 2, "role": "Admin" },
-      { "id": 3, "role": "User" }
-    ]
+    id: 7,
+    username: "greta.hofmann",
+    name: "Greta Hofmann",
+    firstName: "Greta",
+    lastName: "Hofmann",
+    systemrole: "System-Member",
+    email: "greta.hofmann@example.com",
   },
   {
-    "id": 8,
-    "name": "Henry Krause",
-    "firstName": "Henry",
-    "lastName": "Krause",
-    "role": "Manager",
-    "email": "henry.krause@example.com",
-    "groups": [
-      { "id": 3, "role": "Admin" },
-      { "id": 4, "role": "User" }
-    ]
+    id: 8,
+    username: "henry.krause",
+    name: "Henry Krause",
+    firstName: "Henry",
+    lastName: "Krause",
+    systemrole: "System-Member",
+    email: "henry.krause@example.com",
   },
   {
-    "id": 9,
-    "name": "Isabel König",
-    "firstName": "Isabel",
-    "lastName": "König",
-    "role": "User",
-    "email": "isabel.koenig@example.com",
-    "groups": [
-      { "id": 1, "role": "User" }
-    ]
+    id: 9,
+    username: "isabel.koenig",
+    name: "Isabel König",
+    firstName: "Isabel",
+    lastName: "König",
+    systemrole: "System-Member",
+    email: "isabel.koenig@example.com",
   },
   {
-    "id": 10,
-    "name": "Jonas Vogel",
-    "firstName": "Jonas",
-    "lastName": "Vogel",
-    "role": "User",
-    "email": "jonas.vogel@example.com",
-    "groups": [
-      { "id": 1, "role": "User" },
-      { "id": 2, "role": "Admin" }
-    ]
+    id: 10,
+    username: "jonas.vogel",
+    name: "Jonas Vogel",
+    firstName: "Jonas",
+    lastName: "Vogel",
+    systemrole: "System-Member",
+    email: "jonas.vogel@example.com",
   },
   {
-    "id": 11,
-    "name": "Klara Busch",
-    "firstName": "Klara",
-    "lastName": "Busch",
-    "role": "Admin",
-    "email": "klara.busch@example.com",
-    "groups": [
-      { "id": 4, "role": "User" }
-    ]
+    id: 11,
+    username: "klara.busch",
+    name: "Klara Busch",
+    firstName: "Klara",
+    lastName: "Busch",
+    systemrole: "System-Admin",
+    email: "klara.busch@example.com",
   },
   {
-    "id": 12,
-    "name": "Lukas Wolf",
-    "firstName": "Lukas",
-    "lastName": "Wolf",
-    "role": "User",
-    "email": "lukas.wolf@example.com",
-    "groups": [
-      { "id": 2, "role": "Admin" },
-      { "id": 3, "role": "User" }
-    ]
+    id: 12,
+    username: "lukas.wolf",
+    name: "Lukas Wolf",
+    firstName: "Lukas",
+    lastName: "Wolf",
+    systemrole: "System-Member",
+    email: "lukas.wolf@example.com",
   },
   {
-    "id": 13,
-    "name": "Mara Weiß",
-    "firstName": "Mara",
-    "lastName": "Weiß",
-    "role": "Manager",
-    "email": "mara.weiss@example.com",
-    "groups": [
-      { "id": 1, "role": "User" },
-      { "id": 4, "role": "Admin" }
-    ]
+    id: 13,
+    username: "mara.weiss",
+    name: "Mara Weiß",
+    firstName: "Mara",
+    lastName: "Weiß",
+    systemrole: "System-Member",
+    email: "mara.weiss@example.com",
   },
   {
-    "id": 14,
-    "name": "Noah Schäfer",
-    "firstName": "Noah",
-    "lastName": "Schäfer",
-    "role": "User",
-    "email": "noah.schaefer@example.com",
-    "groups": [
-      { "id": 3, "role": "User" }
-    ]
+    id: 14,
+    username: "noah.schaefer",
+    name: "Noah Schäfer",
+    firstName: "Noah",
+    lastName: "Schäfer",
+    systemrole: "System-Member",
+    email: "noah.schaefer@example.com",
   },
   {
-    "id": 15,
-    "name": "Olivia Hartmann",
-    "firstName": "Olivia",
-    "lastName": "Hartmann",
-    "role": "User",
-    "email": "olivia.hartmann@example.com",
-    "groups": [
-      { "id": 1, "role": "Admin" },
-      { "id": 2, "role": "User" }
-    ]
+    id: 15,
+    username: "olivia.hartmann",
+    name: "Olivia Hartmann",
+    firstName: "Olivia",
+    lastName: "Hartmann",
+    systemrole: "System-Member",
+    email: "olivia.hartmann@example.com",
   },
   {
-    "id": 16,
-    "name": "Paul Neumann",
-    "firstName": "Paul",
-    "lastName": "Neumann",
-    "role": "Admin",
-    "email": "paul.neumann@example.com",
-    "groups": [
-      { "id": 2, "role": "User" },
-      { "id": 4, "role": "Admin" }
-    ]
+    id: 16,
+    username: "paul.neumann",
+    name: "Paul Neumann",
+    firstName: "Paul",
+    lastName: "Neumann",
+    systemrole: "System-Admin",
+    email: "paul.neumann@example.com",
   },
   {
-    "id": 17,
-    "name": "Quentin Richter",
-    "firstName": "Quentin",
-    "lastName": "Richter",
-    "role": "User",
-    "email": "quentin.richter@example.com",
-    "groups": [
-      { "id": 4, "role": "User" }
-    ]
+    id: 17,
+    username: "quentin.richter",
+    name: "Quentin Richter",
+    firstName: "Quentin",
+    lastName: "Richter",
+    systemrole: "System-Member",
+    email: "quentin.richter@example.com",
   },
   {
-    "id": 18,
-    "name": "Rosa Lange",
-    "firstName": "Rosa",
-    "lastName": "Lange",
-    "role": "User",
-    "email": "rosa.lange@example.com",
-    "groups": [
-      { "id": 1, "role": "Admin" },
-      { "id": 3, "role": "User" }
-    ]
+    id: 18,
+    username: "rosa.lange",
+    name: "Rosa Lange",
+    firstName: "Rosa",
+    lastName: "Lange",
+    systemrole: "System-Member",
+    email: "rosa.lange@example.com",
   },
   {
-    "id": 19,
-    "name": "Stefan Keller",
-    "firstName": "Stefan",
-    "lastName": "Keller",
-    "role": "Manager",
-    "email": "stefan.keller@example.com",
-    "groups": [
-      { "id": 2, "role": "User" }
-    ]
+    id: 19,
+    username: "stefan.keller",
+    name: "Stefan Keller",
+    firstName: "Stefan",
+    lastName: "Keller",
+    systemrole: "System-Member",
+    email: "stefan.keller@example.com",
   },
   {
-    "id": 20,
-    "name": "Tina Schmitt",
-    "firstName": "Tina",
-    "lastName": "Schmitt",
-    "role": "User",
-    "email": "tina.schmitt@example.com",
-    "groups": [
-      { "id": 3, "role": "Admin" },
-      { "id": 4, "role": "User" }
-    ]
-  }
-]
+    id: 20,
+    username: "tina.schmitt",
+    name: "Tina Schmitt",
+    firstName: "Tina",
+    lastName: "Schmitt",
+    systemrole: "System-Member",
+    email: "tina.schmitt@example.com",
+  },
+];

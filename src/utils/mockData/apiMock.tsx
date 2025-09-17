@@ -1,6 +1,6 @@
 import type { ApiSpecT } from "@/types/Types";
 
-export const groupMockData:ApiSpecT[] = [
+export const apiMockData:ApiSpecT[] = [
     {
       "id": 1,
       "name": "User Service API",

@@ -1,7 +1,7 @@
 import Header from "@/components/Header/Header";
 import { MyTable } from "@/components/Table/Table";
 import { TwoColumnLayout } from "@/components/TwoColumnLayout/TwoColumnLayout";
-import { UserT } from "@/types/Types";
+import { SimpleUserT } from "@/types/Types";
 
 
 export function PublicGroupsPage() {

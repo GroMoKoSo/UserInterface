@@ -4,24 +4,24 @@ import { useNavigate } from 'react-router-dom';
 import { MyTable } from '@/components/Table/Table';
 import { TwoColumnLayout } from '@/components/TwoColumnLayout/TwoColumnLayout';
 import Header from '@/components/Header/Header';
-import type { GroupT, UserT } from '@/types/Types';
+import type { SimpleGroupT, SimpleUserT } from '@/types/Types';
 import { useConfirm } from '@/components/confirm/useConfirm'; // Pfad anpassen
-import { deleteGroup, getAllGroups } from '@/utils/GroupApiHelper';
+import { deleteGroup, getAllGroups } from '@/utils/api/GroupApiService';
 
-type MyGroupT = GroupT & {
+type MyGroupT = SimpleGroupT & {
     size: number;
 };
 
 export function ManageGroupsPage() {
-    const [groups, setGroups] = useState<GroupT[]>([]);
+    const [groups, setGroups] = useState<SimpleGroupT[]>([]);
     const { setColorScheme } = useMantineColorScheme();
     const navigate = useNavigate();
-    const { confirm, modal } = useConfirm<GroupT>();
+    const { confirm, modal } = useConfirm<SimpleGroupT>();
 
     useEffect(() => { setColorScheme('light'); }, [setColorScheme]);
     useEffect(() => { setGroups(getAllGroups()); }, []);
 
-    async function onDelete(row: GroupT) {
+    async function onDelete(row: SimpleGroupT) {
         const res = await confirm({
             title: 'Delete group?',
             payload: row,

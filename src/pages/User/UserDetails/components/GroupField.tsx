@@ -1,29 +1,26 @@
-import { UserT, GroupT } from '@/types/Types';
-import { getAllGroups } from '@/utils/GroupApiHelper';
+import { SimpleUserT, SimpleGroupT, AggregatedUserT } from '@/types/Types';
+import { getAllGroups } from '@/utils/api/GroupApiService';
 import { Accordion, Button, Group, Select } from '@mantine/core';
 import { useEffect, useState } from 'react';
 
 import accordionClasses from "./UserGroups.module.css"
+import { getAggregatedUser } from '@/utils/api/UserApiService';
 
-type GroupWrapperT = {
-    group: GroupT;
-    role: "Admin" | "User";
-}
+type UserGroupMembershipT = NonNullable<AggregatedUserT['groupMemberships']>[number];
 
-export default function UserGroups({ user: User }: { user: UserT | null }) {
+
+export default function GroupFields({ user: User }: { user: SimpleUserT | null }) {
+
     useEffect(() => {
-
-        const groups: GroupT[] = getAllGroups();
-        const groupIds: number[] = User?.groups.map(g => g.id) || [];
-
-        const tempUserGroups: GroupWrapperT[] = groups.filter((group: GroupT) => groupIds.includes(group.id)).map(g => ({group: g, role: User?.groups.find(ug => ug.id === g.id)?.role || "User"}));
+        const groups: SimpleGroupT[] = getAllGroups();
+        const tempUserGroups: UserGroupMembershipT[] = User ? getAggregatedUser(User.id)?.groupMemberships ?? [] : [];
         setUserGroups(tempUserGroups);
         
-        const tempGroupNames: string[] = groups.map((group: GroupT) => group.name);
+        const tempGroupNames: string[] = groups.map((group: SimpleGroupT) => group.name);
         setGroupNames(tempGroupNames);
     }, [])
 
-    const [userGroups, setUserGroups] = useState<GroupWrapperT[]>([]);
+    const [userGroups, setUserGroups] = useState<UserGroupMembershipT[]>([]);
     const [groupNames, setGroupNames] = useState<string[]>([]);
 
 
@@ -44,7 +41,7 @@ export default function UserGroups({ user: User }: { user: UserT | null }) {
                         label="Role"
                         placeholder="Pick a role"
                         data={['Admin', 'User']}
-                        defaultValue={groupWrapper.role}
+                        defaultValue={groupWrapper.roleInGroup}
                     />
                     <Button
                         color='red'

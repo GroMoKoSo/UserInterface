@@ -4,20 +4,20 @@ import { useNavigate } from 'react-router-dom';
 import { MyTable } from '@/components/Table/Table';
 import { TwoColumnLayout } from '@/components/TwoColumnLayout/TwoColumnLayout';
 import Header from '@/components/Header/Header';
-import type { UserT } from '@/types/Types';
-import { deleteUser, getAllUsers } from '@/utils/UserApiHelper';
+import type { SimpleUserT } from '@/types/Types';
+import { deleteUser, getAllUsers } from '@/utils/api/UserApiService';
 import { useConfirm } from '@/components/confirm/useConfirm'; // Pfad anpassen
 
 export function ManageUsersPage() {
-    const [users, setUsers] = useState<UserT[]>([]);
+    const [users, setUsers] = useState<SimpleUserT[]>([]);
     const { setColorScheme } = useMantineColorScheme();
     const navigate = useNavigate();
-    const { confirm, modal } = useConfirm<UserT>();
+    const { confirm, modal } = useConfirm<SimpleUserT>();
 
     useEffect(() => { setColorScheme('light'); }, [setColorScheme]);
     useEffect(() => { setUsers(getAllUsers()); }, []);
 
-    async function onDelete(row: UserT) {
+    async function onDelete(row: SimpleUserT) {
         const res = await confirm({
             title: 'Delete user?',
             payload: row,
@@ -47,9 +47,9 @@ export function ManageUsersPage() {
             <TwoColumnLayout
                 headerContent={<Header title="Users" />}
                 leftContent={
-                    <MyTable<UserT>
+                    <MyTable<SimpleUserT>
                         data={users}
-                        columns={['id', 'name', 'role', 'email']}
+                        columns={['id', 'name', 'systemrole', 'email']}
                         onEdit={(row) => navigate(row.id.toString())}
                         onDelete={onDelete}
                     />

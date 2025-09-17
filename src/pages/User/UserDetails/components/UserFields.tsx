@@ -1,11 +1,11 @@
-import { UserT } from "@/types/Types";
+import { SimpleUserT } from "@/types/Types";
 import { Fieldset, Group, Select, TextInput } from "@mantine/core";
-import UserGroups from "./UserGroups";
+import GroupFields from "./GroupField";
 
 
 
 
-export default function UserFields({user}: { user: UserT | null }) {
+export default function UserFields({user}: { user: SimpleUserT }) {
 
     if (!user) {
         return "loading";
@@ -39,7 +39,7 @@ export default function UserFields({user}: { user: UserT | null }) {
                         label="Role"
                         placeholder="Pick a role"
                         data={['Admin', 'Manager', 'User']}
-                        defaultValue={user?.role} 
+                        defaultValue={user.systemrole} 
                     />
                     
                 </Group>
@@ -52,7 +52,7 @@ export default function UserFields({user}: { user: UserT | null }) {
                 w={"100%"}
                 maw={1000}
             >
-                <UserGroups user={user} />
+                <GroupFields user={user} />
             </Fieldset>
         </>
     )

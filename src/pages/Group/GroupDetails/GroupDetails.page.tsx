@@ -1,16 +1,16 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { GroupT } from "../../../types/Types";
+import { SimpleGroupT } from "../../../types/Types";
 import Header from "@/components/Header/Header";
 import { Button, Group } from "@mantine/core";
 import { TwoColumnLayout } from "@/components/TwoColumnLayout/TwoColumnLayout";
 import { useConfirm } from "@/components/confirm/useConfirm";
-import { deleteGroup, getGroup } from "@/utils/GroupApiHelper";
+import { deleteGroup, getGroup } from "@/utils/api/GroupApiService";
 import GroupFields from "./components/GroupFields";
 
 
 export function GroupDetailsPage() {
-    const [group, setGroup] = useState<GroupT | null>(null);
+    const [group, setGroup] = useState<SimpleGroupT | null>(null);
     const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
@@ -20,9 +20,9 @@ export function GroupDetailsPage() {
     const navigate = useNavigate();
 
 
-    const { confirm, modal } = useConfirm<GroupT>();
+    const { confirm, modal } = useConfirm<SimpleGroupT>();
 
-    async function onDelete(row: GroupT) {
+    async function onDelete(row: SimpleGroupT) {
         const res = await confirm({
             title: 'Delete group?',
             payload: row,
@@ -47,7 +47,7 @@ export function GroupDetailsPage() {
 
 
     if (!group) {
-        "loading"
+        return "loading"
     }
 
     return (

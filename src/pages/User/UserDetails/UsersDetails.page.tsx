@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { UserT } from "../../../types/Types";
-import { deleteUser, getUser } from "@/utils/UserApiHelper";
+import { SimpleUserT } from "../../../types/Types";
+import { deleteUser, getUser } from "@/utils/api/UserApiService";
 import Header from "@/components/Header/Header";
 import UserFields from "./components/UserFields";
 import { Button, Group } from "@mantine/core";
@@ -11,7 +11,7 @@ import { Notifications } from "@mantine/notifications";
 
 
 export function UserDetailsPage() {
-    const [user, setUser] = useState<UserT | null>(null);
+    const [user, setUser] = useState<SimpleUserT | null>(null);
     const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
@@ -21,9 +21,9 @@ export function UserDetailsPage() {
     const navigate = useNavigate();
 
 
-    const { confirm, modal } = useConfirm<UserT>();
+    const { confirm, modal } = useConfirm<SimpleUserT>();
 
-    async function onDelete(row: UserT) {
+    async function onDelete(row: SimpleUserT) {
         const res = await confirm({
             title: 'Delete user?',
             payload: row,
@@ -48,7 +48,7 @@ export function UserDetailsPage() {
 
 
     if (!user) {
-        "loading"
+        return "loading"
     }
 
     return (
