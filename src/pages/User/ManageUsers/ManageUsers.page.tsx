@@ -26,7 +26,7 @@ export function ManageUsersPage() {
             cancelLabel: 'Cancel',
             content: (u) =>
                 u ? (
-                    <p>Delete user "<strong>{u.name}</strong>" (id: {u.id})?</p>
+                    <p>Delete user "<strong>{u.name}</strong>"?</p>
                 ) : (
                     <p>No user selected.</p>
                 ),

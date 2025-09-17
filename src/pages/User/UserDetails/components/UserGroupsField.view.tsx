@@ -3,21 +3,26 @@ import { getAllGroups } from '@/utils/api/GroupApiService';
 import { Accordion, Button, Group, Select } from '@mantine/core';
 import { useEffect, useState } from 'react';
 
-import accordionClasses from "./UserGroups.module.css"
+import accordionClasses from "./UserGroupsField.module.css"
 import { getAggregatedUser } from '@/utils/api/UserApiService';
-import GroupField from './GroupField';
+import GroupAccordionItem from './GroupAccordionItem.view';
+import { MyLoader } from '@/components/MyLoader/MyLoader.view';
 
 export type UserGroupMembershipT = NonNullable<AggregatedUserT['groupMemberships']>[number];
 
 
-export default function GroupFields({ user }: { user: SimpleUserT }) {
+export default function UserGroupsField({ user }: { user: SimpleUserT | null }) {
+
+    if (!user) {
+        return <MyLoader />;
+    }
 
     useEffect(() => {
         const groups: SimpleGroupT[] = getAllGroups();
         const aggregatedUser = getAggregatedUser(user.id);
         const tempUserGroups: UserGroupMembershipT[] = aggregatedUser?.groupMemberships || [];
         setUserGroupMembership(tempUserGroups);
-        
+
         const tempGroupNames: string[] = groups.map((group: SimpleGroupT) => group.name);
         setGroupNames(tempGroupNames);
     }, [])
@@ -26,9 +31,10 @@ export default function GroupFields({ user }: { user: SimpleUserT }) {
     const [groupNames, setGroupNames] = useState<string[]>([]);
 
 
-    const items = userGroupMemberships.map((userGroupMembership) => ( <GroupField userGroupMembership={userGroupMembership}/>));
+    const items = userGroupMemberships.map((userGroupMembership) => (
+        <GroupAccordionItem userGroupMembership={userGroupMembership} />
+    ));
 
-    console.log(userGroupMemberships)
 
     return (
         <>

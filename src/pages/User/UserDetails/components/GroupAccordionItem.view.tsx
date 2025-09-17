@@ -2,13 +2,16 @@ import { SimpleUserT, SimpleGroupT, AggregatedUserT, GroupRolesT, GROUP_ROLES } 
 import { getAllGroups } from '@/utils/api/GroupApiService';
 import { Accordion, Button, Group, Select } from '@mantine/core';
 import { useEffect, useState } from 'react';
+import { UserGroupMembershipT } from './UserGroupsField.view';
+import { MyLoader } from '@/components/MyLoader/MyLoader.view';
 
-import accordionClasses from "./UserGroups.module.css"
-import { UserGroupMembershipT } from './GroupFields';
+export default function GroupAccordionItem({ userGroupMembership }: { userGroupMembership: UserGroupMembershipT | null}) {
 
-export default function GroupField({ userGroupMembership }: { userGroupMembership: UserGroupMembershipT }) {
+    if (!userGroupMembership) {
+        return <MyLoader />;
+    }
+
     const [selectedRole, setSelectedRole] = useState<GroupRolesT>(userGroupMembership.roleInGroup);
-
 
     return (
         <Accordion.Item

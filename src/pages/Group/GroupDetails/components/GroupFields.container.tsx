@@ -10,16 +10,26 @@ import { useNavigate } from "react-router-dom";
 import { getAggregatedGroup } from "@/utils/api/GroupApiService";
 import { useAddModal } from "../hooks/UseAddModal";
 import { useEditModal } from "../hooks/UseEditModal";
+import { GroupMembersField } from "./GroupMembersField.view";
+import { GroupInformationField } from "./GroupInformationField.view";
+import { MyLoader } from "@/components/MyLoader/MyLoader.view";
 
 
 export type GroupMemberT = SimpleUserT & {
     groupRole: AggregatedUserT['groupMemberships'][number]['roleInGroup'];
 };
 
-export default function GroupFields({ group }: { group: SimpleGroupT  }) {
+export default function GroupFields({ group }: { group: SimpleGroupT | null  }) {
+    if (!group) {
+        return <MyLoader />
+    }
+
     const [groupMembers, setGroupMembers] = useState<GroupMemberT[]>([]);
     const [currentlyEditingMember, setCurrentlyEditingMember] = useState<GroupMemberT | null>(null);
     const [selectedGroupType, setSelectedGroupType] = useState<GroupTypesT>(group.type);
+
+    const { open: openAddModal, element: addModalElement } = useAddModal();
+    const { open: openEditModal, element: editModalElement } = useEditModal(currentlyEditingMember, group);
 
     useEffect(() => {
         const users: SimpleUserT[] = getAllUsers();
@@ -36,47 +46,29 @@ export default function GroupFields({ group }: { group: SimpleGroupT  }) {
         setGroupMembers(temp);
     }, [group]);
 
-    const { open: openAddModal, element: addModalEl } = useAddModal();
-    const { open: openEditModal, element: editModalEl } = useEditModal(currentlyEditingMember, group);
-
+    
     function handleEditClick(row: GroupMemberT) {
         setCurrentlyEditingMember(row);
         openEditModal();
     }
 
-    if (!group) return "loading";
-
     return (
         <>
-            {editModalEl}
-            {addModalEl}
+            {editModalElement}
+            
+            {addModalElement}
 
-            <Fieldset legend="Group Information">
-                <TextInput label="Name" placeholder="Name" value={group.name} />
+            <GroupInformationField 
+                group={group}
+                selectedGroupType={selectedGroupType}
+                setSelectedGroupType={setSelectedGroupType}
+            />
 
-                <Select
-                        label="Type"
-                        placeholder="Pick a type"
-                        data={GROUP_TYPES}
-                        mt={"md"}
-                        value={selectedGroupType}
-                        onChange={(value) => setSelectedGroupType(value as GroupTypesT)}
-                    />
-            </Fieldset>
-
-            <Fieldset legend="Group Members" mt="md" w="100%" maw={1000}>
-                <MyTable<GroupMemberT>
-                    data={groupMembers}
-                    columns={["id", "name", "groupRole"]}
-                    height="40vh"
-                    onEdit={handleEditClick}
-                    onDelete={() => openEditModal()}
-                />
-
-                <Button mt="xl" w="100%" variant="outline" color="green" onClick={openAddModal}>
-                    Add Member
-                </Button>
-            </Fieldset>
+            <GroupMembersField 
+                handleEditClick={handleEditClick}
+                openAddModal={openAddModal}
+                groupMembers={groupMembers}
+            />
         </>
     );
 }

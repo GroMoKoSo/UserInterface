@@ -6,54 +6,29 @@ import { Button, Group } from "@mantine/core";
 import { TwoColumnLayout } from "@/components/TwoColumnLayout/TwoColumnLayout.container";
 import { useConfirm } from "@/components/useConfirm/useConfirm";
 import { deleteGroup, getGroup } from "@/utils/api/GroupApiService";
-import GroupFields from "./components/GroupFields";
+import GroupFields from "./components/GroupFields.container";
+import { DeleteSaveButtonGroup } from "@/components/deleteSaveButtonGroup/DeleteSaveButtonGroup.view";
 
 
 export function GroupDetailsPage() {
     const [group, setGroup] = useState<SimpleGroupT | null>(null);
     const { id } = useParams<{ id: string }>();
+    const navigate = useNavigate()
 
     useEffect(() => {
         setGroup(getGroup(id ? parseInt(id, 10) : 0));
     })
 
-    const navigate = useNavigate();
-
-
-    const { confirm, modal } = useConfirm<SimpleGroupT>();
-
-    async function onDelete(row: SimpleGroupT) {
-        const res = await confirm({
-            title: 'Delete group?',
-            payload: row,
-            intent: 'danger',
-            confirmLabel: 'Delete',
-            cancelLabel: 'Cancel',
-            content: (u) =>
-                u ? (
-                    <p>Delete group "<strong>{u.name}</strong>" (id: {u.id})?</p>
-                ) : (
-                    <p>No group selected.</p>
-                ),
-        });
-
-        if (res && typeof res === 'object') {
-            // res === payload (GroupT), weil bestätigt
-            deleteGroup(res.id);
-            navigate(-1)
+    function onDeleteGroup() {
+        if (group) {
+            deleteGroup(group.id);
+            navigate(-1);
         }
     }
 
 
-
-    if (!group) {
-        return "loading"
-    }
-
     return (
         <>
-            {modal}
-
             <TwoColumnLayout
                 headerContent={
                     <Header
@@ -66,29 +41,14 @@ export function GroupDetailsPage() {
                     <>
                         <GroupFields group={group}/>
 
-                        <Group
-                            justify="space-between"
-                            mt="lg"
-                            ml="lg"
-                            mr="lg"
-                        >
-                            <Button
-                                color="red"
-                                onClick={() => group && onDelete(group)}
-                            >
-                                Delete Group
-                            </Button>
-                            <Button
-                                color="green"
-                            >
-                                Save Changes
-                            </Button>
-                        </Group>
+                        <DeleteSaveButtonGroup
+                            deleteLabel="Delete Group"
+                            saveLabel="Save Changes"
+                            nameLabel={group ? group.name : ''}
+                            onDelete={onDeleteGroup}
+                            onSave={() => console.log("save")}
+                        />
                     </>
-                }
-
-                rightContent={
-                    <div></div>
                 }
             />
         </>

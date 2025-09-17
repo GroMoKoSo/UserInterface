@@ -8,6 +8,7 @@ import { Button, Group } from "@mantine/core";
 import { TwoColumnLayout } from "@/components/TwoColumnLayout/TwoColumnLayout.container";
 import { useConfirm } from "@/components/useConfirm/useConfirm";
 import { Notifications } from "@mantine/notifications";
+import { DeleteSaveButtonGroup } from "@/components/deleteSaveButtonGroup/DeleteSaveButtonGroup.view";
 
 
 export function UserDetailsPage() {
@@ -19,7 +20,6 @@ export function UserDetailsPage() {
     })
 
     const navigate = useNavigate();
-
 
     const { confirm, modal } = useConfirm<SimpleUserT>();
 
@@ -46,11 +46,6 @@ export function UserDetailsPage() {
     }
 
 
-
-    if (!user) {
-        return "loading"
-    }
-
     return (
         <>
             {modal}
@@ -67,24 +62,13 @@ export function UserDetailsPage() {
                     <>
                         <UserFields user={user} />
 
-                        <Group
-                            justify="space-between"
-                            mt="lg"
-                            ml="lg"
-                            mr="lg"
-                        >
-                            <Button
-                                color="red"
-                                onClick={() => user && onDelete(user)}
-                            >
-                                Delete User
-                            </Button>
-                            <Button
-                                color="green"
-                            >
-                                Save Changes
-                            </Button>
-                        </Group>
+                        <DeleteSaveButtonGroup
+                            deleteLabel="Delete User"
+                            saveLabel="Save Changes"
+                            nameLabel={user ? user.firstName + " " + user.lastName : ''}
+                            onDelete={() => user && onDelete(user)}
+                            onSave={() => console.log("save")}
+                        />
                     </>
                 }
 

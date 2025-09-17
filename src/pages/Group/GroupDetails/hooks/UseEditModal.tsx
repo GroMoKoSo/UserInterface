@@ -1,6 +1,6 @@
 import { Modal, Stack, Button, Select } from "@mantine/core"
 import { useNavigate } from "react-router-dom";
-import { GroupMemberT } from "../components/GroupFields";
+import { GroupMemberT } from "../components/GroupFields.container";
 import { useDisclosure } from "@mantine/hooks";
 import { SimpleGroupT } from "@/types/Types";
 
