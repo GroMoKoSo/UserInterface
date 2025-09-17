@@ -1,4 +1,10 @@
+export const GROUP_ROLES = ["Group-Admin", "Group-Editor", "Group-Member"] as const;
+export const SYSTEM_ROLES = ["System-Admin", "System-Member"] as const;
+export const GROUP_TYPES = ["Public", "Private"]
 
+export type GroupRolesT = typeof GROUP_ROLES[number];
+export type SystemRolesT = typeof SYSTEM_ROLES[number];
+export type GroupTypesT = typeof GROUP_TYPES[number];
 
 export type SimpleUserT = {
     id: number;
@@ -7,7 +13,7 @@ export type SimpleUserT = {
     lastName: string;
     email: string;
     name: string; // This is a combination of firstName and lastName, has to be combinded in frontend
-    systemrole: "System-Admin" | "System-Member";
+    systemrole: SystemRolesT
 }
 
 export type SimpleGroupT = {
@@ -29,7 +35,7 @@ export type ApiSpecT = {
 
 export type AggregatedUserT = SimpleUserT & {
     groupMemberships: {
-        roleInGroup: "Group-Admin" | "Group-Editor" | "Group-Member";
+        roleInGroup: GroupRolesT;
         group: SimpleGroupT;
     }[];
     accessibleApis: ApiSpecT[];
@@ -37,7 +43,7 @@ export type AggregatedUserT = SimpleUserT & {
 
 export type AggregatedGroupT = SimpleGroupT & {
     members: {
-        roleInGroup: "Group-Admin" | "Group-Editor" | "Group-Member";
+        roleInGroup: GroupRolesT;
         user: SimpleUserT;
     }[];
     accessibleApis: ApiSpecT[];

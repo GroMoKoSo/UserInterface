@@ -1,15 +1,17 @@
-import { SimpleUserT } from "@/types/Types";
+import { GROUP_ROLES, SimpleUserT, SYSTEM_ROLES, SystemRolesT } from "@/types/Types";
 import { Fieldset, Group, Select, TextInput } from "@mantine/core";
-import GroupFields from "./GroupField";
+import GroupFields from "./GroupFields";
+import { useState } from "react";
 
+function enumToSelectData<T extends string>(values: T[]) {
+    return values.map((v) => ({ value: v, label: v }));
+}
 
+export default function UserFields({ user }: { user: SimpleUserT }) {
 
+    const [selectedRole, setSelectedRole] = useState<SystemRolesT>(user.systemrole);
 
-export default function UserFields({user}: { user: SimpleUserT }) {
-
-    if (!user) {
-        return "loading";
-    }
+    console.log("selected Role", selectedRole)
 
     return (
         <>
@@ -24,29 +26,42 @@ export default function UserFields({user}: { user: SimpleUserT }) {
                     grow
                     w={"100%"}
                 >
-                    <TextInput label="Firstname" placeholder="Firstname" value={user?.firstName} />
-                    <TextInput label="Lastname" placeholder="Lastname" value={user?.lastName}/>
+                    <TextInput label="Username" placeholder="Username" value={user.username} />
+
                 </Group>
+
+                <Group
+                    justify="space-between"
+                    grow
+                    mt={"md"}
+                    w={"100%"}
+                >
+                    <TextInput label="Firstname" placeholder="Firstname" value={user.firstName} />
+                    
+                    <TextInput label="Lastname" placeholder="Lastname" value={user.lastName} />
+                </Group>
+
                 <Group
                     justify="space-between"
                     grow
                     w={"100%"}
                     mt={"md"}
                 >
-                    <TextInput label="Email" placeholder="Email" value={user?.email} />
+                    <TextInput label="Email" placeholder="Email" value={user.email} />
 
                     <Select
                         label="Role"
                         placeholder="Pick a role"
-                        data={['Admin', 'Manager', 'User']}
-                        defaultValue={user.systemrole} 
+                        data={SYSTEM_ROLES}
+                        value={selectedRole}
+                        onChange={(val) => setSelectedRole(val as SystemRolesT)}
                     />
-                    
+
                 </Group>
             </Fieldset>
 
 
-            <Fieldset 
+            <Fieldset
                 legend="Groups"
                 mt={"md"}
                 w={"100%"}
