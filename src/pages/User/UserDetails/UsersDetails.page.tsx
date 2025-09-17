@@ -2,11 +2,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { SimpleUserT } from "../../../types/Types";
 import { deleteUser, getUser } from "@/utils/api/UserApiService";
-import Header from "@/components/Header/Header";
+import Header from "@/components/Header/Header.view";
 import UserFields from "./components/UserFields";
 import { Button, Group } from "@mantine/core";
-import { TwoColumnLayout } from "@/components/TwoColumnLayout/TwoColumnLayout";
-import { useConfirm } from "@/components/confirm/useConfirm";
+import { TwoColumnLayout } from "@/components/TwoColumnLayout/TwoColumnLayout.container";
+import { useConfirm } from "@/components/useConfirm/useConfirm";
 import { Notifications } from "@mantine/notifications";
 
 

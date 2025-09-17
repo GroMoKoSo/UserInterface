@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useMantineColorScheme } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
-import { MyTable } from '@/components/Table/Table';
-import { TwoColumnLayout } from '@/components/TwoColumnLayout/TwoColumnLayout';
-import Header from '@/components/Header/Header';
+import { MyTable } from '@/components/MyTable/MyTable';
+import { TwoColumnLayout } from '@/components/TwoColumnLayout/TwoColumnLayout.container';
+import Header from '@/components/Header/Header.view';
 import type { SimpleUserT } from '@/types/Types';
 import { deleteUser, getAllUsers } from '@/utils/api/UserApiService';
-import { useConfirm } from '@/components/confirm/useConfirm'; // Pfad anpassen
+import { useConfirm } from '@/components/useConfirm/useConfirm'; // Pfad anpassen
 
 export function ManageUsersPage() {
     const [users, setUsers] = useState<SimpleUserT[]>([]);

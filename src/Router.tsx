@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider, Outlet, Navigate } from 'react-router-dom';
 import { DashboardPage } from './pages/Common/Dashboard/Dashboard.page';
-import { NavbarNested } from './components/sidebar/NavbarNested/NavbarNested';
+import { Sidebar } from './components/sidebar/Sidebar.container';
 import { Container, Stack } from '@mantine/core';
 import { ManageUsersPage } from './pages/User/ManageUsers/ManageUsers.page';
 import { ApisPage } from './pages/Api/Apis.page';
@@ -16,7 +16,7 @@ import { NotFoundPage } from './pages/Common/NotFound/NotFound.page';
 function Layout() {
     return (
         <div style={{ display: 'flex' }}>
-            <NavbarNested />
+            <Sidebar />
             <Stack
                 m={'xl'}
                 align="flex-start"

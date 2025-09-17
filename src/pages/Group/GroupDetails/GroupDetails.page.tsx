@@ -1,10 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { SimpleGroupT } from "../../../types/Types";
-import Header from "@/components/Header/Header";
+import Header from "@/components/Header/Header.view";
 import { Button, Group } from "@mantine/core";
-import { TwoColumnLayout } from "@/components/TwoColumnLayout/TwoColumnLayout";
-import { useConfirm } from "@/components/confirm/useConfirm";
+import { TwoColumnLayout } from "@/components/TwoColumnLayout/TwoColumnLayout.container";
+import { useConfirm } from "@/components/useConfirm/useConfirm";
 import { deleteGroup, getGroup } from "@/utils/api/GroupApiService";
 import GroupFields from "./components/GroupFields";
 

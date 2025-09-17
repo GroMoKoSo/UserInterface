@@ -1,5 +1,5 @@
-import Header from "@/components/Header/Header";
-import { TwoColumnLayout } from "@/components/TwoColumnLayout/TwoColumnLayout";
+import Header from "@/components/Header/Header.view";
+import { TwoColumnLayout } from "@/components/TwoColumnLayout/TwoColumnLayout.container";
 
 
 export function ProfilePage() {

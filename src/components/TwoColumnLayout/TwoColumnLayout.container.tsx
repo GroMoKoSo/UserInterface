@@ -2,7 +2,7 @@ import React from 'react';
 
 interface TwoColumnLayoutProps {
   leftContent: React.ReactNode;
-  rightContent?: React.ReactNode; // Made optional
+  rightContent?: React.ReactNode; 
   headerContent?: React.ReactNode | null;
 }
 

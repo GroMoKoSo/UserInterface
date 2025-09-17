@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { IconCalendarStats, IconChevronRight } from '@tabler/icons-react';
 import { Box, Collapse, Group, Text, ThemeIcon, UnstyledButton } from '@mantine/core';
-import classes from './NavbarLinksGroup.module.css';
+import classes from './SidebarLink.module.css';
 import { useNavigate } from 'react-router-dom';
 
 interface LinksGroupProps {

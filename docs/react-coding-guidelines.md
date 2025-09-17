@@ -23,7 +23,7 @@ This document outlines the coding guidelines for React development in our projec
 - Use PascalCase for component names (e.g., `UserProfile`).
 - Use descriptive names that convey the purpose of the component.
 
-## Components and Hooks
+## Components
 Components can be one of three types and should be named with the appropriate suffix:
 
 - **Presentational components:** 
@@ -46,6 +46,16 @@ Components can be one of three types and should be named with the appropriate su
 
 - Use functional components and hooks for state management.
 - Keep component state to a minimum; derive state from props whenever possible.
+- **Null Handling in Presentational Components:**  
+  - All presentational components must check for `null` or `undefined` data in the first lines of the component.
+  - If the required data is `null` or loading, render the `<MyLoader />` component instead of the usual content.
+  - Example:
+    ```tsx
+    const UserProfileView = ({ user }: { user: User | null }) => {
+      if (!user) return <MyLoader />;
+      // ...rest of the component
+    };
+    ```
 
 ## Styling
 

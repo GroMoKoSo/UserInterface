@@ -3,7 +3,7 @@ import { getAllUsers } from "@/utils/api/UserApiService";
 import { Accordion, Button, Fieldset, Group, Modal, Select, Stack, TextInput } from "@mantine/core";
 import { useEffect, useState } from "react";
 import accordionClasses from "../../../User/UserDetails/components/UserGroups.module.css"
-import { MyTable } from "@/components/Table/Table";
+import { MyTable } from "@/components/MyTable/MyTable";
 import { useDisclosure } from "@mantine/hooks";
 import {IconLink} from "@tabler/icons-react"
 import { useNavigate } from "react-router-dom";

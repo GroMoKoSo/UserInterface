@@ -1,6 +1,6 @@
-import Header from "@/components/Header/Header";
-import { MyTable } from "@/components/Table/Table";
-import { TwoColumnLayout } from "@/components/TwoColumnLayout/TwoColumnLayout";
+import Header from "@/components/Header/Header.view";
+import { MyTable } from "@/components/MyTable/MyTable";
+import { TwoColumnLayout } from "@/components/TwoColumnLayout/TwoColumnLayout.container";
 import { SimpleUserT } from "@/types/Types";
 
 

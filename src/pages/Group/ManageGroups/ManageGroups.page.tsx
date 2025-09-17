@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useMantineColorScheme } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
-import { MyTable } from '@/components/Table/Table';
-import { TwoColumnLayout } from '@/components/TwoColumnLayout/TwoColumnLayout';
-import Header from '@/components/Header/Header';
+import { MyTable } from '@/components/MyTable/MyTable';
+import { TwoColumnLayout } from '@/components/TwoColumnLayout/TwoColumnLayout.container';
+import Header from '@/components/Header/Header.view';
 import type { SimpleGroupT, SimpleUserT } from '@/types/Types';
-import { useConfirm } from '@/components/confirm/useConfirm'; // Pfad anpassen
+import { useConfirm } from '@/components/useConfirm/useConfirm'; // Pfad anpassen
 import { deleteGroup, getAllGroups } from '@/utils/api/GroupApiService';
 
 type MyGroupT = SimpleGroupT & {
