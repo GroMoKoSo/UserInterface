@@ -46,7 +46,7 @@ build_dev_image:
   variables:
     DOCKER_IMAGE: $DOCKER_IMAGE_APP_DEV
   rules:
-    - if: '$CI_COMMIT_BRANCH == "staging"'
+    - if: '$CI_COMMIT_BRANCH != "staging"'
   environment:
     name: staging
 
@@ -66,7 +66,7 @@ deploy_dev_container:
   variables:
     DOCKER_IMAGE: $DOCKER_IMAGE_APP_DEV
   rules:
-    - if: '$CI_COMMIT_BRANCH == "staging"'
+    - if: '$CI_COMMIT_BRANCH != "staging"'
       when: manual
   environment:
     name: staging
