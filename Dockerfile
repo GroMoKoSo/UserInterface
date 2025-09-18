@@ -26,6 +26,6 @@ COPY --from=build /app/dist ./dist
 # Install serve globally
 RUN npm install -g serve
 
-EXPOSE 5000
+EXPOSE 8080
 
-CMD ["serve", "-s", "dist", "-l", "5000"]
+CMD ["serve", "-s", "dist", "-l", "8080"]
