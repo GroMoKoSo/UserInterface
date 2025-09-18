@@ -1,4 +1,4 @@
-# Build stage
+# === Build-Phase ===
 FROM node:20-alpine AS build
 
 WORKDIR /app
@@ -15,17 +15,15 @@ COPY . .
 # Build the Vite app
 RUN npm run build
 
-# Production stage
-FROM node:16-alpine AS production
+# === Runtime-Phase ===
+FROM nginx:1.27
 
-WORKDIR /app
+# 4) Entrypoint-Script aus frontend ins Image kopieren
+COPY ./docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
 
-# Copy built files from build stage
-COPY --from=build /app/dist ./dist
+# 5) Die gebauten Dateien aus dem Build-Stage übernehmen
+COPY --from=build /app/dist /usr/share/nginx/html
 
-# Install serve globally
-RUN npm install -g serve
-
-EXPOSE 5000
-
-CMD ["serve", "-s", "dist", "-l", "5000"]
+# 6) Entrypoint setzen
+ENTRYPOINT ["/docker-entrypoint.sh"]
