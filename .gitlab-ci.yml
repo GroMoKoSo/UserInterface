@@ -19,7 +19,7 @@ stages:
   stage: build
   script:
     - echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
-    - docker build -t $DOCKER_IMAGE .
+    - docker build -t "$DOCKER_IMAGE" --build-arg VITE_BASE_URL="/gromokoso" .
     - docker push $DOCKER_IMAGE
   services:
     - docker:dind
@@ -34,7 +34,7 @@ stages:
     - docker stop $CONTAINER_NAME || true
     - docker rm $CONTAINER_NAME || true
     - docker network create internal_net || true
-    - docker run -d --network=internal_net -v /home/swt2025/$CONTAINER_NAME/data:/app/data --restart=always --name $CONTAINER_NAME -e BASE_URL="/gromokoso/" $DOCKER_IMAGE
+    - docker run -d --network=internal_net -v /home/swt2025/$CONTAINER_NAME/data:/app/data --restart=always --name $CONTAINER_NAME -e BASE_URL="/gromokoso" $DOCKER_IMAGE
   services:
     - docker:dind
   tags:

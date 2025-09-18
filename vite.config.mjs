@@ -9,5 +9,5 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './vitest.setup.mjs',
   },
-  base: process.env.BASEURL ?? '/',
+  base: process.env.VITE_BASE_URL || '/test',
 });

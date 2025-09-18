@@ -1,0 +1,36 @@
+@startuml env
+title Env variable usage in containerized Vite project
+
+actor Developer
+participant "Docker Build" as Build
+participant "Container Entrypoint" as Entrypoint
+participant "Nginx" as Nginx
+participant "Browser (Vite App)" as Browser
+
+== Build Time ==
+Developer -> Build: set VITE_* envs\n(docker build --build-arg or .env)
+Build -> Build: vite build
+Build -> Build: bake VITE_* envs into static assets
+note right of Build
+  Build-time envs are permanent
+  Cannot be changed later
+end note
+
+== Runtime (Container Start) ==
+Developer -> Entrypoint: docker run -e BASE_URL=...
+Entrypoint -> Entrypoint: entrypoint.sh writes env.js
+Entrypoint -> Nginx: start nginx serving /usr/share/nginx/html
+
+== Serving ==
+Browser -> Nginx: request index.html
+Nginx -> Browser: return index.html + static assets
+Browser -> Nginx: request env.js
+Nginx -> Browser: return env.js (with window.ENV)
+
+note right of Browser
+  Browser JS reads window.ENV
+  → runtime configuration available
+end note
+
+
+@enduml

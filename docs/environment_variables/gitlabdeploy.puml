@@ -1,0 +1,16 @@
+@startuml
+
+Person client
+
+Component "https://zdh-swa-muenker.zdh.thm.de/" as webapp {
+    Component nginx <<reverse proxy>>
+
+    Component DockerRunner {
+        Component ContainerA <<webserver>>
+    }
+}
+
+client --> nginx : access /ContainerA
+nginx --> ContainerA : forward request to :8080
+
+@endpumll

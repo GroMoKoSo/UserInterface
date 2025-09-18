@@ -7,4 +7,5 @@ window.ENV = {
 EOF
 
 
+
 exec nginx -g "daemon off;"

@@ -1,0 +1,41 @@
+@startuml
+
+participant Client
+participant Nginx <<reverse proxy>> 
+
+box "Docker Container: containerA" #LightBlue
+participant NginxI <<internal webserver>> 
+end box
+
+
+Client -> Nginx: **GET** https://.../containerA
+activate Nginx #FFBBBB
+Nginx -> Nginx: check for container\nnamed containerA
+Nginx -> Nginx: rewrite /containerA to /
+Nginx -> NginxI: **GET** containerA:8080
+NginxI --> Nginx: index.html
+Nginx --> Client: index.html
+Client --> Client: index.html loads env.js 
+deactivate Nginx
+
+
+' index.html tries to load env.js
+Client -> Nginx: **GET** https://.../env.js
+activate Nginx #FFBBBB
+Nginx -> Nginx: check for container\nnamed env.js
+Nginx -[#AAA]-> NginxI: <font color=gray>**GET** containerA:8080/env.js</font>
+note right
+    this would be 
+    the correct request
+end note
+Nginx -> Client: 502 Bad Gateway
+
+note left of Client
+    Problem:
+    **index.html** tries to load **env.js** from root /
+    but Nginx is configured to forward 
+    **/containerA** to **containerA:8080**
+end note
+deactivate Nginx
+
+@enduml
