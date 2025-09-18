@@ -18,6 +18,8 @@ RUN npm run build
 # === Runtime-Phase ===
 FROM nginx:1.27
 
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # 4) Entrypoint-Script aus frontend ins Image kopieren
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
