@@ -32,74 +32,86 @@ function Layout() {
     );
 }
 
-const router = createBrowserRouter([
+declare global {
+    interface Window {
+        ENV?: { BASE_URL?: string };
+    }
+}
+
+
+const router = createBrowserRouter(
+    [
+        {
+            path: '/',
+            element: <Layout />, // Wrap routes with Layout
+            children: [
+                // Common routes
+                {
+                    path: '/',
+                    element: <DashboardPage />,
+                },
+                {
+                    path: '/dashboard',
+                    element: <DashboardPage />,
+                },
+                {
+                    path: '/me',
+                    element: <ProfilePage />,
+                },
+                // User routes
+                {
+                    path: '/users',
+                    element: <ManageUsersPage />
+                },
+                {
+                    path: '/users/:id',
+                    element: <UserDetailsPage />
+                },
+                // Group routes
+                {
+                    path: '/groups',
+                    element: <ManageGroupsPage />,
+                },
+                {
+                    path: '/groups/public',
+                    element: <PublicGroupsPage />,
+                },
+                {
+                    path: '/groups/:id',
+                    element: <GroupDetailsPage />,
+                },
+                // API routes
+                // currently disabled due to incomplete implementation
+                // {
+                //     path: '/apis',
+                //     element: <ApisPage />,
+                // },
+                // Forward unknown routes to NotFound
+                {
+                    path: '*',
+                    element: <Navigate to="/not-found" replace />,
+                },
+            ],
+        },
+        // Route NOT wrapped in Layout
+        {
+            path: '/login',
+            element: <LoginPage />,
+        },
+        // Fallback for unknown routes outside Layout
+        {
+            path: '/not-found',
+            element: <NotFoundPage />,
+        },
+        {
+            path: '*',
+            element: <Navigate to="/not-found" replace />,
+        },
+    ],
     {
-        path: '/',
-        element: <Layout />, // Wrap routes with Layout
-        children: [
-            // Common routes
-            {
-                path: '/',
-                element: <DashboardPage />,
-            },
-            {
-                path: '/dashboard',
-                element: <DashboardPage />,
-            },
-            {
-                path: '/me',
-                element: <ProfilePage />,
-            },
-            // User routes
-            {
-                path: '/users',
-                element: <ManageUsersPage />
-            },
-            {
-                path: '/users/:id',
-                element: <UserDetailsPage />
-            },
-            // Group routes
-            {
-                path: '/groups',
-                element: <ManageGroupsPage />,
-            },
-            {
-                path: '/groups/public',
-                element: <PublicGroupsPage />,
-            },
-            {
-                path: '/groups/:id',
-                element: <GroupDetailsPage />,
-            },
-            // API routes
-            // currently disabled due to incomplete implementation
-            // {
-            //     path: '/apis',
-            //     element: <ApisPage />,
-            // },
-            // Forward unknown routes to NotFound
-            {
-                path: '*',
-                element: <Navigate to="/not-found" replace />,
-            },
-        ],
-    },
-    // Route NOT wrapped in Layout
-    {
-        path: '/login',
-        element: <LoginPage />,
-    },
-    // Fallback for unknown routes outside Layout
-    {
-        path: '/not-found',
-        element: <NotFoundPage />,
-    },
-    {
-        path: '*',
-        element: <Navigate to="/not-found" replace />,
-    },
-]);
+        basename: window.ENV?.BASE_URL ?? "/"
+    }
+);
 
 export function Router() {
     return <RouterProvider router={router} />;
