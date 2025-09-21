@@ -1,17 +1,21 @@
 import { MyLoader } from "@/components/MyLoader/MyLoader.view";
 import { AggregatedUserT, SYSTEM_ROLES, SystemRolesT } from "@/types/Types";
 import { Group, Select, TextInput } from "@mantine/core";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useAggregatedUserForm } from "../useUserForm";
+import { userFormContext } from "./UserFields";
 
 
 
-export function UserInformationField({user}: {user: AggregatedUserT | null}) {
+export function UserInformationField({ user }: { user: AggregatedUserT | null }) {
 
     if (!user) {
         return <MyLoader />;
     }
 
     const [selectedRole, setSelectedRole] = useState<SystemRolesT>(user.systemrole);
+
+    const form = useContext(userFormContext)
 
     return (
         <>
@@ -20,7 +24,10 @@ export function UserInformationField({user}: {user: AggregatedUserT | null}) {
                 grow
                 w={"100%"}
             >
-                <TextInput label="Username" placeholder="Username" value={user.username} />
+                <TextInput
+                    label="Username"
+                    {...form?.getInputProps('username')}
+                />
 
             </Group>
 
@@ -30,9 +37,15 @@ export function UserInformationField({user}: {user: AggregatedUserT | null}) {
                 mt={"md"}
                 w={"100%"}
             >
-                <TextInput label="Firstname" placeholder="Firstname" value={user.firstName} />
+                <TextInput
+                    label="Firstname"
+                    {...form?.getInputProps('firstName')}
+                />
 
-                <TextInput label="Lastname" placeholder="Lastname" value={user.lastName} />
+                <TextInput
+                    label="Lastname"
+                    {...form?.getInputProps('lastName')}
+                />
             </Group>
 
             <Group
@@ -41,14 +54,15 @@ export function UserInformationField({user}: {user: AggregatedUserT | null}) {
                 w={"100%"}
                 mt={"md"}
             >
-                <TextInput label="Email" placeholder="Email" value={user.email} />
+                <TextInput
+                    label="Email"
+                    {...form?.getInputProps('email')}
+                />
 
                 <Select
                     label="Role"
-                    placeholder="Pick a role"
                     data={SYSTEM_ROLES}
-                    value={selectedRole}
-                    onChange={(val) => setSelectedRole(val as SystemRolesT)}
+                    {...form?.getInputProps('systemrole')}
                 />
 
             </Group>

@@ -1,12 +1,15 @@
-import { SimpleGroupT, AggregatedUserT, GROUP_ROLES } from '@/types/Types';
+import { SimpleGroupT, AggregatedUserT, GROUP_ROLES, GroupRolesT, SimpleUserT } from '@/types/Types';
 import { getAllGroups } from '@/utils/api/GroupApiService';
 import { Accordion, Button, Group, Select } from '@mantine/core';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import accordionClasses from "./UserGroupsField.module.css"
 import { getAggregatedUser } from '@/utils/api/UserApiService';
-import GroupAccordionItem from './GroupAccordionItem.view';
+
 import { MyLoader } from '@/components/MyLoader/MyLoader.view';
+import { useAggregatedUserForm } from '../useUserForm';
+import { renderGroupAccordionItems } from './GroupAccordionItem.view';
+import { userFormContext } from './UserFields';
 
 export type UserGroupMembershipT = NonNullable<AggregatedUserT['groupMemberships']>[number];
 
@@ -17,12 +20,15 @@ export default function UserGroupsField({ user }: { user: AggregatedUserT | null
         return <MyLoader />;
     }
 
-    const groupNames = user.groupMemberships.map((gm) => gm.group.name);
+    const form = useContext(userFormContext)
 
+    if (!form) {
+        return <MyLoader />;
+    }
 
-    const items = user.groupMemberships.map((userGroupMembership) => (
-        <GroupAccordionItem userGroupMembership={userGroupMembership} />
-    ));
+    const groupNames = form.values.groupMemberships.map((gm) => gm.group.name);
+
+    const items = renderGroupAccordionItems({ form });
 
 
     return (
