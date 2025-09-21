@@ -109,7 +109,7 @@ const router = createBrowserRouter(
         },
     ],
     {
-        basename: window.ENV?.BASE_URL ?? "/test3"
+        basename: window.ENV?.BASE_URL ?? "/test-router"
     }
 );
 
