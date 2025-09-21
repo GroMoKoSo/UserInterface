@@ -13,10 +13,10 @@ import { DeleteSaveButtonGroup } from "@/components/deleteSaveButtonGroup/Delete
 
 export function UserDetailsPage() {
     const [user, setUser] = useState<SimpleUserT | null>(null);
-    const { id } = useParams<{ id: string }>();
+    const { username } = useParams<{ username: string }>();
 
     useEffect(() => {
-        setUser(getUser(id ? parseInt(id, 10) : 0));
+        setUser(getUser(username ? username : ''));
     })
 
     const navigate = useNavigate();
@@ -32,7 +32,7 @@ export function UserDetailsPage() {
             cancelLabel: 'Cancel',
             content: (u) =>
                 u ? (
-                    <p>Delete user "<strong>{u.name}</strong>" (id: {u.id})?</p>
+                    <p>Delete user "<strong>{u.name}</strong>" (id: {u.username})?</p>
                 ) : (
                     <p>No user selected.</p>
                 ),
@@ -40,7 +40,7 @@ export function UserDetailsPage() {
 
         if (res && typeof res === 'object') {
             // res === payload (UserT), weil bestätigt
-            deleteUser(res.id);
+            deleteUser(res.username);
             navigate(-1)
         }
     }

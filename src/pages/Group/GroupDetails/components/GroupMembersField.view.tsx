@@ -19,7 +19,7 @@ export function GroupMembersField(
         <Fieldset legend="Group Members" mt="md" w="100%" maw={1000}>
             <MyTable<GroupMemberT>
                 data={groupMembers}
-                columns={["id", "name", "groupRole"]}
+                columns={["name", "groupRole"]}
                 height="40vh"
                 onEdit={(row) => handleEditClick(row)}
                 onDelete={() => console.log("delete")}

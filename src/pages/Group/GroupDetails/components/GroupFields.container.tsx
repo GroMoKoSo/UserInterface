@@ -33,13 +33,13 @@ export default function GroupFields({ group }: { group: SimpleGroupT | null  }) 
 
     useEffect(() => {
         const users: SimpleUserT[] = getAllUsers();
-        const aggregatedGroup = getAggregatedGroup(group.id);
+        const aggregatedGroup = getAggregatedGroup(group.name);
 
         if (!users || !aggregatedGroup) {
             return
         }
 
-        const temp: GroupMemberT[] = aggregatedGroup.members.map((member: { roleInGroup: "Group-Admin" | "Group-Editor" | "Group-Member"; user: SimpleUserT }) => ({
+        const temp: GroupMemberT[] = aggregatedGroup.groupMembers.map((member: { roleInGroup: "Group-Admin" | "Group-Editor" | "Group-Member"; user: SimpleUserT }) => ({
             ...member.user,
             groupRole: member.roleInGroup,
         }));

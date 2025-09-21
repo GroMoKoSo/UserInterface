@@ -2,7 +2,6 @@ import type { SimpleUserT } from "@/types/Types";
 
 export const userMockData: SimpleUserT[] = [
   {
-    id: 1,
     username: "alice.mueller",
     name: "Alice Müller",
     firstName: "Alice",
@@ -11,7 +10,6 @@ export const userMockData: SimpleUserT[] = [
     email: "alice.mueller@example.com",
   },
   {
-    id: 2,
     username: "bob.schneider",
     name: "Bob Schneider",
     firstName: "Bob",
@@ -20,7 +18,6 @@ export const userMockData: SimpleUserT[] = [
     email: "bob.schneider@example.com",
   },
   {
-    id: 3,
     username: "clara.fischer",
     name: "Clara Fischer",
     firstName: "Clara",
@@ -29,7 +26,6 @@ export const userMockData: SimpleUserT[] = [
     email: "clara.fischer@example.com",
   },
   {
-    id: 4,
     username: "david.becker",
     name: "David Becker",
     firstName: "David",
@@ -38,7 +34,6 @@ export const userMockData: SimpleUserT[] = [
     email: "david.becker@example.com",
   },
   {
-    id: 5,
     username: "eva.wagner",
     name: "Eva Wagner",
     firstName: "Eva",
@@ -47,7 +42,6 @@ export const userMockData: SimpleUserT[] = [
     email: "eva.wagner@example.com",
   },
   {
-    id: 6,
     username: "felix.braun",
     name: "Felix Braun",
     firstName: "Felix",
@@ -56,7 +50,6 @@ export const userMockData: SimpleUserT[] = [
     email: "felix.braun@example.com",
   },
   {
-    id: 7,
     username: "greta.hofmann",
     name: "Greta Hofmann",
     firstName: "Greta",
@@ -65,7 +58,6 @@ export const userMockData: SimpleUserT[] = [
     email: "greta.hofmann@example.com",
   },
   {
-    id: 8,
     username: "henry.krause",
     name: "Henry Krause",
     firstName: "Henry",
@@ -74,7 +66,6 @@ export const userMockData: SimpleUserT[] = [
     email: "henry.krause@example.com",
   },
   {
-    id: 9,
     username: "isabel.koenig",
     name: "Isabel König",
     firstName: "Isabel",
@@ -83,7 +74,6 @@ export const userMockData: SimpleUserT[] = [
     email: "isabel.koenig@example.com",
   },
   {
-    id: 10,
     username: "jonas.vogel",
     name: "Jonas Vogel",
     firstName: "Jonas",
@@ -92,7 +82,6 @@ export const userMockData: SimpleUserT[] = [
     email: "jonas.vogel@example.com",
   },
   {
-    id: 11,
     username: "klara.busch",
     name: "Klara Busch",
     firstName: "Klara",
@@ -101,7 +90,6 @@ export const userMockData: SimpleUserT[] = [
     email: "klara.busch@example.com",
   },
   {
-    id: 12,
     username: "lukas.wolf",
     name: "Lukas Wolf",
     firstName: "Lukas",
@@ -110,7 +98,6 @@ export const userMockData: SimpleUserT[] = [
     email: "lukas.wolf@example.com",
   },
   {
-    id: 13,
     username: "mara.weiss",
     name: "Mara Weiß",
     firstName: "Mara",
@@ -119,7 +106,6 @@ export const userMockData: SimpleUserT[] = [
     email: "mara.weiss@example.com",
   },
   {
-    id: 14,
     username: "noah.schaefer",
     name: "Noah Schäfer",
     firstName: "Noah",
@@ -128,7 +114,6 @@ export const userMockData: SimpleUserT[] = [
     email: "noah.schaefer@example.com",
   },
   {
-    id: 15,
     username: "olivia.hartmann",
     name: "Olivia Hartmann",
     firstName: "Olivia",
@@ -137,7 +122,6 @@ export const userMockData: SimpleUserT[] = [
     email: "olivia.hartmann@example.com",
   },
   {
-    id: 16,
     username: "paul.neumann",
     name: "Paul Neumann",
     firstName: "Paul",
@@ -146,7 +130,6 @@ export const userMockData: SimpleUserT[] = [
     email: "paul.neumann@example.com",
   },
   {
-    id: 17,
     username: "quentin.richter",
     name: "Quentin Richter",
     firstName: "Quentin",
@@ -155,7 +138,6 @@ export const userMockData: SimpleUserT[] = [
     email: "quentin.richter@example.com",
   },
   {
-    id: 18,
     username: "rosa.lange",
     name: "Rosa Lange",
     firstName: "Rosa",
@@ -164,7 +146,6 @@ export const userMockData: SimpleUserT[] = [
     email: "rosa.lange@example.com",
   },
   {
-    id: 19,
     username: "stefan.keller",
     name: "Stefan Keller",
     firstName: "Stefan",
@@ -173,7 +154,6 @@ export const userMockData: SimpleUserT[] = [
     email: "stefan.keller@example.com",
   },
   {
-    id: 20,
     username: "tina.schmitt",
     name: "Tina Schmitt",
     firstName: "Tina",

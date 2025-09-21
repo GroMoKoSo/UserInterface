@@ -7,7 +7,6 @@ export type SystemRolesT = typeof SYSTEM_ROLES[number];
 export type GroupTypesT = typeof GROUP_TYPES[number];
 
 export type SimpleUserT = {
-    id: number;
     username: string;
     firstName: string;
     lastName: string;
@@ -17,10 +16,9 @@ export type SimpleUserT = {
 }
 
 export type SimpleGroupT = {
-    id: number;
     name: string;
-    type: "Private" | "Public";
-    size: number; // has to be calculated in frontend
+    description: string;
+    type: GroupTypesT;
 }
 
 export type ApiSpecT = {
@@ -32,19 +30,22 @@ export type ApiSpecT = {
     spec: string;
 }
 
+export type GroupMemershipT = {
+    roleInGroup: GroupRolesT;
+    group: SimpleGroupT;
+}[];
 
 export type AggregatedUserT = SimpleUserT & {
-    groupMemberships: {
-        roleInGroup: GroupRolesT;
-        group: SimpleGroupT;
-    }[];
+    groupMemberships: GroupMemershipT;
     accessibleApis: ApiSpecT[];
 }
 
+export type GroupMemberT = {
+    roleInGroup: GroupRolesT;
+    user: SimpleUserT;
+}[];
+
 export type AggregatedGroupT = SimpleGroupT & {
-    members: {
-        roleInGroup: GroupRolesT;
-        user: SimpleUserT;
-    }[];
+    groupMembers: GroupMemberT;
     accessibleApis: ApiSpecT[];
 }
