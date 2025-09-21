@@ -1,10 +1,11 @@
 import { group } from "console";
-import { AggregatedGroupT, GroupMemershipT, SimpleGroupT } from "../../types/Types"
+import { AggregatedGroupT, ApiAccessT, GroupMemberT, GroupMemershipT, SimpleGroupT } from "../../types/Types"
 import { groupMockData } from "./../mockData/groupMock"
 import { userMockData } from "../mockData/userMock";
 import { getAllUsers } from "./UserApiService";
 import { getAllApis } from "./ApiApiService";
 import { notificationError, notificationSuccess, notificationLoading } from "../NotificationService";
+import { get } from "http";
 
 export function getAllGroups(): SimpleGroupT[] {
     console.log("Fetching all groups");
@@ -16,6 +17,29 @@ export function getGroup(name: string): SimpleGroupT | null {
     return groupMockData.filter((group: SimpleGroupT) => group.name === name)[0] || null;
 }
 
+// private function to aggregate group data#
+
+function getGroupMembers(name: string): GroupMemberT {
+    return getAllUsers()
+                .sort(() => 0.5 - Math.random()) // Shuffle users
+                .slice(0, Math.floor(Math.random() * (12 - 4 + 1)) + 4) // Get 4-12 random members
+                .map(user => ({
+                    roleInGroup: ["Group-Admin", "Group-Editor", "Group-Member"][Math.floor(Math.random() * 3)] as "Group-Admin" | "Group-Editor" | "Group-Member", // Assign random role
+                    user
+                }))
+}
+
+function getGroupApis(name: string): ApiAccessT[] {
+    return getAllApis()
+                .sort(() => 0.5 - Math.random()) // Shuffle APIs
+                .slice(0, Math.floor(Math.random() * (10 - 2 + 1)) + 2) // Get 2-10 random APIs
+                .map(api => ({
+                    api: api.id,
+                    accessVia: "GROUP",
+                    activated: Math.random() < 0.8 // 80% chance of being activated
+                }))
+}
+
 export function getAggregatedGroup(name: string): AggregatedGroupT | null {
     const group = getGroup(name);
     let aggregatedGroup = null;
@@ -25,17 +49,8 @@ export function getAggregatedGroup(name: string): AggregatedGroupT | null {
     try {
         aggregatedGroup = {
             ...group,
-            groupMembers: getAllUsers()
-                .sort(() => 0.5 - Math.random()) // Shuffle users
-                .slice(0, Math.floor(Math.random() * (12 - 4 + 1)) + 4) // Get 4-12 random members
-                .map(user => ({
-                    roleInGroup: ["Group-Admin", "Group-Editor", "Group-Member"][Math.floor(Math.random() * 3)] as "Group-Admin" | "Group-Editor" | "Group-Member", // Assign random role
-                    user
-                } 
-            )),
-            accessibleApis: getAllApis()
-                .sort(() => 0.5 - Math.random()) // Shuffle APIs
-                .slice(0, Math.floor(Math.random() * (10 - 2 + 1)) + 2) // Get 2-10 random APIs
+            groupMembers: getGroupMembers(name),
+            accessibleApis: getGroupApis(name)
         };
     } catch (error) {
         return null;
