@@ -7,7 +7,12 @@ type ApiOption   = { value: number; label: string; spec: ApiSpecT };
 
 
 // existingUser kommt z.B. aus deiner API (AggregatedUserT) oder ist undefined für "create"
-export function useAggregatedUserForm(existingUser: AggregatedUserT, allGroups: SimpleGroupT[] = [], allApis: ApiSpecT[] = []) {
+export function useAggregatedUserForm(existingUser: AggregatedUserT | null, allGroups: SimpleGroupT[] = [], allApis: ApiSpecT[] = []) {
+
+    if (!existingUser) {
+        return
+    }
+
     const groupOptions: GroupOption[] = allGroups.map(g => ({
       value: g.name, label: g.name, group: g,
     }));

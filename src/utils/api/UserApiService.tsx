@@ -53,7 +53,7 @@ export async function getAggregatedUser(username: string): Promise<AggregatedUse
           ...user,
           groupMemberships: groupMockData
             .sort(() => 0.5 - Math.random())
-            .slice(0, Math.floor(Math.random() * (3 - 1 + 1)) + 4)
+            .slice(0, Math.floor(Math.random() * (3 - 1 + 1)) + 1)
             .map((group: SimpleGroupT) => ({
               roleInGroup: (['group-admin', 'group-editor', 'group-member'][
                 Math.floor(Math.random() * 3)
@@ -87,14 +87,14 @@ export function createUser(user: SimpleUserT): Promise<number> {
   });
 }
 
-export function updateUser(username: string, user: SimpleUserT): Promise<boolean> {
-  const id = notificationLoading('Updating User ...', `Trying to update User ${username} ...`);
+export function updateUser(user: AggregatedUserT): Promise<boolean> {
+  const id = notificationLoading('Updating User ...', `Trying to update User ${user.username} ...`);
 
   return new Promise((resolve) => {
     setTimeout(() => {
       // fake success
-      notificationSuccess(id, 'Success!', `User ${username} has been updated!`);
-      console.log('Updating user: ', username, user);
+      notificationSuccess(id, 'Success!', `User ${user.username} has been updated!`);
+      console.log('Updating user: ', user.username, user);
       resolve(true);
     }, 2000);
   });

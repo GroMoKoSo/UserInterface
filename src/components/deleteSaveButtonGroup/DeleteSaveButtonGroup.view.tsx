@@ -1,5 +1,6 @@
-import { Button, Group } from "@mantine/core";
+import { ActionIcon, Button, Group, Tooltip } from "@mantine/core";
 import { useConfirm } from "@/components/useConfirm/useConfirm";
+import { IconRestore } from "@tabler/icons-react";
 
 export function DeleteSaveButtonGroup(
     {
@@ -7,7 +8,8 @@ export function DeleteSaveButtonGroup(
         saveLabel = "Save Changes",
         nameLabel = "Name",
         onDelete,
-        onSave
+        onSave,
+        onReset
     }:
         {
             deleteLabel: string;
@@ -15,6 +17,7 @@ export function DeleteSaveButtonGroup(
             nameLabel: string;
             onDelete: () => void;
             onSave: () => void;
+            onReset?: () => void;
         }
 ) {
 
@@ -37,7 +40,7 @@ export function DeleteSaveButtonGroup(
         });
 
 
-        if (res) { onDelete(); } 
+        if (res) { onDelete(); }
     }
 
     return (
@@ -45,7 +48,7 @@ export function DeleteSaveButtonGroup(
             {modal}
 
             <Group
-                justify="space-between"
+                // justify="space-between"
                 mt="lg"
                 ml="lg"
                 mr="lg"
@@ -57,11 +60,18 @@ export function DeleteSaveButtonGroup(
                     {deleteLabel}
                 </Button>
                 <Button
+                    type="submit"
                     color="green"
                     onClick={onSave}
                 >
                     {saveLabel}
                 </Button>
+                <Tooltip label="Reset changes" withArrow>
+                    <ActionIcon size="lg" color="gray" onClick={onReset}>
+                        <IconRestore />
+                    </ActionIcon>
+                </Tooltip>
+
             </Group>
         </>
     )

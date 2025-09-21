@@ -4,13 +4,14 @@ interface TwoColumnLayoutProps {
   leftContent: React.ReactNode;
   rightContent?: React.ReactNode; 
   headerContent?: React.ReactNode | null;
+  bottomContent?: React.ReactNode | null;
 }
 
-export function TwoColumnLayout({ leftContent, rightContent, headerContent }: TwoColumnLayoutProps) {
+export function TwoColumnLayout({ leftContent, rightContent, headerContent, bottomContent }: TwoColumnLayoutProps) {
   return (
     <div style={{ width: "100%" }}>
       {headerContent}
-      <div style={{ display: 'flex', height: '100vh' }}>
+      <div style={{ display: 'flex' }}>
         <div
           style={{
             flex: 'none', // Prevent stretching
@@ -26,6 +27,7 @@ export function TwoColumnLayout({ leftContent, rightContent, headerContent }: Tw
           </div>
         )}
       </div>
+      {bottomContent}
     </div>
   );
 }

@@ -1,50 +1,26 @@
-import { SimpleGroupT, AggregatedUserT, GROUP_ROLES, GroupRolesT, SimpleUserT } from '@/types/Types';
-import { getAllGroups } from '@/utils/api/GroupApiService';
+import { GROUP_ROLES, GroupRolesT, SimpleGroupT } from '@/types/Types';
 import { Accordion, Button, Group, Select } from '@mantine/core';
-import { useContext, useEffect, useState } from 'react';
-
 import accordionClasses from "./UserGroupsField.module.css"
-import { getAggregatedUser } from '@/utils/api/UserApiService';
+import { userFormContext } from '../UserFields';
+import { useContext, useState } from 'react';
 
-import { MyLoader } from '@/components/MyLoader/MyLoader.view';
-import { useAggregatedUserForm } from '../useUserForm';
-import { renderGroupAccordionItems } from './GroupAccordionItem.view';
-import { userFormContext } from './UserFields';
-
-export type UserGroupMembershipT = NonNullable<AggregatedUserT['groupMemberships']>[number];
-
-
-export default function UserGroupsField({ user }: { user: AggregatedUserT | null }) {
-
-    if (!user) {
-        return <MyLoader />;
-    }
+export function AddGroupAccordion({possibleGroups}: {possibleGroups: SimpleGroupT[]}) {
 
     const form = useContext(userFormContext)
-
-    if (!form) {
-        return <MyLoader />;
-    }
-
-    const groupNames = form.values.groupMemberships.map((gm) => gm.group.name);
-
-    const items = renderGroupAccordionItems({ form });
-
+    const [selection, setSelection] = useState<{ group: SimpleGroupT | null; role: GroupRolesT | null }>({
+        group: null,
+        role: null
+    });
 
     return (
-        <>
-            <Accordion variant="separated" classNames={accordionClasses}>
-                {items}
-            </Accordion>
-
-
-            <Accordion
+        <Accordion
                 variant="separated"
                 classNames={{
                     ...accordionClasses,
                     root: `${accordionClasses.root} ${accordionClasses.greenRoot}`,
                 }}
                 mt={"md"}
+                // defaultValue={"add-group"}
             >
                 <Accordion.Item
                     key={"add-group"}
@@ -59,17 +35,31 @@ export default function UserGroupsField({ user }: { user: AggregatedUserT | null
                             <Select
                                 label="Group"
                                 placeholder="Pick a group"
-                                data={groupNames}
+                                data={possibleGroups.map(g => g.name)}
+                                value={selection.group?.name || null}
+                                onChange={(val) => {
+                                    const group = possibleGroups.find(g => g.name === val) || null;
+                                    setSelection((s) => ({ ...s, group }));
+                                }}
                             />
 
                             <Select
                                 label="Role"
                                 placeholder="Pick a role"
                                 data={GROUP_ROLES}
+                                value={selection.role || null}
+                                onChange={(val) => {
+                                    const role = (GROUP_ROLES.find(r => r === val)) || null;
+                                    setSelection((s) => ({ ...s, role }));
+                                }}
                             />
 
                             <Button
                                 color='green'
+                                onClick={() => {
+                                    form?.insertListItem("groupMemberships", {group: selection.group, role: selection.role})
+                                    setSelection({group: null, role: null})
+                                }}
                             >
                                 Add to User
                             </Button>
@@ -77,6 +67,5 @@ export default function UserGroupsField({ user }: { user: AggregatedUserT | null
                     </Accordion.Panel>
                 </Accordion.Item>
             </Accordion>
-        </>
-    );
+    )
 }
