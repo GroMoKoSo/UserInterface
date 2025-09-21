@@ -30,7 +30,7 @@ export function getAggregatedUser(username: string): AggregatedUserT | null {
                             .sort(() => 0.5 - Math.random()) // Shuffle groups
                             .slice(0, Math.floor(Math.random() * (3 - 1 + 1)) + 4) // Get 1-3 random members
                             .map((group: SimpleGroupT) => ({
-                                roleInGroup: ["Group-Admin", "Group-Editor", "Group-Member"][Math.floor(Math.random() * 3)] as "Group-Admin" | "Group-Editor" | "Group-Member", // Assign random role
+                                roleInGroup: ["group-admin", "group-editor", "group-member"][Math.floor(Math.random() * 3)] as "group-admin" | "group-editor" | "group-member", // Assign random role
                                 group
                             })),
             accessibleApis: getAllApis()

@@ -1,13 +1,36 @@
-export const GROUP_ROLES = ["Group-Admin", "Group-Editor", "Group-Member"] as const;
-export const SYSTEM_ROLES = ["System-Admin", "System-Member"] as const;
-export const GROUP_TYPES = ["Public", "Private"]
-
-export const API_ACCESS_TYPES = ["User", "GROUP"] as const;
-
+export const GROUP_ROLES = ["group-admin", "group-editor", "group-member"] as const;
 export type GroupRolesT = typeof GROUP_ROLES[number];
+export const COLORS_GROUP_ROLES: Record<GroupRolesT, string> = {
+  "group-admin": "#E74C3C",
+  "group-editor": "#27AE60",
+  "group-member": "#2980B9",
+};
+
+
+export const SYSTEM_ROLES = ["system-admin", "system-member"] as const;
 export type SystemRolesT = typeof SYSTEM_ROLES[number];
+export const COLORS_SYSTEM_ROLES: Record<SystemRolesT, string> = {
+  "system-admin": "#8E44AD",  // purple
+  "system-member": "#16A085", // teal
+};
+
+
+export const GROUP_TYPES = ["public", "private"] as const;
 export type GroupTypesT = typeof GROUP_TYPES[number];
+export const COLORS_GROUP_TYPES: Record<GroupTypesT, string> = {
+  "public": "#2ECC71",  // green
+  "private": "#34495E", // dark gray
+};
+
+
+export const API_ACCESS_TYPES = ["user", "group"] as const;
 export type ApiAccessTypesT = typeof API_ACCESS_TYPES[number];
+export const COLORS_API_ACCESS_TYPES: Record<ApiAccessTypesT, string> = {
+  "user": "#3498DB",  // blue
+  "group": "#9B59B6", // violet
+};
+
+
 
 export type SimpleUserT = {
     username: string;
@@ -35,7 +58,7 @@ export type ApiSpecT = {
 
 export type ApiAccessT = {
     api: number;
-    accessVia: ApiAccessTypesT; 
+    accessVia: ApiAccessTypesT;
     activated: boolean;
 }
 

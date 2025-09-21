@@ -39,7 +39,7 @@ export default function GroupFields({ group }: { group: SimpleGroupT | null  }) 
             return
         }
 
-        const temp: GroupMemberT[] = aggregatedGroup.groupMembers.map((member: { roleInGroup: "Group-Admin" | "Group-Editor" | "Group-Member"; user: SimpleUserT }) => ({
+        const temp: GroupMemberT[] = aggregatedGroup.groupMembers.map((member) => ({
             ...member.user,
             groupRole: member.roleInGroup,
         }));

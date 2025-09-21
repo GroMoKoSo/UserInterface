@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { MyTable } from '@/components/MyTable/MyTable';
 import { TwoColumnLayout } from '@/components/TwoColumnLayout/TwoColumnLayout.container';
 import Header from '@/components/Header/Header.view';
-import type { SimpleUserT } from '@/types/Types';
+import { COLORS_SYSTEM_ROLES, type SimpleUserT } from '@/types/Types';
 import { deleteUser, getAllUsers } from '@/utils/api/UserApiService';
 import { useConfirm } from '@/components/useConfirm/useConfirm'; // Pfad anpassen
+import { EditDeleteActions } from '@/components/MyTable/components/EditDeleteActions';
 
 export function ManageUsersPage() {
     const [users, setUsers] = useState<SimpleUserT[]>([]);
@@ -49,9 +50,26 @@ export function ManageUsersPage() {
                 leftContent={
                     <MyTable<SimpleUserT>
                         data={users}
-                        columns={['name', 'systemrole', 'email']}
-                        onEdit={(row) => navigate(row.username.toString())}
-                        onDelete={onDelete}
+                        columns={[
+                            { key: 'name', label: 'Name' },
+                            {
+                                key: 'systemrole',
+                                label: 'Systemrole',
+                                badge: {
+                                    colorMap: COLORS_SYSTEM_ROLES,
+                                    fallbackColor: 'gray',
+                                },
+                            },
+                            { key: 'email', label: 'Email' },
+                        ]}
+                        renderActions={(row, index) => (
+                            <EditDeleteActions 
+                                onEdit={(row) => navigate(row.username.toString())}
+                                onDelete={onDelete}
+                                row={row} 
+                                rowIndex={index}                    
+                            />
+                        )}
                     />
                 }
             />

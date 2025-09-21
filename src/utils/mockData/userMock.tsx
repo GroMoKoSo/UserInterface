@@ -6,7 +6,7 @@ export const userMockData: SimpleUserT[] = [
     name: "Alice Müller",
     firstName: "Alice",
     lastName: "Müller",
-    systemrole: "System-Admin",
+    systemrole: "system-admin",
     email: "alice.mueller@example.com",
   },
   {
@@ -14,7 +14,7 @@ export const userMockData: SimpleUserT[] = [
     name: "Bob Schneider",
     firstName: "Bob",
     lastName: "Schneider",
-    systemrole: "System-Member",
+    systemrole: "system-member",
     email: "bob.schneider@example.com",
   },
   {
@@ -22,7 +22,7 @@ export const userMockData: SimpleUserT[] = [
     name: "Clara Fischer",
     firstName: "Clara",
     lastName: "Fischer",
-    systemrole: "System-Member",
+    systemrole: "system-member",
     email: "clara.fischer@example.com",
   },
   {
@@ -30,7 +30,7 @@ export const userMockData: SimpleUserT[] = [
     name: "David Becker",
     firstName: "David",
     lastName: "Becker",
-    systemrole: "System-Member",
+    systemrole: "system-member",
     email: "david.becker@example.com",
   },
   {
@@ -38,7 +38,7 @@ export const userMockData: SimpleUserT[] = [
     name: "Eva Wagner",
     firstName: "Eva",
     lastName: "Wagner",
-    systemrole: "System-Admin",
+    systemrole: "system-admin",
     email: "eva.wagner@example.com",
   },
   {
@@ -46,7 +46,7 @@ export const userMockData: SimpleUserT[] = [
     name: "Felix Braun",
     firstName: "Felix",
     lastName: "Braun",
-    systemrole: "System-Member",
+    systemrole: "system-member",
     email: "felix.braun@example.com",
   },
   {
@@ -54,7 +54,7 @@ export const userMockData: SimpleUserT[] = [
     name: "Greta Hofmann",
     firstName: "Greta",
     lastName: "Hofmann",
-    systemrole: "System-Member",
+    systemrole: "system-member",
     email: "greta.hofmann@example.com",
   },
   {
@@ -62,7 +62,7 @@ export const userMockData: SimpleUserT[] = [
     name: "Henry Krause",
     firstName: "Henry",
     lastName: "Krause",
-    systemrole: "System-Member",
+    systemrole: "system-member",
     email: "henry.krause@example.com",
   },
   {
@@ -70,7 +70,7 @@ export const userMockData: SimpleUserT[] = [
     name: "Isabel König",
     firstName: "Isabel",
     lastName: "König",
-    systemrole: "System-Member",
+    systemrole: "system-member",
     email: "isabel.koenig@example.com",
   },
   {
@@ -78,7 +78,7 @@ export const userMockData: SimpleUserT[] = [
     name: "Jonas Vogel",
     firstName: "Jonas",
     lastName: "Vogel",
-    systemrole: "System-Member",
+    systemrole: "system-member",
     email: "jonas.vogel@example.com",
   },
   {
@@ -86,7 +86,7 @@ export const userMockData: SimpleUserT[] = [
     name: "Klara Busch",
     firstName: "Klara",
     lastName: "Busch",
-    systemrole: "System-Admin",
+    systemrole: "system-admin",
     email: "klara.busch@example.com",
   },
   {
@@ -94,7 +94,7 @@ export const userMockData: SimpleUserT[] = [
     name: "Lukas Wolf",
     firstName: "Lukas",
     lastName: "Wolf",
-    systemrole: "System-Member",
+    systemrole: "system-member",
     email: "lukas.wolf@example.com",
   },
   {
@@ -102,7 +102,7 @@ export const userMockData: SimpleUserT[] = [
     name: "Mara Weiß",
     firstName: "Mara",
     lastName: "Weiß",
-    systemrole: "System-Member",
+    systemrole: "system-member",
     email: "mara.weiss@example.com",
   },
   {
@@ -110,7 +110,7 @@ export const userMockData: SimpleUserT[] = [
     name: "Noah Schäfer",
     firstName: "Noah",
     lastName: "Schäfer",
-    systemrole: "System-Member",
+    systemrole: "system-member",
     email: "noah.schaefer@example.com",
   },
   {
@@ -118,7 +118,7 @@ export const userMockData: SimpleUserT[] = [
     name: "Olivia Hartmann",
     firstName: "Olivia",
     lastName: "Hartmann",
-    systemrole: "System-Member",
+    systemrole: "system-member",
     email: "olivia.hartmann@example.com",
   },
   {
@@ -126,7 +126,7 @@ export const userMockData: SimpleUserT[] = [
     name: "Paul Neumann",
     firstName: "Paul",
     lastName: "Neumann",
-    systemrole: "System-Admin",
+    systemrole: "system-admin",
     email: "paul.neumann@example.com",
   },
   {
@@ -134,7 +134,7 @@ export const userMockData: SimpleUserT[] = [
     name: "Quentin Richter",
     firstName: "Quentin",
     lastName: "Richter",
-    systemrole: "System-Member",
+    systemrole: "system-member",
     email: "quentin.richter@example.com",
   },
   {
@@ -142,7 +142,7 @@ export const userMockData: SimpleUserT[] = [
     name: "Rosa Lange",
     firstName: "Rosa",
     lastName: "Lange",
-    systemrole: "System-Member",
+    systemrole: "system-member",
     email: "rosa.lange@example.com",
   },
   {
@@ -150,7 +150,7 @@ export const userMockData: SimpleUserT[] = [
     name: "Stefan Keller",
     firstName: "Stefan",
     lastName: "Keller",
-    systemrole: "System-Member",
+    systemrole: "system-member",
     email: "stefan.keller@example.com",
   },
   {
@@ -158,7 +158,7 @@ export const userMockData: SimpleUserT[] = [
     name: "Tina Schmitt",
     firstName: "Tina",
     lastName: "Schmitt",
-    systemrole: "System-Member",
+    systemrole: "system-member",
     email: "tina.schmitt@example.com",
   },
 ];
