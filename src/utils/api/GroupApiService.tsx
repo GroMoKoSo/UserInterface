@@ -24,7 +24,7 @@ function getGroupMembers(name: string): GroupMemberT {
                 .sort(() => 0.5 - Math.random()) // Shuffle users
                 .slice(0, Math.floor(Math.random() * (12 - 4 + 1)) + 4) // Get 4-12 random members
                 .map(user => ({
-                    roleInGroup: ["Group-Admin", "Group-Editor", "Group-Member"][Math.floor(Math.random() * 3)] as "Group-Admin" | "Group-Editor" | "Group-Member", // Assign random role
+                    roleInGroup: ["group-admin", "group-editor", "group-member"][Math.floor(Math.random() * 3)] as "group-admin" | "group-editor" | "group-member", // Assign random role
                     user
                 }))
 }
@@ -35,7 +35,7 @@ function getGroupApis(name: string): ApiAccessT[] {
                 .slice(0, Math.floor(Math.random() * (10 - 2 + 1)) + 2) // Get 2-10 random APIs
                 .map(api => ({
                     api: api.id,
-                    accessVia: "GROUP",
+                    accessVia: "group",
                     activated: Math.random() < 0.8 // 80% chance of being activated
                 }))
 }

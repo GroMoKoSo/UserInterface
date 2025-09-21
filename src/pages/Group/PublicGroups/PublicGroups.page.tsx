@@ -1,23 +1,38 @@
 import Header from "@/components/Header/Header.view";
+import { JoinActions } from "@/components/MyTable/components/JoinActions";
 import { MyTable } from "@/components/MyTable/MyTable";
 import { TwoColumnLayout } from "@/components/TwoColumnLayout/TwoColumnLayout.container";
-import { SimpleUserT } from "@/types/Types";
+import { SimpleGroupT, SimpleUserT } from "@/types/Types";
+import { getAllGroups } from "@/utils/api/GroupApiService";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 export function PublicGroupsPage() {
 
+    const [groups, setGroups] = useState<SimpleGroupT[]>([]);
+    const navigate = useNavigate();
+
+    useEffect(() => { setGroups(getAllGroups()); }, []);
+
     return (
         <TwoColumnLayout
-                        headerContent={<Header title="Public Groups" />}
-                        leftContent={<></>}
-                        // leftContent={
-                        //     <MyTable<UserT>
-                        //         data={users}
-                        //         columns={['id', 'name', 'role', 'email']}
-                        //         onEdit={(row) => navigate(row.id.toString())}
-                        //         onDelete={onDelete}
-                        //     />
-                        // }
+            headerContent={<Header title="Public Groups" />}
+            leftContent={
+                <MyTable<SimpleGroupT>
+                        data={groups}
+                        columns={['name', 'type']}
+                        initialSortKey='name'
+                        renderActions={(row, index) => (
+                            <JoinActions
+                                onJoin={(row) => console.log("join", row)}
+                                row={row} 
+                                rowIndex={index}                    
+                            />
+                        )}
                     />
+            }
+
+        />
     )
 }

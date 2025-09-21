@@ -10,7 +10,7 @@ export function GroupInformationField(
     }: {
         group: { name: string },
         selectedGroupType: string,
-        setSelectedGroupType: (value: string) => void,
+        setSelectedGroupType: (value: GroupTypesT) => void,
     }
 ) {
     return (

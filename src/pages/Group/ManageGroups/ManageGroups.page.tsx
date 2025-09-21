@@ -1,16 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useMantineColorScheme } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
-import { MyTable } from '@/components/MyTable/MyTable';
+import { ColumnDef, MyTable } from '@/components/MyTable/MyTable';
 import { TwoColumnLayout } from '@/components/TwoColumnLayout/TwoColumnLayout.container';
 import Header from '@/components/Header/Header.view';
-import type { SimpleGroupT, SimpleUserT } from '@/types/Types';
+import { COLORS_GROUP_TYPES, type SimpleGroupT, type SimpleUserT } from '@/types/Types';
 import { useConfirm } from '@/components/useConfirm/useConfirm'; // Pfad anpassen
 import { deleteGroup, getAllGroups } from '@/utils/api/GroupApiService';
-
-type MyGroupT = SimpleGroupT & {
-    size: number;
-};
+import { EditDeleteActions } from '@/components/MyTable/components/EditDeleteActions';
 
 export function ManageGroupsPage() {
     const [groups, setGroups] = useState<SimpleGroupT[]>([]);
@@ -43,18 +40,36 @@ export function ManageGroupsPage() {
         }
     }
 
+
     return (
         <>
             {modal}
             <TwoColumnLayout
                 headerContent={<Header title="Manage Groups" />}
                 leftContent={
-                    <MyTable<MyGroupT>
-                        data={groups.map((g, i) => ({ ...g, size: (Math.floor(Math.random() * (20 - 5 + 1)) + 5) }))}
-                        columns={['name', 'type']}
-                        onEdit={(row) => navigate(row.name.toString())}
-                        onDelete={onDelete}
+                    <MyTable<SimpleGroupT>
+                        data={groups}
+                        columns={[
+                            { key: 'name', label: 'Name' },
+                            {
+                                key: 'type',
+                                label: 'Type',
+                                badge: {
+                                    colorMap: COLORS_GROUP_TYPES,
+                                    fallbackColor: 'gray',
+                                },
+                            },
+                        ]}
                         initialSortKey='name'
+                        renderActions={(row, index) => (
+                            <EditDeleteActions
+                                onEdit={(row) => navigate(row.name.toString())}
+                                onDelete={onDelete}
+                                row={row}
+                                rowIndex={index}
+                            />
+                        )}
+
                     />
                 }
             />
