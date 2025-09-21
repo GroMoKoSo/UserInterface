@@ -13,7 +13,13 @@ export function PublicGroupsPage() {
     const [groups, setGroups] = useState<SimpleGroupT[]>([]);
     const navigate = useNavigate();
 
-    useEffect(() => { setGroups(getAllGroups()); }, []);
+    useEffect(() => {
+        const fetchGroups = async () => {
+            const groupsData = await getAllGroups();
+            setGroups(groupsData);
+        };
+        fetchGroups();
+    }, []);
 
     return (
         <TwoColumnLayout

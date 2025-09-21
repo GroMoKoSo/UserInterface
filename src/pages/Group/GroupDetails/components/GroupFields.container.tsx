@@ -32,18 +32,26 @@ export default function GroupFields({ group }: { group: SimpleGroupT | null  }) 
     const { open: openEditModal, element: editModalElement } = useEditModal(currentlyEditingMember, group);
 
     useEffect(() => {
-        const users: SimpleUserT[] = getAllUsers();
-        const aggregatedGroup = getAggregatedGroup(group.name);
+        const fetchData = async () => {
+            try {
+                const users: SimpleUserT[] = await getAllUsers();
+                const aggregatedGroup = await getAggregatedGroup(group.name);
 
-        if (!users || !aggregatedGroup) {
-            return
-        }
+                if (!users || !aggregatedGroup) {
+                    return;
+                }
 
-        const temp: GroupMemberT[] = aggregatedGroup.groupMembers.map((member) => ({
-            ...member.user,
-            groupRole: member.roleInGroup,
-        }));
-        setGroupMembers(temp);
+                const temp: GroupMemberT[] = aggregatedGroup.groupMembers.map((member) => ({
+                    ...member.user,
+                    groupRole: member.roleInGroup,
+                }));
+                setGroupMembers(temp);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
     }, [group]);
 
     

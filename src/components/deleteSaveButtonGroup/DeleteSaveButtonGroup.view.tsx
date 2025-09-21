@@ -36,11 +36,8 @@ export function DeleteSaveButtonGroup(
                 ),
         });
 
-        if (res && typeof res === 'object') {
-            // res === payload (GroupT), weil bestätigt
-            onDelete();
-    
-        }
+
+        if (res) { onDelete(); } 
     }
 
     return (

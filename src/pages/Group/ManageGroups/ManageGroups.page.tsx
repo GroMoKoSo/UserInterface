@@ -16,7 +16,13 @@ export function ManageGroupsPage() {
     const { confirm, modal } = useConfirm<SimpleGroupT>();
 
     useEffect(() => { setColorScheme('light'); }, [setColorScheme]);
-    useEffect(() => { setGroups(getAllGroups()); }, []);
+    useEffect(() => {
+        async function fetchGroups() {
+            const groups = await getAllGroups();
+            setGroups(groups);
+        }
+        fetchGroups();
+    }, []);
 
     async function onDelete(row: SimpleGroupT) {
         const res = await confirm({

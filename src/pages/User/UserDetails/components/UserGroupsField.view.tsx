@@ -18,14 +18,22 @@ export default function UserGroupsField({ user }: { user: SimpleUserT | null }) 
     }
 
     useEffect(() => {
-        const groups: SimpleGroupT[] = getAllGroups();
-        const aggregatedUser = getAggregatedUser(user.username);
-        const tempUserGroups: UserGroupMembershipT[] = aggregatedUser?.groupMemberships || [];
-        setUserGroupMembership(tempUserGroups);
+        const fetchData = async () => {
+            try {
+                const groups: SimpleGroupT[] = await getAllGroups();
+                const aggregatedUser = await getAggregatedUser(user.username);
+                const tempUserGroups: UserGroupMembershipT[] = aggregatedUser?.groupMemberships || [];
+                setUserGroupMembership(tempUserGroups);
 
-        const tempGroupNames: string[] = groups.map((group: SimpleGroupT) => group.name);
-        setGroupNames(tempGroupNames);
-    }, [])
+                const tempGroupNames: string[] = groups.map((group: SimpleGroupT) => group.name);
+                setGroupNames(tempGroupNames);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, [user.username]);
 
     const [userGroupMemberships, setUserGroupMembership] = useState<UserGroupMembershipT[]>([]);
     const [groupNames, setGroupNames] = useState<string[]>([]);

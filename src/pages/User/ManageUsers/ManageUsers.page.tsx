@@ -16,7 +16,13 @@ export function ManageUsersPage() {
     const { confirm, modal } = useConfirm<SimpleUserT>();
 
     useEffect(() => { setColorScheme('light'); }, [setColorScheme]);
-    useEffect(() => { setUsers(getAllUsers()); }, []);
+    useEffect(() => {
+        async function fetchUsers() {
+            const users = await getAllUsers();
+            setUsers(users);
+        }
+        fetchUsers();
+    }, []);
 
     async function onDelete(row: SimpleUserT) {
         const res = await confirm({

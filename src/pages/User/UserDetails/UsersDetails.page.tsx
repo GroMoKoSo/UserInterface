@@ -16,32 +16,29 @@ export function UserDetailsPage() {
     const { username } = useParams<{ username: string }>();
 
     useEffect(() => {
-        setUser(getUser(username ? username : ''));
-    })
+        async function fetchUser() {
+            if (username) {
+                const userData = await getUser(username);
+                setUser(userData);
+            }
+        }
+        fetchUser();
+    }, [username]);
 
     const navigate = useNavigate();
 
     const { confirm, modal } = useConfirm<SimpleUserT>();
 
-    async function onDelete(row: SimpleUserT) {
-        const res = await confirm({
-            title: 'Delete user?',
-            payload: row,
-            intent: 'danger',
-            confirmLabel: 'Delete',
-            cancelLabel: 'Cancel',
-            content: (u) =>
-                u ? (
-                    <p>Delete user "<strong>{u.name}</strong>" (id: {u.username})?</p>
-                ) : (
-                    <p>No user selected.</p>
-                ),
-        });
-
-        if (res && typeof res === 'object') {
+    async function onDelete(row: SimpleUserT | null) {
+        if (!row) {
+            Notifications.show({ message: 'No user selected to delete.', color: 'red' });
+            return;
+        }
+        
+        if (row && typeof row === 'object') {
             // res === payload (UserT), weil bestätigt
-            deleteUser(res.username);
-            navigate(-1)
+            await deleteUser(row.username);
+            navigate(-1);
         }
     }
 
@@ -66,7 +63,7 @@ export function UserDetailsPage() {
                             deleteLabel="Delete User"
                             saveLabel="Save Changes"
                             nameLabel={user ? user.firstName + " " + user.lastName : ''}
-                            onDelete={() => user && onDelete(user)}
+                            onDelete={() => onDelete(user)}
                             onSave={() => console.log("save")}
                         />
                     </>

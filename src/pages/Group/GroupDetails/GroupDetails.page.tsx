@@ -16,8 +16,14 @@ export function GroupDetailsPage() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        setGroup(getGroup(name ? name : ''));
-    })
+        async function fetchGroup() {
+            if (name) {
+                const fetchedGroup = await getGroup(name);
+                setGroup(fetchedGroup);
+            }
+        }
+        fetchGroup();
+    }, [name]);
 
     function onDeleteGroup() {
         if (group) {
