@@ -34,8 +34,8 @@ export function ManageUsersPage() {
 
         if (res && typeof res === 'object') {
             // res === payload (UserT), weil bestätigt
-            deleteUser(res.id);
-            setUsers((prev) => prev.filter((u) => u.id !== res.id));
+            deleteUser(res.username);
+            setUsers((prev) => prev.filter((u) => u.name !== res.name));
         }
     }
 
@@ -45,12 +45,12 @@ export function ManageUsersPage() {
             {modal}  
             
             <TwoColumnLayout
-                headerContent={<Header title="Users" />}
+                headerContent={<Header title="Manage Users" />}
                 leftContent={
                     <MyTable<SimpleUserT>
                         data={users}
-                        columns={['id', 'name', 'systemrole', 'email']}
-                        onEdit={(row) => navigate(row.id.toString())}
+                        columns={['name', 'systemrole', 'email']}
+                        onEdit={(row) => navigate(row.username.toString())}
                         onDelete={onDelete}
                     />
                 }

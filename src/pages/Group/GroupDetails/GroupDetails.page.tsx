@@ -12,16 +12,16 @@ import { DeleteSaveButtonGroup } from "@/components/deleteSaveButtonGroup/Delete
 
 export function GroupDetailsPage() {
     const [group, setGroup] = useState<SimpleGroupT | null>(null);
-    const { id } = useParams<{ id: string }>();
+    const { name } = useParams<{ name: string }>();
     const navigate = useNavigate()
 
     useEffect(() => {
-        setGroup(getGroup(id ? parseInt(id, 10) : 0));
+        setGroup(getGroup(name ? name : ''));
     })
 
     function onDeleteGroup() {
         if (group) {
-            deleteGroup(group.id);
+            deleteGroup(group.name);
             navigate(-1);
         }
     }

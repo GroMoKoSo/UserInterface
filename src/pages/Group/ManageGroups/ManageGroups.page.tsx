@@ -30,7 +30,7 @@ export function ManageGroupsPage() {
             cancelLabel: 'Cancel',
             content: (u) =>
                 u ? (
-                    <p>Delete group "<strong>{u.name}</strong>" (id: {u.id})?</p>
+                    <p>Delete group "<strong>{u.name}</strong>"?</p>
                 ) : (
                     <p>No group selected.</p>
                 ),
@@ -38,8 +38,8 @@ export function ManageGroupsPage() {
 
         if (res && typeof res === 'object') {
             // res === payload (UserT), weil bestätigt
-            deleteGroup(res.id);
-            setGroups((prev) => prev.filter((u) => u.id !== res.id));
+            deleteGroup(res.name);
+            setGroups((prev) => prev.filter((u) => u.name !== res.name));
         }
     }
 
@@ -47,14 +47,14 @@ export function ManageGroupsPage() {
         <>
             {modal}
             <TwoColumnLayout
-                headerContent={<Header title="Groups" />}
+                headerContent={<Header title="Manage Groups" />}
                 leftContent={
                     <MyTable<MyGroupT>
                         data={groups.map((g, i) => ({ ...g, size: (Math.floor(Math.random() * (20 - 5 + 1)) + 5) }))}
-                        columns={['id', 'name', 'size']}
-                        onEdit={(row) => navigate(row.id.toString())}
+                        columns={['name', 'type']}
+                        onEdit={(row) => navigate(row.name.toString())}
                         onDelete={onDelete}
-                        initialSortKey='id'
+                        initialSortKey='name'
                     />
                 }
             />

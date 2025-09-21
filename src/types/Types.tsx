@@ -2,12 +2,14 @@ export const GROUP_ROLES = ["Group-Admin", "Group-Editor", "Group-Member"] as co
 export const SYSTEM_ROLES = ["System-Admin", "System-Member"] as const;
 export const GROUP_TYPES = ["Public", "Private"]
 
+export const API_ACCESS_TYPES = ["User", "GROUP"] as const;
+
 export type GroupRolesT = typeof GROUP_ROLES[number];
 export type SystemRolesT = typeof SYSTEM_ROLES[number];
 export type GroupTypesT = typeof GROUP_TYPES[number];
+export type ApiAccessTypesT = typeof API_ACCESS_TYPES[number];
 
 export type SimpleUserT = {
-    id: number;
     username: string;
     firstName: string;
     lastName: string;
@@ -17,10 +19,9 @@ export type SimpleUserT = {
 }
 
 export type SimpleGroupT = {
-    id: number;
     name: string;
-    type: "Private" | "Public";
-    size: number; // has to be calculated in frontend
+    description: string;
+    type: GroupTypesT;
 }
 
 export type ApiSpecT = {
@@ -32,19 +33,28 @@ export type ApiSpecT = {
     spec: string;
 }
 
+export type ApiAccessT = {
+    api: number;
+    accessVia: ApiAccessTypesT; 
+    activated: boolean;
+}
+
+export type GroupMemershipT = {
+    roleInGroup: GroupRolesT;
+    group: SimpleGroupT;
+}[];
 
 export type AggregatedUserT = SimpleUserT & {
-    groupMemberships: {
-        roleInGroup: GroupRolesT;
-        group: SimpleGroupT;
-    }[];
+    groupMemberships: GroupMemershipT;
     accessibleApis: ApiSpecT[];
 }
 
+export type GroupMemberT = {
+    roleInGroup: GroupRolesT;
+    user: SimpleUserT;
+}[];
+
 export type AggregatedGroupT = SimpleGroupT & {
-    members: {
-        roleInGroup: GroupRolesT;
-        user: SimpleUserT;
-    }[];
-    accessibleApis: ApiSpecT[];
+    groupMembers: GroupMemberT;
+    accessibleApis: ApiAccessT[];
 }

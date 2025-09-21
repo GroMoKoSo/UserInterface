@@ -64,7 +64,7 @@ const router = createBrowserRouter(
                     element: <ManageUsersPage />
                 },
                 {
-                    path: '/users/:id',
+                    path: '/users/:username',
                     element: <UserDetailsPage />
                 },
                 // Group routes
@@ -77,7 +77,7 @@ const router = createBrowserRouter(
                     element: <PublicGroupsPage />,
                 },
                 {
-                    path: '/groups/:id',
+                    path: '/groups/:name',
                     element: <GroupDetailsPage />,
                 },
                 // API routes

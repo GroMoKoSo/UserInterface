@@ -19,7 +19,7 @@ export function useEditModal(member: GroupMemberT | null, group?: SimpleGroupT |
 
                 <Button
                     variant="light"
-                    onClick={() => navigate(`/users/${member.id}`)}
+                    onClick={() => navigate(`/users/${member.username}`)}
                 >
                     Go to User Details
                 </Button>             

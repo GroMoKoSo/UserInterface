@@ -15,7 +15,7 @@ export default function GroupAccordionItem({ userGroupMembership }: { userGroupM
 
     return (
         <Accordion.Item
-            key={userGroupMembership.group.id}
+            key={userGroupMembership.group.name}
             value={userGroupMembership.group.name}
             color='blue'
         >

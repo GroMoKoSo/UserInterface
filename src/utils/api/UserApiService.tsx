@@ -12,13 +12,13 @@ export function getAllUsers(): SimpleUserT[] {
     return userMockData
 }
 
-export function getUser(userId: number): SimpleUserT | null {
-    console.log('Fetching user: ', userId);
-    return userMockData.filter((user: SimpleUserT) => user.id === userId)[0] || null;
+export function getUser(username: string): SimpleUserT | null {
+    console.log('Fetching user: ', username);
+    return userMockData.filter((user: SimpleUserT) => user.username === username)[0] || null;
 }
 
-export function getAggregatedUser(userId: number): AggregatedUserT | null {
-    const user = getUser(userId);
+export function getAggregatedUser(username: string): AggregatedUserT | null {
+    const user = getUser(username);
     let aggregatedUser: AggregatedUserT ;
 
     if (!user) return null;
@@ -42,7 +42,7 @@ export function getAggregatedUser(userId: number): AggregatedUserT | null {
     return aggregatedUser;
 }
 
-export function createUser(user: SimpleUserT): boolean {
+export function createUser(user: SimpleUserT): number {
     const id = notificationLoading("Deleting User ...", `Trying to create User ...`);
 
     setTimeout(() => {
@@ -54,35 +54,74 @@ export function createUser(user: SimpleUserT): boolean {
     }, 2000);
 
     console.log('Creating user: ', user);
-    return true
+    return 555
 }
 
-export function updateUser(userId: number, user: SimpleUserT): boolean {
-    const id = notificationLoading("Updating User ...", `Trying to update User with ID ${userId} ...`);
+export function updateUser(username: string, user: SimpleUserT): boolean {
+    const id = notificationLoading("Updating User ...", `Trying to update User ${username} ...`);
 
     setTimeout(() => {
         if (true) {
-            notificationSuccess(id, "Success!", `User with ID ${userId} has been updated!`)
+            notificationSuccess(id, "Success!", `User ${username} has been updated!`)
         } else {
             notificationError(id, "Error", "An error occoured while tryin to update a user")
         }
     }, 2000);
 
-    console.log('Updating user: ', userId, user);
+    console.log('Updating user: ', username, user);
     return true
 }
 
-export function deleteUser(userId: number): boolean {
-    const id = notificationLoading("Deleting User ...", `Trying to delete User with ID ${userId} ...`);
+export function deleteUser(username: string): boolean {
+    const id = notificationLoading("Deleting User ...", `Trying to delete User ${username} ...`);
 
     setTimeout(() => {
         if (true) {
-            notificationSuccess(id, "Success!", `User with ID ${userId} has been deleted!`)
+            notificationSuccess(id, "Success!", `User ${username} has been deleted!`)
         } else {
             notificationError(id, "Error", "An error occoured while tryin to delete a user")
         }
     }, 2000);
 
-    console.log('Deleting user: ', userId);
+    console.log('Deleting user: ', username);
+    return true
+}
+
+// Group management within user
+
+//  functiion getGroupsForUser is implemented in getAggregatedUser
+
+
+// API management within user 
+
+// functiion getApisForUser is implemented in getAggregatedUser
+
+export function addApiToUser(username: string, apiId: number): boolean {
+    const id = notificationLoading("Adding API to User ...", `Trying to add API with ID ${apiId} to User ${username} ...`);
+
+    setTimeout(() => {
+        if (true) {
+            notificationSuccess(id, "Success!", `API with ID ${apiId} has been added to User ${username} !`)
+        } else {
+            notificationError(id, "Error", "An error occoured while tryin to add API to user")
+        }
+    }, 2000);
+
+    console.log('Adding API to user: ', username, apiId);
+    return true
+}
+
+export function removeApiFromUser(username: string, apiId: number): boolean {
+    const id = notificationLoading("Removing API from User ...", `Trying to remove API with ID ${apiId} from User ${username} ...`);
+
+    setTimeout(() => {
+        if (true) {
+            notificationSuccess(id, "Success!", `API with ID ${apiId} has been removed from User ${username} !`)
+        } else {
+            notificationError(id, "Error", "An error occoured while tryin to remove API from user")
+        }
+    }, 2000);
+
+    console.log('Removing API from user: ', username, apiId);
     return true
 }

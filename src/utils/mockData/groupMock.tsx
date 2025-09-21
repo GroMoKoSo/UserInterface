@@ -1,8 +1,8 @@
 import type { SimpleGroupT } from "@/types/Types";
 
-export const groupMockData:SimpleGroupT[] = [
-    { "id": 1, "name": "Frontend", "type": "Public", "size": 10 },
-    { "id": 2, "name": "Backend", "type": "Private", "size": 8 },
-    { "id": 3, "name": "Design", "type": "Public", "size": 5 },
-    { "id": 4, "name": "QA", "type": "Private", "size": 7 },
-]
+export const groupMockData: SimpleGroupT[] = [
+    { "name": "Frontend",   "description": "Handles the user interface and client-side logic.",  "type": "Public" },
+    { "name": "Backend",    "description": "Manages server-side logic and database operations.", "type": "Private" },
+    { "name": "Design",     "description": "Focuses on creating user-friendly and visually appealing designs.", "type": "Public" },
+    { "name": "QA",         "description": "Ensures the quality and reliability of the product through testing.", "type": "Private" }
+];

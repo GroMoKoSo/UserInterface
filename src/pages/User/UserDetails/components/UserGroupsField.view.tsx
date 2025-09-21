@@ -19,7 +19,7 @@ export default function UserGroupsField({ user }: { user: SimpleUserT | null }) 
 
     useEffect(() => {
         const groups: SimpleGroupT[] = getAllGroups();
-        const aggregatedUser = getAggregatedUser(user.id);
+        const aggregatedUser = getAggregatedUser(user.username);
         const tempUserGroups: UserGroupMembershipT[] = aggregatedUser?.groupMemberships || [];
         setUserGroupMembership(tempUserGroups);
 
