@@ -1,4 +1,4 @@
-import { SimpleUserT, SimpleGroupT, AggregatedUserT, GROUP_ROLES } from '@/types/Types';
+import { SimpleGroupT, AggregatedUserT, GROUP_ROLES } from '@/types/Types';
 import { getAllGroups } from '@/utils/api/GroupApiService';
 import { Accordion, Button, Group, Select } from '@mantine/core';
 import { useEffect, useState } from 'react';
@@ -11,35 +11,16 @@ import { MyLoader } from '@/components/MyLoader/MyLoader.view';
 export type UserGroupMembershipT = NonNullable<AggregatedUserT['groupMemberships']>[number];
 
 
-export default function UserGroupsField({ user }: { user: SimpleUserT | null }) {
+export default function UserGroupsField({ user }: { user: AggregatedUserT | null }) {
 
     if (!user) {
         return <MyLoader />;
     }
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const groups: SimpleGroupT[] = await getAllGroups();
-                const aggregatedUser = await getAggregatedUser(user.username);
-                const tempUserGroups: UserGroupMembershipT[] = aggregatedUser?.groupMemberships || [];
-                setUserGroupMembership(tempUserGroups);
-
-                const tempGroupNames: string[] = groups.map((group: SimpleGroupT) => group.name);
-                setGroupNames(tempGroupNames);
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        };
-
-        fetchData();
-    }, [user.username]);
-
-    const [userGroupMemberships, setUserGroupMembership] = useState<UserGroupMembershipT[]>([]);
-    const [groupNames, setGroupNames] = useState<string[]>([]);
+    const groupNames = user.groupMemberships.map((gm) => gm.group.name);
 
 
-    const items = userGroupMemberships.map((userGroupMembership) => (
+    const items = user.groupMemberships.map((userGroupMembership) => (
         <GroupAccordionItem userGroupMembership={userGroupMembership} />
     ));
 

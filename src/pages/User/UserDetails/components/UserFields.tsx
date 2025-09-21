@@ -1,4 +1,4 @@
-import { GROUP_ROLES, SimpleUserT, SYSTEM_ROLES, SystemRolesT } from "@/types/Types";
+import { GROUP_ROLES, AggregatedUserT, SYSTEM_ROLES, SystemRolesT } from "@/types/Types";
 import { Fieldset, Group, Select, TextInput } from "@mantine/core";
 import UserGroupsField from "./UserGroupsField.view";
 import { useState } from "react";
@@ -9,7 +9,7 @@ function enumToSelectData<T extends string>(values: T[]) {
     return values.map((v) => ({ value: v, label: v }));
 }
 
-export default function UserFields({ user }: { user: SimpleUserT | null }) {
+export default function UserFields({ user }: { user: AggregatedUserT | null }) {
 
     if (!user) {
         return <MyLoader />

@@ -1,10 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { SimpleUserT } from "../../../types/Types";
-import { deleteUser, getUser } from "@/utils/api/UserApiService";
+import { AggregatedUserT } from "../../../types/Types";
+import { deleteUser, getAggregatedUser } from "@/utils/api/UserApiService";
 import Header from "@/components/Header/Header.view";
 import UserFields from "./components/UserFields";
-import { Button, Group } from "@mantine/core";
 import { TwoColumnLayout } from "@/components/TwoColumnLayout/TwoColumnLayout.container";
 import { useConfirm } from "@/components/useConfirm/useConfirm";
 import { Notifications } from "@mantine/notifications";
@@ -12,13 +11,13 @@ import { DeleteSaveButtonGroup } from "@/components/deleteSaveButtonGroup/Delete
 
 
 export function UserDetailsPage() {
-    const [user, setUser] = useState<SimpleUserT | null>(null);
+    const [user, setUser] = useState<AggregatedUserT | null>(null);
     const { username } = useParams<{ username: string }>();
 
     useEffect(() => {
         async function fetchUser() {
             if (username) {
-                const userData = await getUser(username);
+                const userData = await getAggregatedUser(username);
                 setUser(userData);
             }
         }
@@ -27,9 +26,9 @@ export function UserDetailsPage() {
 
     const navigate = useNavigate();
 
-    const { confirm, modal } = useConfirm<SimpleUserT>();
+    const { confirm, modal } = useConfirm<AggregatedUserT>();
 
-    async function onDelete(row: SimpleUserT | null) {
+    async function onDelete(row: AggregatedUserT | null) {
         if (!row) {
             Notifications.show({ message: 'No user selected to delete.', color: 'red' });
             return;

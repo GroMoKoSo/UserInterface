@@ -1,11 +1,11 @@
 import { MyLoader } from "@/components/MyLoader/MyLoader.view";
-import { SimpleUserT, SYSTEM_ROLES, SystemRolesT } from "@/types/Types";
+import { AggregatedUserT, SYSTEM_ROLES, SystemRolesT } from "@/types/Types";
 import { Group, Select, TextInput } from "@mantine/core";
 import { useState } from "react";
 
 
 
-export function UserInformationField({user}: {user: SimpleUserT | null}) {
+export function UserInformationField({user}: {user: AggregatedUserT | null}) {
 
     if (!user) {
         return <MyLoader />;
