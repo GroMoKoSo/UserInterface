@@ -6,15 +6,15 @@ import SwaggerEditor from "swagger-editor";
 
 export function ApisPage() {
 
-  return (
-    <>
-      <Title>Api's</Title>
-      
+    return (
+        <>
+            <Title>Api's</Title>
 
-      <div style={{ height: "100vh" }}>
-        <SwaggerEditor url="/openapi.yaml" />
-      </div>
-    </>
-  );
+
+            <div style={{ height: "100vh" }}>
+                <SwaggerEditor url="/openapi.yaml" />
+            </div>
+        </>
+    );
 }
 

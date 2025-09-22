@@ -1,16 +1,16 @@
 @startuml Component Diagram
 
 skinparam component {
-  backgroundColor<<presentation>> Lightblue
-  backgroundColor<<container>> Lightgreen
+    backgroundColor<<presentation>> Lightblue
+    backgroundColor<<container>> Lightgreen
 }
 
 package GroupsDetails.page {
-    component "GroupDetailsPage"  as root <<container>> 
+    component "GroupDetailsPage"  as root <<container>>
 
-    component "TwoCollumnLayout" as tcl <<container>> 
+    component "TwoCollumnLayout" as tcl <<container>>
 
-    component "Header" as h <<presentation>> 
+    component "Header" as h <<presentation>>
 
     component "Group" as g1 <<container>>
     component "Button" as b1 <<presentation>>
@@ -29,7 +29,7 @@ package GroupsDetails.page {
 }
 
 package ApiHelper {
-  component "GroupApiHelper" as gapi <<container>>
+    component "GroupApiHelper" as gapi <<container>>
 }
 
 root --> tcl

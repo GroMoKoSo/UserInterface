@@ -12,8 +12,8 @@ Developer -> Build: set VITE_* envs\n(docker build --build-arg or .env)
 Build -> Build: vite build
 Build -> Build: bake VITE_* envs into static assets
 note right of Build
-  Build-time envs are permanent
-  Cannot be changed later
+    Build-time envs are permanent
+    Cannot be changed later
 end note
 
 == Runtime (Container Start) ==
@@ -28,8 +28,8 @@ Browser -> Nginx: request env.js
 Nginx -> Browser: return env.js (with window.ENV)
 
 note right of Browser
-  Browser JS reads window.ENV
-  → runtime configuration available
+    Browser JS reads window.ENV
+    → runtime configuration available
 end note
 
 

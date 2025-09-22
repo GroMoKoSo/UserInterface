@@ -4,18 +4,18 @@ import { createGroup } from "@/utils/api/GroupApiService";
 import { GroupFormPage } from "@/pages/Group/GroupFormPage/GroupFormPage";
 
 export function NewGroupPage() {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  async function handleCreate(g: SimpleGroupT) {
-    await createGroup(g);
-    navigate("/groups");
-  }
+    async function handleCreate(g: SimpleGroupT) {
+        await createGroup(g);
+        navigate("/groups");
+    }
 
-  return (
-    <GroupFormPage
-      mode="create"
-      initialGroup={null}
-      onSubmit={handleCreate}
-    />
-  );
+    return (
+        <GroupFormPage
+            mode="create"
+            initialGroup={null}
+            onSubmit={handleCreate}
+        />
+    );
 }

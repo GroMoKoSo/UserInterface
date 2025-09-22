@@ -3,40 +3,6 @@ import { Modal, Button, Group } from '@mantine/core';
 import type { ReactNode } from 'react';
 
 
-/**
- * useConfirm Hook
- *
- * Provides a generic, promise-based confirmation dialog.
- *
- * - Call `const { confirm, modal } = useConfirm<T>()`
- * - Render `{modal}` somewhere in your component tree.
- * - Use `await confirm(options)` in event handlers to show a modal
- *   and wait for the user’s choice.
- *
- * Features:
- * - Returns a Promise that resolves to `false` (cancel) or the payload you passed in (confirm).
- * - Content can be static JSX or a render function that receives the payload.
- * - Supports custom title, labels, button intent (danger/success/default), etc.
- *
- * Example:
- *   const { confirm, modal } = useConfirm<User>();
- *
- *   async function onDelete(user: User) {
- *     const res = await confirm({
- *       title: 'Delete user?',
- *       payload: user,
- *       intent: 'danger',
- *       content: (u) => `Delete user "${u?.name}"?`
- *     });
- *     if (res) { deleteUser(res.id); }
- *   }
- *
- *   return <>{modal}<Button onClick={() => onDelete(someUser)}>Delete</Button></>
- */
-
-
-
-
 type ConfirmIntent = 'default' | 'danger' | 'success';
 
 export type ConfirmOptions<TPayload = unknown> = {

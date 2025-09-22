@@ -1,16 +1,16 @@
 @startuml Component Diagram
 
 skinparam component {
-  backgroundColor<<presentation>> Lightblue
-  backgroundColor<<container>> Lightgreen
+    backgroundColor<<presentation>> Lightblue
+    backgroundColor<<container>> Lightgreen
 }
 
 package Groups.page {
-    component "GroupsPage"  as g <<container>> 
+    component "GroupsPage"  as g <<container>>
 
-    component "TwoCollumnLayout" as t <<container>> 
+    component "TwoCollumnLayout" as t <<container>>
 
-    component "MyTable" as my <<presentation>> 
+    component "MyTable" as my <<presentation>>
 }
 
 g --> t
