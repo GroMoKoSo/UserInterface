@@ -3,6 +3,7 @@ import { AggregatedGroupT, GROUP_TYPES, GroupTypesT } from "@/types/Types";
 import { Fieldset, Group, Select, Skeleton, Space, Textarea, TextInput } from "@mantine/core";
 import { useContext } from "react";
 import { groupFormContext } from "../GroupFormPage";
+import { GroupInformationSkeleton } from "@/components/Skelletons/Skeletons.view";
 
 export function GroupInformationField({ group }: { group: AggregatedGroupT | null }) {
 
@@ -13,26 +14,7 @@ export function GroupInformationField({ group }: { group: AggregatedGroupT | nul
     }
 
     if (!group && mode === "edit" ) {
-        return (
-            <>
-                <Space h={8} />
-                <Skeleton height={18} width={"14%"}/>
-                <Space h={2} />
-                <Skeleton height={36}/>
-
-                <Space h={8} />
-
-                <Skeleton height={18} mt={"xs"} width={"14%"}/>
-                <Space h={2} />
-                <Skeleton height={74}/>
-
-                <Space h={12} />
-
-                <Skeleton height={18} mt={"xs"} width={"14%"}/>
-                <Space h={2} />
-                <Skeleton height={36}/>
-            </>
-        )
+        return (<GroupInformationSkeleton />)
     }
     
     return (

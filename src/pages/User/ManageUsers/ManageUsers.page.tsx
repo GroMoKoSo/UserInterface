@@ -55,7 +55,7 @@ export function ManageUsersPage() {
             <TwoColumnLayout
                 headerContent={<Header title="Manage Users" />}
                 leftContent={
-                    <>
+                    <div style={{minWidth: 600}}>
                         <MyTable<SimpleUserT>
                             data={users}
                             columns={[
@@ -83,7 +83,7 @@ export function ManageUsersPage() {
                             label="Add New User" 
                             onClick={() => navigate('new')} 
                         />
-                    </>
+                    </div>
                 }
             />
         </>

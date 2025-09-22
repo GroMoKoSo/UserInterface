@@ -7,6 +7,7 @@ import { useAddModal } from "../hooks/UseAddModal";
 import { useEditModal } from "../hooks/UseEditModal";
 import { MyLoader } from "@/components/MyLoader/MyLoader.view";
 import { groupFormContext } from "../GroupFormPage";
+import { GroupMembersSkeleton } from "@/components/Skelletons/Skeletons.view";
 
 export type TableGroupMemberT = GroupMemberT[number] & {
     memberName: string;
@@ -31,22 +32,7 @@ export function GroupMembersField({ group }: { group: AggregatedGroupT | null })
     }
 
     if (!group && mode === "edit") {
-        return (
-            <>
-                <Skeleton height={36} />
-                <Space h={28} />
-                <Group>
-                    <Skeleton height={22} width={"30%"}/> 
-                    <Skeleton height={22} width={"30%"}/> 
-                </Group>    
-
-                <Skeleton height={53} mt={"sm"}/>
-                <Skeleton height={53} mt={"xs"}/> 
-                <Skeleton height={53} mt={"xs"}/> 
-
-                <Skeleton height={34} mt={"lg"}/> 
-            </>
-        )
+        return ( <GroupMembersSkeleton />)
     }
 
     return (

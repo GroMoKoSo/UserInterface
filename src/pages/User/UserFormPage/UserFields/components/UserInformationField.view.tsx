@@ -1,4 +1,5 @@
 import { MyLoader } from "@/components/MyLoader/MyLoader.view";
+import { UserInformationSkeleton } from "@/components/Skelletons/Skeletons.view";
 import { userFormContext } from "@/pages/User/UserFormPage/UserFormPage";
 import { AggregatedUserT, COLORS_SYSTEM_ROLES, SYSTEM_ROLES, SystemRolesT } from "@/types/Types";
 import { Badge, Group, Select, Skeleton, Space, TextInput } from "@mantine/core";
@@ -13,22 +14,7 @@ export function UserInformationField({ user }: { user: AggregatedUserT | null })
     }
 
     if (!user && mode === "edit") {
-        return (
-            <>
-                <Space h={24} />
-                <Skeleton height={36} />
-                <Space h={24} />
-                <Group mt={"md"} justify="space-between">
-                    <Skeleton height={36} w={"48%"}/>
-                    <Skeleton height={36} w={"48%"}/>
-                </Group>
-                <Space h={24} />
-                <Group mt={"md"} justify="space-between">
-                    <Skeleton height={36} w={"48%"}/>
-                    <Skeleton height={36} w={"48%"}/>
-                </Group>
-            </>
-        )
+        return ( <UserInformationSkeleton /> )
     }
 
     return (

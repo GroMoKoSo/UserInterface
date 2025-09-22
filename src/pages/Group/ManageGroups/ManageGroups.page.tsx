@@ -54,7 +54,7 @@ export function ManageGroupsPage() {
             <TwoColumnLayout
                 headerContent={<Header title="Manage Groups" />}
                 leftContent={
-                    <>
+                    <div style={{minWidth: 600}}>
                         <MyTable<SimpleGroupT>
                             data={groups}
                             columns={[
@@ -84,7 +84,7 @@ export function ManageGroupsPage() {
                             label="Add New Group" 
                             onClick={() => navigate('new')}
                         />
-                    </>
+                    </div>
                 }
             />
         </>

@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
 export default function UserFields({ user }: { user: AggregatedUserT | null }) {
 
     return (
-        <>
+        <div style={{minWidth: 600}}>
             <Fieldset
                 legend="Personal Information"
                 mt={"md"}
@@ -38,6 +38,6 @@ export default function UserFields({ user }: { user: AggregatedUserT | null }) {
             >
                 <UserGroupsField user={user} />
             </Fieldset>
-        </>
+        </div>
     );
 }
