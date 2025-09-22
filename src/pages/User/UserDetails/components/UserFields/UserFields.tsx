@@ -18,10 +18,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function UserFields({ user }: { user: AggregatedUserT | null }) {
 
-    if (!user) {
-        return <MyLoader />
-    }
-
     return (
         <>
             <Fieldset

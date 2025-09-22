@@ -9,17 +9,13 @@ import { getAggregatedUser } from '@/utils/api/UserApiService';
 import { MyLoader } from '@/components/MyLoader/MyLoader.view';
 import { useAggregatedUserForm } from '../../../useUserForm';
 import { renderGroupAccordionItems } from './GroupAccordionItem.view';
-import { userFormContext } from '../../../UsersDetails.page';
 import { AddGroupAccordion } from './AddGroupAccordion';
+import { userFormContext } from '@/components/UserFormPage/UserFormPage';
 
 export type UserGroupMembershipT = NonNullable<AggregatedUserT['groupMemberships']>[number];
 
 
 export default function UserGroupsField({ user }: { user: AggregatedUserT | null }) {
-
-    if (!user) {
-        return <MyLoader />;
-    }
 
     const form = useContext(userFormContext)
 

@@ -200,7 +200,7 @@ export function MyTable<T>({
   showActions,
   initialSortKey,
   initialSortDirection = 'asc',
-  height = '80vh',
+  height = '70vh',
   badgeByIndex,
 }: MyTableProps<T>) {
   const columnDefs = useMemo(() => toColumnDefs(columns), [columns]);

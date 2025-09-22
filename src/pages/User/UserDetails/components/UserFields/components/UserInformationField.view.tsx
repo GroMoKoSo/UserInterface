@@ -1,19 +1,11 @@
 import { MyLoader } from "@/components/MyLoader/MyLoader.view";
+import { userFormContext } from "@/components/UserFormPage/UserFormPage";
 import { AggregatedUserT, SYSTEM_ROLES, SystemRolesT } from "@/types/Types";
 import { Group, Select, TextInput } from "@mantine/core";
 import { useContext, useState } from "react";
-import { useAggregatedUserForm } from "../../../useUserForm";
-import { userFormContext } from "../../../UsersDetails.page";
-
 
 
 export function UserInformationField({ user }: { user: AggregatedUserT | null }) {
-
-    if (!user) {
-        return <MyLoader />;
-    }
-
-    const [selectedRole, setSelectedRole] = useState<SystemRolesT>(user.systemrole);
 
     const form = useContext(userFormContext)
 

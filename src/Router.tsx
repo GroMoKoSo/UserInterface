@@ -12,6 +12,7 @@ import { GroupDetailsPage } from './pages/Group/GroupDetails/GroupDetails.page';
 import { LoginPage } from './pages/Common/Login/Login.page';
 import { ProfilePage } from './pages/Common/Profile/Profile.page';
 import { NotFoundPage } from './pages/Common/NotFound/NotFound.page';
+import { NewUserPage } from './pages/User/NewUser/NewUser.page';
 
 function Layout() {
     return (
@@ -62,6 +63,10 @@ const router = createBrowserRouter(
                 {
                     path: '/users',
                     element: <ManageUsersPage />
+                },
+                {
+                    path: '/users/new',
+                    element: <NewUserPage />
                 },
                 {
                     path: '/users/:username',

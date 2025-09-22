@@ -1,12 +1,12 @@
 import { GROUP_ROLES, GroupMemershipT, GroupRolesT, SimpleGroupT } from '@/types/Types';
 import { Accordion, Button, Group, Select } from '@mantine/core';
 import accordionClasses from "./UserGroupsField.module.css"
-import { userFormContext } from '../../../UsersDetails.page';
 import { useContext, useEffect, useState } from 'react';
 import { GroupMembersField } from '@/pages/Group/GroupDetails/components/GroupMembersField.view';
 import { useForm } from '@mantine/form';
 import { getGroup } from '@/utils/api/GroupApiService';
 import { group } from 'console';
+import { userFormContext } from '@/components/UserFormPage/UserFormPage';
 
 export function AddGroupAccordion({ possibleGroups }: { possibleGroups: SimpleGroupT[] }) {
 
