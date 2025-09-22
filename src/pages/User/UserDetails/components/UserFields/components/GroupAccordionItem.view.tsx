@@ -9,7 +9,6 @@ import { MyLoader } from '@/components/MyLoader/MyLoader.view';
 export function renderGroupAccordionItems({ form }: { form: any }) {
 
     const items = form.values.groupMemberships.map((userGroupMembership: UserGroupMembershipT | null, index: number) => {
-
         return <GroupAccordionItem key={index} userGroupMembership={userGroupMembership} index={index} />
     });
 

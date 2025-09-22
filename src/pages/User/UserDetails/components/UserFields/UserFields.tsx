@@ -16,15 +16,11 @@ import { Notifications } from "@mantine/notifications";
 import { deleteUser, updateUser } from "@/utils/api/UserApiService";
 import { useNavigate } from "react-router-dom";
 
-export const userFormContext = createContext<UseFormReturnType<AggregatedUserT, (values: AggregatedUserT) => AggregatedUserT> | undefined>(undefined);
-
 export default function UserFields({ user }: { user: AggregatedUserT | null }) {
 
     if (!user) {
         return <MyLoader />
     }
-
-
 
     return (
         <>

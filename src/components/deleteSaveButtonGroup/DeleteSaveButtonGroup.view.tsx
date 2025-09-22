@@ -66,11 +66,6 @@ export function DeleteSaveButtonGroup(
                 >
                     {saveLabel}
                 </Button>
-                <Tooltip label="Reset changes" withArrow>
-                    <ActionIcon size="lg" color="gray" onClick={onReset}>
-                        <IconRestore />
-                    </ActionIcon>
-                </Tooltip>
 
             </Group>
         </>

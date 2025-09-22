@@ -9,10 +9,6 @@ type ApiOption   = { value: number; label: string; spec: ApiSpecT };
 // existingUser kommt z.B. aus deiner API (AggregatedUserT) oder ist undefined für "create"
 export function useAggregatedUserForm(existingUser: AggregatedUserT | null, allGroups: SimpleGroupT[] = [], allApis: ApiSpecT[] = []) {
 
-    if (!existingUser) {
-        return
-    }
-
     const groupOptions: GroupOption[] = allGroups.map(g => ({
       value: g.name, label: g.name, group: g,
     }));
@@ -22,7 +18,7 @@ export function useAggregatedUserForm(existingUser: AggregatedUserT | null, allG
 
     const form = useForm<AggregatedUserT>({
         mode: 'uncontrolled',
-        initialValues: {
+        initialValues: existingUser ? {
             username: existingUser.username,
             firstName: existingUser.firstName,
             lastName: existingUser.lastName,
@@ -34,14 +30,26 @@ export function useAggregatedUserForm(existingUser: AggregatedUserT | null, allG
                 roleInGroup: gm.roleInGroup
             })),
             accessibleApis: existingUser.accessibleApis
+        } : {
+            username: '',
+            firstName: '',
+            lastName: '',
+            name: '',
+            email: '',
+            systemrole: 'system-member',
+            groupMemberships: [],
+            accessibleApis: []
         },
         validate: {
-            'username': (v) => (!v ? 'Required' : null),
-            'firstName': (v) => (!v ? 'Required' : null),
-            'lastName': (v) => (!v ? 'Required' : null),
-            'email': (v) => (!v || !/^\S+@\S+\.\S+$/.test(v) ? 'Invalid email' : null),
-            'systemrole': (v) => (!v ? 'Required' : null),
-            // optional: weitere Checks
+            username: (v) => (!v ? 'Required' : null),
+            firstName: (v) => (!v ? 'Required' : null),
+            lastName: (v) => (!v ? 'Required' : null),
+            email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+            systemrole: (v) => (!v ? 'Required' : null),
+            groupMemberships: (memberships) =>
+                memberships.every((m) => m.group && m.roleInGroup)
+                    ? null
+                    : 'Each group membership must have both group and role filled',
         },
     });
 

@@ -1,71 +1,91 @@
-import { GROUP_ROLES, GroupRolesT, SimpleGroupT } from '@/types/Types';
+import { GROUP_ROLES, GroupMemershipT, GroupRolesT, SimpleGroupT } from '@/types/Types';
 import { Accordion, Button, Group, Select } from '@mantine/core';
 import accordionClasses from "./UserGroupsField.module.css"
-import { userFormContext } from '../UserFields';
-import { useContext, useState } from 'react';
+import { userFormContext } from '../../../UsersDetails.page';
+import { useContext, useEffect, useState } from 'react';
+import { GroupMembersField } from '@/pages/Group/GroupDetails/components/GroupMembersField.view';
+import { useForm } from '@mantine/form';
+import { getGroup } from '@/utils/api/GroupApiService';
+import { group } from 'console';
 
-export function AddGroupAccordion({possibleGroups}: {possibleGroups: SimpleGroupT[]}) {
+export function AddGroupAccordion({ possibleGroups }: { possibleGroups: SimpleGroupT[] }) {
 
     const form = useContext(userFormContext)
-    const [selection, setSelection] = useState<{ group: SimpleGroupT | null; role: GroupRolesT | null }>({
-        group: null,
-        role: null
-    });
+
+
+    const addGroupForm = useForm<{ group: string | null, roleInGroup: GroupRolesT | null }>({
+        initialValues: {
+            group: null,
+            roleInGroup: null
+        },
+        validate: {
+            group: (v) => (v ? null : "Group is required"),
+            roleInGroup: (v) => (v ? null : "Role is required")
+        }
+    })
+
+    if (!form) {
+        return null;
+    }
+
+    function onSubmit() {
+        if (!form) {
+            return;
+        }
+        if (!addGroupForm.validate().hasErrors) {
+            const fullGroup = possibleGroups.find(g => g.name === addGroupForm.getValues().group);
+            const role = addGroupForm.getValues().roleInGroup;
+            form.insertListItem("groupMemberships", {group: fullGroup, roleInGroup: role} as GroupMemershipT[0]);
+            addGroupForm.reset();
+        }
+    }
+
 
     return (
+
         <Accordion
-                variant="separated"
-                classNames={{
-                    ...accordionClasses,
-                    root: `${accordionClasses.root} ${accordionClasses.greenRoot}`,
-                }}
-                mt={"md"}
-                // defaultValue={"add-group"}
+            variant="separated"
+            classNames={{
+                ...accordionClasses,
+                root: `${accordionClasses.root} ${accordionClasses.greenRoot}`,
+            }}
+            mt={"md"}
+        // defaultValue={"add-group"}
+        >
+            <Accordion.Item
+                key={"add-group"}
+                value='add-group'
             >
-                <Accordion.Item
-                    key={"add-group"}
-                    value='add-group'
-                >
-                    <Accordion.Control>Add Group</Accordion.Control>
-                    <Accordion.Panel>
-                        <Group
-                            justify='space-between'
-                            align='flex-end'
+                <Accordion.Control>Add Group</Accordion.Control>
+                <Accordion.Panel>
+                    <Group
+                        justify='space-between'
+                        align='flex-end'
+                    >
+                        <Select
+                            label="Group"
+                            placeholder="Pick a group"
+                            data={possibleGroups.map(g => (g.name ))}
+                            {...addGroupForm.getInputProps("group")}
+                        />
+
+                        <Select
+                            label="Role"
+                            placeholder="Pick a role"
+                            data={GROUP_ROLES}
+                            {...addGroupForm.getInputProps("roleInGroup")}
+                        />
+
+                        <Button
+                            color='green'
+                            onClick={onSubmit}
                         >
-                            <Select
-                                label="Group"
-                                placeholder="Pick a group"
-                                data={possibleGroups.map(g => g.name)}
-                                value={selection.group?.name || null}
-                                onChange={(val) => {
-                                    const group = possibleGroups.find(g => g.name === val) || null;
-                                    setSelection((s) => ({ ...s, group }));
-                                }}
-                            />
+                            Add to User
+                        </Button>
+                    </Group>
+                </Accordion.Panel>
+            </Accordion.Item>
+        </Accordion>
 
-                            <Select
-                                label="Role"
-                                placeholder="Pick a role"
-                                data={GROUP_ROLES}
-                                value={selection.role || null}
-                                onChange={(val) => {
-                                    const role = (GROUP_ROLES.find(r => r === val)) || null;
-                                    setSelection((s) => ({ ...s, role }));
-                                }}
-                            />
-
-                            <Button
-                                color='green'
-                                onClick={() => {
-                                    form?.insertListItem("groupMemberships", {group: selection.group, role: selection.role})
-                                    setSelection({group: null, role: null})
-                                }}
-                            >
-                                Add to User
-                            </Button>
-                        </Group>
-                    </Accordion.Panel>
-                </Accordion.Item>
-            </Accordion>
     )
 }

@@ -3,7 +3,7 @@ import { AggregatedUserT, SYSTEM_ROLES, SystemRolesT } from "@/types/Types";
 import { Group, Select, TextInput } from "@mantine/core";
 import { useContext, useState } from "react";
 import { useAggregatedUserForm } from "../../../useUserForm";
-import { userFormContext } from "../UserFields";
+import { userFormContext } from "../../../UsersDetails.page";
 
 
 
@@ -17,6 +17,10 @@ export function UserInformationField({ user }: { user: AggregatedUserT | null })
 
     const form = useContext(userFormContext)
 
+    if (!form) {
+        return <MyLoader/>
+    }
+
     return (
         <>
             <Group
@@ -26,7 +30,7 @@ export function UserInformationField({ user }: { user: AggregatedUserT | null })
             >
                 <TextInput
                     label="Username"
-                    {...form?.getInputProps('username')}
+                    {...form.getInputProps('username')}
                 />
 
             </Group>
@@ -39,12 +43,12 @@ export function UserInformationField({ user }: { user: AggregatedUserT | null })
             >
                 <TextInput
                     label="Firstname"
-                    {...form?.getInputProps('firstName')}
+                    {...form.getInputProps('firstName')}
                 />
 
                 <TextInput
                     label="Lastname"
-                    {...form?.getInputProps('lastName')}
+                    {...form.getInputProps('lastName')}
                 />
             </Group>
 
@@ -56,13 +60,13 @@ export function UserInformationField({ user }: { user: AggregatedUserT | null })
             >
                 <TextInput
                     label="Email"
-                    {...form?.getInputProps('email')}
+                    {...form.getInputProps('email')}
                 />
 
                 <Select
                     label="Role"
                     data={SYSTEM_ROLES}
-                    {...form?.getInputProps('systemrole')}
+                    {...form.getInputProps('systemrole')}
                 />
 
             </Group>

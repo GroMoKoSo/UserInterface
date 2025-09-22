@@ -9,7 +9,7 @@ import { getAggregatedUser } from '@/utils/api/UserApiService';
 import { MyLoader } from '@/components/MyLoader/MyLoader.view';
 import { useAggregatedUserForm } from '../../../useUserForm';
 import { renderGroupAccordionItems } from './GroupAccordionItem.view';
-import { userFormContext } from '../UserFields';
+import { userFormContext } from '../../../UsersDetails.page';
 import { AddGroupAccordion } from './AddGroupAccordion';
 
 export type UserGroupMembershipT = NonNullable<AggregatedUserT['groupMemberships']>[number];
