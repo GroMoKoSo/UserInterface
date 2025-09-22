@@ -57,7 +57,7 @@ const router = createBrowserRouter(
                     element: <DashboardPage />,
                 },
                 {
-                    path: '/me',
+                    path: '/profile',
                     element: <ProfilePage />,
                 },
                 // User routes

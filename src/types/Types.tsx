@@ -7,7 +7,7 @@ export const COLORS_GROUP_ROLES: Record<GroupRolesT, string> = {
 };
 
 
-export const SYSTEM_ROLES = ["system-admin", "system-member"] as const;
+export const SYSTEM_ROLES = ["system-member", "system-admin"] as const;
 export type SystemRolesT = typeof SYSTEM_ROLES[number];
 export const COLORS_SYSTEM_ROLES: Record<SystemRolesT, string> = {
     "system-admin": "#8E44AD",  // purple
