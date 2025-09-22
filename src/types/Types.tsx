@@ -1,9 +1,9 @@
-export const GROUP_ROLES = ["group-admin", "group-editor", "group-member"] as const;
+export const GROUP_ROLES = ["group-member", "group-editor", "group-admin"] as const;
 export type GroupRolesT = typeof GROUP_ROLES[number];
 export const COLORS_GROUP_ROLES: Record<GroupRolesT, string> = {
-  "group-admin": "#E74C3C",
-  "group-editor": "#27AE60",
   "group-member": "#2980B9",
+  "group-editor": "#27AE60",
+  "group-admin": "#E74C3C",
 };
 
 

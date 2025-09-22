@@ -13,6 +13,7 @@ import { LoginPage } from './pages/Common/Login/Login.page';
 import { ProfilePage } from './pages/Common/Profile/Profile.page';
 import { NotFoundPage } from './pages/Common/NotFound/NotFound.page';
 import { NewUserPage } from './pages/User/NewUser/NewUser.page';
+import { NewGroupPage } from './pages/Group/NewGroup/NewGroup';
 
 function Layout() {
     return (
@@ -80,6 +81,10 @@ const router = createBrowserRouter(
                 {
                     path: '/groups/public',
                     element: <PublicGroupsPage />,
+                },
+                {
+                    path: '/groups/new',
+                    element: <NewGroupPage />,
                 },
                 {
                     path: '/groups/:name',

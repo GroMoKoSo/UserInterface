@@ -1,12 +1,12 @@
-import { UserFormPage } from "@/components/UserFormPage/UserFormPage";
+import { UserFormPage } from "@/pages/User/UserFormPage/UserFormPage";
 import { AggregatedUserT } from "@/types/Types";
 import { getAggregatedUser, deleteUser, updateUser } from "@/utils/api/UserApiService";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 export function UserDetailsPage() {
-    const { username } = useParams<{ username: string }>();
     const [user, setUser] = useState<AggregatedUserT | null>(null);
+    const { username } = useParams<{ username: string }>();
     const navigate = useNavigate();
 
     useEffect(() => {

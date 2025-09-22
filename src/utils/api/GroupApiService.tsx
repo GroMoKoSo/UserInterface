@@ -113,17 +113,17 @@ export function createGroup(group: SimpleGroupT): Promise<number> {
   });
 }
 
-export function updateGroup(name: string, group: SimpleGroupT): Promise<boolean> {
+export function updateGroup(group: AggregatedGroupT): Promise<boolean> {
   const id = notificationLoading(
     'Updating Group ...',
-    `Trying to update group "${name}" ...`
+    `Trying to update group "${group.name}" ...`
   );
 
   return new Promise((resolve) => {
     setTimeout(() => {
       // fake success
-      notificationSuccess(id, 'Success!', `Group "${name}" has been updated!`);
-      console.log('Updating group: ', name, group);
+      notificationSuccess(id, 'Success!', `Group "${group.name}" has been updated!`);
+      console.log('Updating group: ', group.name, group);
       resolve(true);
     }, 2000);
   });

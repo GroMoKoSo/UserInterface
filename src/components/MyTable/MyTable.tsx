@@ -279,7 +279,6 @@ export function MyTable<T>({
       {enableSearch && (
         <TextInput
           placeholder={searchPlaceholder}
-          mb="md"
           leftSection={<IconSearch size={16} stroke={1.5} />}
           value={search}
           onChange={(e) => setSearch(e.currentTarget.value)}

@@ -1,4 +1,4 @@
-import { UserFormPage } from "@/components/UserFormPage/UserFormPage";
+import { UserFormPage } from "@/pages/User/UserFormPage/UserFormPage";
 import { AggregatedUserT } from "@/types/Types";
 import { createUser } from "@/utils/api/UserApiService";
 import { useNavigate } from "react-router-dom";

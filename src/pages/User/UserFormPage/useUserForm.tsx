@@ -25,10 +25,7 @@ export function useAggregatedUserForm(existingUser: AggregatedUserT | null, allG
             name: existingUser.firstName + " " + existingUser.lastName,
             email: existingUser.email,
             systemrole: existingUser.systemrole,
-            groupMemberships: existingUser.groupMemberships.map((gm: { group: SimpleGroupT, roleInGroup: GroupRolesT }) => ({
-                group: gm.group,
-                roleInGroup: gm.roleInGroup
-            })),
+            groupMemberships: existingUser.groupMemberships,
             accessibleApis: existingUser.accessibleApis
         } : {
             username: '',

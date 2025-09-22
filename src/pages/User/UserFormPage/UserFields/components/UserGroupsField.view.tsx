@@ -7,10 +7,11 @@ import accordionClasses from "./UserGroupsField.module.css"
 import { getAggregatedUser } from '@/utils/api/UserApiService';
 
 import { MyLoader } from '@/components/MyLoader/MyLoader.view';
-import { useAggregatedUserForm } from '../../../useUserForm';
+import { useAggregatedUserForm } from '../../useUserForm';
 import { renderGroupAccordionItems } from './GroupAccordionItem.view';
 import { AddGroupAccordion } from './AddGroupAccordion';
-import { userFormContext } from '@/components/UserFormPage/UserFormPage';
+import { userFormContext } from '../../UserFormPage';
+
 
 export type UserGroupMembershipT = NonNullable<AggregatedUserT['groupMemberships']>[number];
 

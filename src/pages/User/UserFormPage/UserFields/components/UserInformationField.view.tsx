@@ -1,9 +1,8 @@
 import { MyLoader } from "@/components/MyLoader/MyLoader.view";
-import { userFormContext } from "@/components/UserFormPage/UserFormPage";
+import { userFormContext } from "@/pages/User/UserFormPage/UserFormPage";
 import { AggregatedUserT, COLORS_SYSTEM_ROLES, SYSTEM_ROLES, SystemRolesT } from "@/types/Types";
 import { Badge, Group, Select, Skeleton, Space, TextInput } from "@mantine/core";
-import { useContext, useState } from "react";
-
+import { useContext } from "react";
 
 export function UserInformationField({ user }: { user: AggregatedUserT | null }) {
 

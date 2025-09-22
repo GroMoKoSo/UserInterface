@@ -8,6 +8,7 @@ import { COLORS_GROUP_TYPES, type SimpleGroupT, type SimpleUserT } from '@/types
 import { useConfirm } from '@/components/useConfirm/useConfirm'; // Pfad anpassen
 import { deleteGroup, getAllGroups } from '@/utils/api/GroupApiService';
 import { EditDeleteActions } from '@/components/MyTable/components/EditDeleteActions';
+import { AddNewButton } from '@/components/AddNewButton/AddNewButton.view';
 
 export function ManageGroupsPage() {
     const [groups, setGroups] = useState<SimpleGroupT[]>([]);
@@ -53,30 +54,37 @@ export function ManageGroupsPage() {
             <TwoColumnLayout
                 headerContent={<Header title="Manage Groups" />}
                 leftContent={
-                    <MyTable<SimpleGroupT>
-                        data={groups}
-                        columns={[
-                            { key: 'name', label: 'Name' },
-                            {
-                                key: 'type',
-                                label: 'Type',
-                                badge: {
-                                    colorMap: COLORS_GROUP_TYPES,
-                                    fallbackColor: 'gray',
+                    <>
+                        <MyTable<SimpleGroupT>
+                            data={groups}
+                            columns={[
+                                { key: 'name', label: 'Name' },
+                                {
+                                    key: 'type',
+                                    label: 'Type',
+                                    badge: {
+                                        colorMap: COLORS_GROUP_TYPES,
+                                        fallbackColor: 'gray',
+                                    },
                                 },
-                            },
-                        ]}
-                        initialSortKey='name'
-                        renderActions={(row, index) => (
-                            <EditDeleteActions
-                                onEdit={(row) => navigate(row.name.toString())}
-                                onDelete={onDelete}
-                                row={row}
-                                rowIndex={index}
-                            />
-                        )}
+                            ]}
+                            initialSortKey='name'
+                            renderActions={(row, index) => (
+                                <EditDeleteActions
+                                    onEdit={(row) => navigate(row.name.toString())}
+                                    onDelete={onDelete}
+                                    row={row}
+                                    rowIndex={index}
+                                />
+                            )}
+                            height={"auto"}
 
-                    />
+                        />
+                        <AddNewButton 
+                            label="Add New Group" 
+                            onClick={() => navigate('new')}
+                        />
+                    </>
                 }
             />
         </>
