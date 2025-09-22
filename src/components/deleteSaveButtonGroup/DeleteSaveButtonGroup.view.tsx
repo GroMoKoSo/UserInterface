@@ -9,7 +9,7 @@ export function DeleteSaveButtonGroup(
         nameLabel = "Name",
         onDelete,
         onSave,
-        onReset
+        showDelete = true
     }:
         {
             deleteLabel: string;
@@ -17,7 +17,7 @@ export function DeleteSaveButtonGroup(
             nameLabel: string;
             onDelete: () => void;
             onSave: () => void;
-            onReset?: () => void;
+            showDelete?: boolean;
         }
 ) {
 
@@ -53,12 +53,13 @@ export function DeleteSaveButtonGroup(
                 ml="lg"
                 mr="lg"
             >
-                <Button
-                    color="red"
-                    onClick={onDeleteClicked}
-                >
-                    {deleteLabel}
-                </Button>
+                {showDelete &&
+                    <Button
+                        color="red"
+                        onClick={onDeleteClicked}
+                    >
+                        {deleteLabel}
+                    </Button>}
                 <Button
                     type="submit"
                     color="green"

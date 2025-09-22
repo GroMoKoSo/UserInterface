@@ -1,16 +1,35 @@
 import { MyLoader } from "@/components/MyLoader/MyLoader.view";
 import { userFormContext } from "@/components/UserFormPage/UserFormPage";
-import { AggregatedUserT, SYSTEM_ROLES, SystemRolesT } from "@/types/Types";
-import { Group, Select, TextInput } from "@mantine/core";
+import { AggregatedUserT, COLORS_SYSTEM_ROLES, SYSTEM_ROLES, SystemRolesT } from "@/types/Types";
+import { Badge, Group, Select, Skeleton, Space, TextInput } from "@mantine/core";
 import { useContext, useState } from "react";
 
 
 export function UserInformationField({ user }: { user: AggregatedUserT | null }) {
 
-    const form = useContext(userFormContext)
+    const { form, mode } = useContext(userFormContext)
 
     if (!form) {
-        return <MyLoader/>
+        return <MyLoader />
+    }
+
+    if (!user && mode === "edit") {
+        return (
+            <>
+                <Space h={24} />
+                <Skeleton height={36} />
+                <Space h={24} />
+                <Group mt={"md"} justify="space-between">
+                    <Skeleton height={36} w={"48%"}/>
+                    <Skeleton height={36} w={"48%"}/>
+                </Group>
+                <Space h={24} />
+                <Group mt={"md"} justify="space-between">
+                    <Skeleton height={36} w={"48%"}/>
+                    <Skeleton height={36} w={"48%"}/>
+                </Group>
+            </>
+        )
     }
 
     return (
@@ -23,6 +42,7 @@ export function UserInformationField({ user }: { user: AggregatedUserT | null })
                 <TextInput
                     label="Username"
                     {...form.getInputProps('username')}
+                    disabled={mode === "edit"}
                 />
 
             </Group>
@@ -36,11 +56,13 @@ export function UserInformationField({ user }: { user: AggregatedUserT | null })
                 <TextInput
                     label="Firstname"
                     {...form.getInputProps('firstName')}
+                    disabled={mode === "edit"}
                 />
 
                 <TextInput
                     label="Lastname"
                     {...form.getInputProps('lastName')}
+                    disabled={mode === "edit"}
                 />
             </Group>
 
@@ -53,6 +75,7 @@ export function UserInformationField({ user }: { user: AggregatedUserT | null })
                 <TextInput
                     label="Email"
                     {...form.getInputProps('email')}
+                    disabled={mode === "edit"}
                 />
 
                 <Select

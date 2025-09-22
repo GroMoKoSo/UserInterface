@@ -15,7 +15,7 @@ type UserFormPageProps = {
     onDelete?: (user: AggregatedUserT) => Promise<void>;
 };
 
-export const userFormContext = createContext<ReturnType<typeof useAggregatedUserForm>['form'] | null>(null);
+export const userFormContext = createContext<any>(null)
 
 export function UserFormPage({
     mode,
@@ -38,35 +38,36 @@ export function UserFormPage({
     }
 
     return (
-        <userFormContext.Provider value={form}>
+        <userFormContext.Provider value={{ form, mode }}>
             <form onSubmit={form.onSubmit(onSubmit)} style={{ width: "100%" }}>
-                <TwoColumnLayout
-                    headerContent={
-                        <Header
-                            title={
-                                mode === "edit"
-                                    ? `User Details - ${initialUser?.firstName ?? ""} ${initialUser?.lastName ?? ""}`
-                                    : "New User"
-                            }
-                            backButton={true}
-                        />
+            <TwoColumnLayout
+                headerContent={
+                <Header
+                    title={
+                    mode === "edit"
+                        ? `User Details - ${initialUser?.firstName ?? ""} ${initialUser?.lastName ?? ""}`
+                        : "New User"
                     }
-                    leftContent={<UserFields user={initialUser ?? null} />}
-                    rightContent={<div></div>}
-                    bottomContent={
-                        <DeleteSaveButtonGroup
-                            deleteLabel="Delete User"
-                            saveLabel={mode === "edit" ? "Save Changes" : "Create User"}
-                            nameLabel={
-                                initialUser ? `${initialUser.firstName} ${initialUser.lastName}` : ""
-                            }
-                            onDelete={
-                                mode === "edit" && onDelete ? () => onDelete(initialUser!) : () => console.log("Create mode, no delete action")
-                            }
-                            onSave={() => form.setSubmitting(true)}
-                        />
-                    }
+                    backButton={true}
                 />
+                }
+                leftContent={<UserFields user={initialUser ?? null} />}
+                rightContent={<div></div>}
+                bottomContent={
+                <DeleteSaveButtonGroup
+                    deleteLabel="Delete User"
+                    saveLabel={mode === "edit" ? "Save Changes" : "Create User"}
+                    nameLabel={
+                    initialUser ? `${initialUser.firstName} ${initialUser.lastName}` : ""
+                    }
+                    onDelete={
+                    mode === "edit" && onDelete ? () => onDelete(initialUser!) : () => console.log("Create mode, no delete action")
+                    }
+                    onSave={() => form.setSubmitting(true)}
+                    showDelete={mode === "edit"}
+                />
+                }
+            />
             </form>
         </userFormContext.Provider>
     );

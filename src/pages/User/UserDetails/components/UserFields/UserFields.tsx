@@ -1,5 +1,5 @@
 import { GROUP_ROLES, AggregatedUserT, SYSTEM_ROLES, SystemRolesT } from "@/types/Types";
-import { Button, Fieldset, Group, Select, TextInput } from "@mantine/core";
+import { Button, Fieldset, Group, Select, Skeleton, TextInput } from "@mantine/core";
 import UserGroupsField from "./components/UserGroupsField.view";
 import { createContext } from "react";
 import { MyLoader } from "@/components/MyLoader/MyLoader.view";
@@ -17,6 +17,7 @@ import { deleteUser, updateUser } from "@/utils/api/UserApiService";
 import { useNavigate } from "react-router-dom";
 
 export default function UserFields({ user }: { user: AggregatedUserT | null }) {
+
 
     return (
         <>

@@ -41,7 +41,14 @@ export function useAggregatedUserForm(existingUser: AggregatedUserT | null, allG
             accessibleApis: []
         },
         validate: {
-            username: (v) => (!v ? 'Required' : null),
+            username: (v) => {
+                if (!v) return 'Required';
+                if (v.length < 3) return 'Too short';
+                if (v.toLowerCase() === 'admin') return 'Username cannot be admin';
+                if (v.toLowerCase() === 'new') return 'Username cannot be new';
+
+                return null
+            },
             firstName: (v) => (!v ? 'Required' : null),
             lastName: (v) => (!v ? 'Required' : null),
             email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),

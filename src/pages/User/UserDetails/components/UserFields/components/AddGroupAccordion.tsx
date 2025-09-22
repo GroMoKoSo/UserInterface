@@ -10,7 +10,7 @@ import { userFormContext } from '@/components/UserFormPage/UserFormPage';
 
 export function AddGroupAccordion({ possibleGroups }: { possibleGroups: SimpleGroupT[] }) {
 
-    const form = useContext(userFormContext)
+    const {form} = useContext(userFormContext)
 
 
     const addGroupForm = useForm<{ group: string | null, roleInGroup: GroupRolesT | null }>({

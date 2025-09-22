@@ -38,6 +38,7 @@ export function renderGroupAccordionItems({ form }: { form: any }) {
                             placeholder="Pick a role"
                             data={GROUP_ROLES}
                             {...form.getInputProps(`${base}.roleInGroup`)}
+                            defaultValue={GROUP_ROLES[0]}
                         />
                         <Button
                             color='red'
