@@ -1,9 +1,10 @@
 import { IconArrowsLeftRight, IconChevronRight, IconLogout, IconUserScan } from '@tabler/icons-react';
-import { Avatar, Group, Menu, Text, UnstyledButton } from '@mantine/core';
+import { Avatar, Group, Menu, Text, UnstyledButton, useComputedColorScheme, useMantineColorScheme } from '@mantine/core';
 import classes from './UserButton.module.css';
 import { useContext } from 'react';
 import { SessionContext } from '@/utils/authentication/Authwrapper.js';
 import { KEYCLOAK_URL, KEYCLOAK_REALM } from '@/types/constants.js';
+import { IconSun, IconMoon } from '@tabler/icons-react';
 
 export function UserButton({ name, email }: { name?: string, email?: string }) {
 
@@ -17,6 +18,9 @@ export function UserButton({ name, email }: { name?: string, email?: string }) {
     const handleLogoutClick = () => {
         keycloak?.logout();
     }
+
+    const { setColorScheme } = useMantineColorScheme();
+    const computedColorScheme = useComputedColorScheme('light', { getInitialValueInEffect: true });
 
     return (
         <Menu position='right' trigger="hover" openDelay={100} closeDelay={400}>
@@ -73,6 +77,13 @@ export function UserButton({ name, email }: { name?: string, email?: string }) {
                     }}
                 >
                     Toggle Admin/User role
+                </Menu.Item>
+
+                <Menu.Item
+                    leftSection={computedColorScheme === 'light' ? <IconMoon size={14} /> : <IconSun size={14} />}
+                    onClick={() => setColorScheme(computedColorScheme === 'light' ? 'dark' : 'light')}
+                >
+                    Toggle Color Scheme
                 </Menu.Item>
 
             </Menu.Dropdown>

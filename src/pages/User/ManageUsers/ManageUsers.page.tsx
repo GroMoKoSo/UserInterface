@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useMantineColorScheme } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
 import { MyTable } from '@/components/MyTable/MyTable.js';
 import { TwoColumnLayout } from '@/components/TwoColumnLayout/TwoColumnLayout.container.js';
@@ -12,11 +11,9 @@ import { AddNewButton } from '@/components/AddNewButton/AddNewButton.view.js';
 
 export function ManageUsersPage() {
     const [users, setUsers] = useState<SimpleUserT[]>([]);
-    const { setColorScheme } = useMantineColorScheme();
     const navigate = useNavigate();
     const { confirm, modal } = useConfirm<SimpleUserT>();
 
-    useEffect(() => { setColorScheme('light'); }, [setColorScheme]);
     useEffect(() => {
         async function fetchUsers() {
             const users = await getAllUsers();

@@ -29,12 +29,6 @@ export function DashboardPage() {
                                 Create Api
                             </Button>
                         </Fieldset>
-                        <Fieldset mt={"md"} legend="Settings">
-                            <Group>
-                                <Text>Toggle Color Scheme</Text>
-                                <ColorToggleButton />       
-                            </Group>
-                        </Fieldset>
                     </>
                 }
                 rightContent={

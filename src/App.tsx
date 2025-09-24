@@ -10,7 +10,7 @@ import { AuthWrapper } from './utils/authentication/Authwrapper.js';
 export default function App() {
     return (
         <AuthWrapper>
-            <MantineProvider theme={theme}>
+            <MantineProvider theme={theme} defaultColorScheme="dark">
                 <Notifications />
                 <Router />
             </MantineProvider>
