@@ -11,8 +11,10 @@ import { useContext } from 'react';
 export function Sidebar() {
 
     const sessionContext = useContext(SessionContext);
+    const permittedRoutes: RouteT[] = sessionContext?.permittedRoutes ?? [];
+    const user = sessionContext?.user;
 
-    const links = sessionContext?.permittedRoutes
+    const links = permittedRoutes
         .filter((r): r is RouteT & { menu: MenuItemT } => r.menu !== undefined)
         .map((item, index) => <LinksGroup key={index} icon={item.menu.icon} label={item.menu.label} path={item.path} />);
 
@@ -32,7 +34,7 @@ export function Sidebar() {
             </ScrollArea>
 
             <div className={classes.footer}>
-                <UserButton />
+                <UserButton name={user?.name} email={user?.email} />
             </div>
         </nav>
     );

@@ -3,7 +3,7 @@ import { Avatar, Group, Text, UnstyledButton } from '@mantine/core';
 import classes from './UserButton.module.css';
 import { useNavigate } from 'react-router-dom';
 
-export function UserButton() {
+export function UserButton({name, email}: {name?: string, email?: string}) {
 
     const navigate = useNavigate();
 
@@ -21,11 +21,11 @@ export function UserButton() {
 
                 <div style={{ flex: 1 }}>
                     <Text size="sm" fw={500}>
-                        Leon Schäfer
+                        {name || "Guest User"}
                     </Text>
 
                     <Text c="dimmed" size="xs">
-                        leon.schaefer@web.de
+                        {email || "guest@example.com"}
                     </Text>
                 </div>
 

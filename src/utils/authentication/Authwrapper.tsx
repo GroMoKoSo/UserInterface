@@ -42,8 +42,9 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
             console.log("Keycloak already initialized.");
             return;
         }
+
         console.log("Initializing Keycloak...");
-        keycloak.init({ onLoad: 'login-required', redirectUri: `${window.location.origin}/dashboard` })
+        keycloak.init({ onLoad: 'login-required' })
             .then(authenticated => {
                 (keycloak as any).initialized = true;
                 if (authenticated) {
@@ -53,6 +54,7 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
                         fetchAggregatedUserInfo(username)
                             .then(fetchedUser => {
                                 setUser(fetchedUser);
+                                setPermittedRoutes(routes.filter((r) => r.adminOnly ? fetchedUser.systemrole === "system-admin" : true))
                                 console.log("Fetched User:", fetchedUser);
                             })
                             .catch(err => {
@@ -68,9 +70,6 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
             });
     }, [])
 
-    useEffect(() => {
-        setPermittedRoutes(routes.filter((r) => r.adminOnly ? user?.systemrole === "system-admin" : true))
-    }, [user])
 
     return (
         <SessionContext.Provider value={{ user, keycloak, setUser, permittedRoutes}}>
