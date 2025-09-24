@@ -1,5 +1,5 @@
 import { GROUP_ROLES, GroupMemershipT, GroupRolesT, SimpleGroupT } from '@/types/Types.js';
-import { Accordion, Button, Group, Select } from '@mantine/core';
+import { Accordion, Button, Group, Select, useMantineColorScheme } from '@mantine/core';
 import accordionClasses from "./UserGroupsField.module.css";
 import { useContext } from 'react';
 import { useForm } from '@mantine/form';
@@ -8,7 +8,7 @@ import { userFormContext } from '../../UserFormPage.js';
 export function AddGroupAccordion({ possibleGroups }: { possibleGroups: SimpleGroupT[] }) {
 
     const {form} = useContext(userFormContext)
-
+    const { colorScheme } = useMantineColorScheme();
 
     const addGroupForm = useForm<{ group: string | null, roleInGroup: GroupRolesT | null }>({
         initialValues: {
@@ -74,7 +74,8 @@ export function AddGroupAccordion({ possibleGroups }: { possibleGroups: SimpleGr
                         />
 
                         <Button
-                            color='green'
+                            color={colorScheme === 'dark' ? 'green' : 'green'}
+                            variant={colorScheme === 'dark' ? 'filled' : 'filled'}
                             onClick={onSubmit}
                         >
                             Add to User

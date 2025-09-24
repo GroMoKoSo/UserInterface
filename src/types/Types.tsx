@@ -19,7 +19,7 @@ export const GROUP_TYPES = ["public", "private"] as const;
 export type GroupTypesT = typeof GROUP_TYPES[number];
 export const COLORS_GROUP_TYPES: Record<GroupTypesT, string> = {
     "public": "#2ECC71",  // green
-    "private": "#34495E", // dark gray
+    "private": "#7F8C8D", // gray with good contrast
 };
 
 

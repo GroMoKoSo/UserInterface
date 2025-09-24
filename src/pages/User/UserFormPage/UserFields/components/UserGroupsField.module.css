@@ -16,7 +16,15 @@
     }
 }
 
-.greenRoot .panel,
-.greenRoot .control {
-    background-color: var(--mantine-color-green-1);
+/* gilt nur im Light Mode */
+[data-mantine-color-scheme="light"] .greenRoot .panel,
+[data-mantine-color-scheme="light"] .greenRoot .control {
+  background-color: var(--mantine-color-green-1);
+}
+
+/* gilt nur im Dark Mode */
+[data-mantine-color-scheme="dark"] .greenRoot .panel,
+[data-mantine-color-scheme="dark"] .greenRoot .control {
+  background-color: var(--mantine-color-green-4);
+  color: black;
 }
