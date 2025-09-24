@@ -1,17 +1,14 @@
 import { IconArrowsLeftRight, IconChevronRight, IconLogout, IconUserScan } from '@tabler/icons-react';
 import { Avatar, Group, Menu, Text, UnstyledButton } from '@mantine/core';
 import classes from './UserButton.module.css';
-import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { SessionContext } from '@/utils/authentication/Authwrapper.js';
 import { KEYCLOAK_URL, KEYCLOAK_REALM } from '@/types/constants.js';
 
 export function UserButton({ name, email }: { name?: string, email?: string }) {
 
-    const navigate = useNavigate();
     const sessionContext = useContext(SessionContext)
     const keycloak = sessionContext?.keycloak;
-    const setUser = sessionContext?.setUser;
 
     const handleProfileClick = () => {
         window.location.href = `${KEYCLOAK_URL}/realms/${KEYCLOAK_REALM}/account/#/`;
