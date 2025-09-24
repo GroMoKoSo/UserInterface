@@ -1,8 +1,7 @@
-import { Modal, Stack, Button, Select } from "@mantine/core"
+import { Modal, Stack, Button, Select } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import { useDisclosure } from "@mantine/hooks";
-import { AggregatedGroupT, GROUP_ROLES, SimpleGroupT } from "@/types/Types";
-import { TableGroupMemberT } from "../components/GroupMembersField.view";
+import { AggregatedGroupT, GROUP_ROLES } from "@/types/Types.js";
 import { UseFormReturnType } from "@mantine/form";
 
 export function useEditModal(memberIndex: number | null, form: UseFormReturnType<AggregatedGroupT, (values: AggregatedGroupT) => AggregatedGroupT>) {

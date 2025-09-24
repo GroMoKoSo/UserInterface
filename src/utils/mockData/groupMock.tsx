@@ -1,4 +1,4 @@
-import type { SimpleGroupT } from "@/types/Types";
+import type { SimpleGroupT } from "@/types/Types.js";
 
 export const groupMockData: SimpleGroupT[] = [
     { "name": "Frontend",   "description": "Handles the user interface and client-side logic.",  "type": "public" },

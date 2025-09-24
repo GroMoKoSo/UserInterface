@@ -1,10 +1,7 @@
-import { UserFormPage } from "@/pages/User/UserFormPage/UserFormPage";
-import { AggregatedUserT } from "@/types/Types";
-import { createUser } from "@/utils/api/UserApiService";
+import { UserFormPage } from "@/pages/User/UserFormPage/UserFormPage.js";
+import { AggregatedUserT } from "@/types/Types.js";
+import { createUser } from "@/utils/api/UserApiService.js";
 import { useNavigate } from "react-router-dom";
-
-
-
 
 export function NewUserPage() {
     const navigate = useNavigate();

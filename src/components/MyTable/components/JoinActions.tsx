@@ -1,5 +1,4 @@
-import { ActionIcon, Button, Group } from "@mantine/core";
-import { IconPencil, IconTrash } from "@tabler/icons-react";
+import { Button, Group } from "@mantine/core";
 
 
 type EditDeleteActionProps<T> = {

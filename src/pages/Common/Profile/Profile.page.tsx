@@ -1,14 +1,12 @@
-import Header from "@/components/Header/Header.view";
-import { UserInformationSkeleton } from "@/components/Skelletons/Skeletons.view";
-import { TwoColumnLayout } from "@/components/TwoColumnLayout/TwoColumnLayout.container";
-import { UserInformationField } from "@/pages/User/UserFormPage/UserFields/components/UserInformationField.view";
-import { AggregatedUserT, SimpleUserT, SYSTEM_ROLES } from "@/types/Types";
-import { getAggregatedUser, getAllUsers } from "@/utils/api/UserApiService";
-import { Group, TextInput, Select, Fieldset } from "@mantine/core";
+import Header from "@/components/Header/Header.view.js";
+import { TwoColumnLayout } from "@/components/TwoColumnLayout/TwoColumnLayout.container.js";
+import { SimpleUserT, SYSTEM_ROLES } from "@/types/Types.js";
+import { getAggregatedUser, getAllUsers } from "@/utils/api/UserApiService.js";
+import { Fieldset } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { createContext, useState } from "react";
-import { UserProfileFields } from "./components/ProfileFields";
-import { DeleteSaveButtonGroup } from "@/components/deleteSaveButtonGroup/DeleteSaveButtonGroup.view";
+import { useState } from "react";
+import { UserProfileFields } from "./components/ProfileFields.js";
+import { DeleteSaveButtonGroup } from "@/components/deleteSaveButtonGroup/DeleteSaveButtonGroup.view.js";
 
 import { useEffect } from "react";
 
@@ -52,7 +50,7 @@ export function ProfilePage() {
       headerContent={<Header title="My Profile" />}
       leftContent={
         <form
-          onSubmit={form.onSubmit((values) => console.log(values))}
+          onSubmit={form.onSubmit((values: any) => console.log(values))}
           style={{ minWidth: 600 }}
         >
           <Fieldset legend="My Information" w={"100%"}>

@@ -1,5 +1,4 @@
-
-import { Title, useMantineColorScheme } from '@mantine/core';
+import { Title } from '@mantine/core';
 
 import SwaggerEditor from "swagger-editor";
 

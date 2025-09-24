@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Button, useMantineColorScheme } from '@mantine/core';
+import { useMantineColorScheme } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
-import { MyTable } from '@/components/MyTable/MyTable';
-import { TwoColumnLayout } from '@/components/TwoColumnLayout/TwoColumnLayout.container';
-import Header from '@/components/Header/Header.view';
-import { COLORS_SYSTEM_ROLES, type SimpleUserT } from '@/types/Types';
-import { deleteUser, getAllUsers } from '@/utils/api/UserApiService';
-import { useConfirm } from '@/components/useConfirm/useConfirm'; // Pfad anpassen
-import { EditDeleteActions } from '@/components/MyTable/components/EditDeleteActions';
-import { AddNewButton } from '@/components/AddNewButton/AddNewButton.view';
+import { MyTable } from '@/components/MyTable/MyTable.js';
+import { TwoColumnLayout } from '@/components/TwoColumnLayout/TwoColumnLayout.container.js';
+import Header from '@/components/Header/Header.view.js';
+import { COLORS_SYSTEM_ROLES, type SimpleUserT } from '@/types/Types.js';
+import { deleteUser, getAllUsers } from '@/utils/api/UserApiService.js';
+import { useConfirm } from '@/components/useConfirm/useConfirm.js';
+import { EditDeleteActions } from '@/components/MyTable/components/EditDeleteActions.js';
+import { AddNewButton } from '@/components/AddNewButton/AddNewButton.view.js';
 
 export function ManageUsersPage() {
     const [users, setUsers] = useState<SimpleUserT[]>([]);

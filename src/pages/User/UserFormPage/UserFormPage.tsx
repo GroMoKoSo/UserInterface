@@ -1,12 +1,11 @@
-import UserFields from "@/pages/User/UserFormPage/UserFields/UserFields";
-
-import { useAggregatedUserForm } from "@/pages/User/UserFormPage/useUserForm";
-import { AggregatedUserT } from "@/types/Types";
+import UserFields from "@/pages/User/UserFormPage/UserFields/UserFields.js";
+import { useAggregatedUserForm } from "@/pages/User/UserFormPage/useUserForm.js";
+import { AggregatedUserT } from "@/types/Types.js";
 import { createContext, useEffect } from "react";
-import { DeleteSaveButtonGroup } from "../../../components/deleteSaveButtonGroup/DeleteSaveButtonGroup.view";
-import Header from "../../../components/Header/Header.view";
-import { MyLoader } from "../../../components/MyLoader/MyLoader.view";
-import { TwoColumnLayout } from "../../../components/TwoColumnLayout/TwoColumnLayout.container";
+import { DeleteSaveButtonGroup } from "../../../components/deleteSaveButtonGroup/DeleteSaveButtonGroup.view.js";
+import Header from "../../../components/Header/Header.view.js";
+import { MyLoader } from "../../../components/MyLoader/MyLoader.view.js";
+import { TwoColumnLayout } from "../../../components/TwoColumnLayout/TwoColumnLayout.container.js";
 
 type UserFormPageProps = {
     mode: "create" | "edit";

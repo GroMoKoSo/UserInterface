@@ -1,19 +1,12 @@
-import { createBrowserRouter, RouterProvider, Outlet, Navigate } from 'react-router-dom';
-import { DashboardPage } from './pages/Common/Dashboard/Dashboard.page';
-import { Sidebar } from './components/sidebar/Sidebar.container';
-import { Container, Stack } from '@mantine/core';
-import { ManageUsersPage } from './pages/User/ManageUsers/ManageUsers.page';
-import { ApisPage } from './pages/Api/Apis.page';
-import { ManageGroupsPage } from './pages/Group/ManageGroups/ManageGroups.page';
-import { PublicGroupsPage } from './pages/Group/PublicGroups/PublicGroups.page';
-import path from 'path';
-import { UserDetailsPage } from './pages/User/UserDetails/UsersDetails.page';
-import { GroupDetailsPage } from './pages/Group/GroupDetails/GroupDetails.page';
-import { LoginPage } from './pages/Common/Login/Login.page';
-import { ProfilePage } from './pages/Common/Profile/Profile.page';
-import { NotFoundPage } from './pages/Common/NotFound/NotFound.page';
-import { NewUserPage } from './pages/User/NewUser/NewUser.page';
-import { NewGroupPage } from './pages/Group/NewGroup/NewGroup';
+import { Stack } from '@mantine/core';
+import { createBrowserRouter, Navigate, Outlet, RouteObject, RouterProvider } from 'react-router-dom';
+import { Sidebar } from './components/sidebar/Sidebar.container.js';
+import { NotFoundPage } from './pages/Common/NotFound/NotFound.page.js';
+import { BASE_URL } from './types/constants.js';
+import { routes, routesAsRouteObject, RouteT } from './utils/authentication/routes.js';
+import { useContext } from 'react';
+import { SessionContext } from './utils/authentication/Authwrapper.js';
+import { SystemRolesT } from './types/Types.js';
 
 function Layout() {
     return (
@@ -26,103 +19,55 @@ function Layout() {
                 gap="xl"
                 w="100%"
             >
-
                 <Outlet /> {/* This renders the routed content */}
-
             </Stack>
         </div>
     );
 }
 
-declare global {
-    interface Window {
-        ENV?: { BASE_URL?: string };
-    }
-}
-
-
-const router = createBrowserRouter(
-    [
-        {
-            path: '/',
-            element: <Layout />, // Wrap routes with Layout
-            children: [
-                // Common routes
-                {
-                    path: '/',
-                    element: <DashboardPage />,
-                },
-                {
-                    path: '/dashboard',
-                    element: <DashboardPage />,
-                },
-                {
-                    path: '/profile',
-                    element: <ProfilePage />,
-                },
-                // User routes
-                {
-                    path: '/users',
-                    element: <ManageUsersPage />
-                },
-                {
-                    path: '/users/new',
-                    element: <NewUserPage />
-                },
-                {
-                    path: '/users/:username',
-                    element: <UserDetailsPage />
-                },
-                // Group routes
-                {
-                    path: '/groups',
-                    element: <ManageGroupsPage />,
-                },
-                {
-                    path: '/groups/public',
-                    element: <PublicGroupsPage />,
-                },
-                {
-                    path: '/groups/new',
-                    element: <NewGroupPage />,
-                },
-                {
-                    path: '/groups/:name',
-                    element: <GroupDetailsPage />,
-                },
-                // API routes
-                // currently disabled due to incomplete implementation
-                // {
-                //     path: '/apis',
-                //     element: <ApisPage />,
-                // },
-                // Forward unknown routes to NotFound
-                {
-                    path: '*',
-                    element: <Navigate to="/not-found" replace />,
-                },
-            ],
-        },
-        // Route NOT wrapped in Layout
-        {
-            path: '/login',
-            element: <LoginPage />,
-        },
-        // Fallback for unknown routes outside Layout
-        {
-            path: '/not-found',
-            element: <NotFoundPage />,
-        },
-        {
-            path: '*',
-            element: <Navigate to="/not-found" replace />,
-        },
-    ],
-    {
-        basename: window.ENV?.BASE_URL ?? ""
-    }
-);
-
 export function Router() {
+
+    const sessionContext = useContext(SessionContext);
+    const permitted_routes: RouteT[] = sessionContext?.permittedRoutes ?? [];
+
+    const routesWithSidebar: RouteObject[] = routesAsRouteObject(
+        permitted_routes.filter((r) => r.showSidebar)
+    );
+
+    const routesWithoutSidebar: RouteObject[] = routesAsRouteObject(
+        permitted_routes.filter((r) => !r.showSidebar)
+    );
+
+    const router = createBrowserRouter(
+        [
+            {
+                path: '/',
+                element: <Layout />, // adds sidebar to pages
+                children: [
+                    ...routesWithSidebar,
+                    {
+                        path: '*',
+                        element: <Navigate to="/not-found" replace />,
+                    },
+                ],
+            },
+            // Route NOT wrapped in Layout
+            ...routesWithoutSidebar,
+            // Fallback for unknown routes outside Layout
+            {
+                path: '/not-found',
+                element: <NotFoundPage />,
+            },
+            {
+                path: '*',
+                element: <Navigate to="/not-found" replace />,
+            },
+        ],
+        {
+            basename: BASE_URL
+        }
+    );
+
+
     return <RouterProvider router={router} />;
 }

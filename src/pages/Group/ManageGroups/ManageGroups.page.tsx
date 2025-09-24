@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useMantineColorScheme } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
-import { ColumnDef, MyTable } from '@/components/MyTable/MyTable';
-import { TwoColumnLayout } from '@/components/TwoColumnLayout/TwoColumnLayout.container';
-import Header from '@/components/Header/Header.view';
-import { COLORS_GROUP_TYPES, type SimpleGroupT, type SimpleUserT } from '@/types/Types';
-import { useConfirm } from '@/components/useConfirm/useConfirm'; // Pfad anpassen
-import { deleteGroup, getAllGroups } from '@/utils/api/GroupApiService';
-import { EditDeleteActions } from '@/components/MyTable/components/EditDeleteActions';
-import { AddNewButton } from '@/components/AddNewButton/AddNewButton.view';
+import { MyTable } from '@/components/MyTable/MyTable.js';
+import { TwoColumnLayout } from '@/components/TwoColumnLayout/TwoColumnLayout.container.js';
+import Header from '@/components/Header/Header.view.js';
+import { COLORS_GROUP_TYPES, type SimpleGroupT } from '@/types/Types.js';
+import { useConfirm } from '@/components/useConfirm/useConfirm.js';
+import { deleteGroup, getAllGroups } from '@/utils/api/GroupApiService.js';
+import { EditDeleteActions } from '@/components/MyTable/components/EditDeleteActions.js';
+import { AddNewButton } from '@/components/AddNewButton/AddNewButton.view.js';
 
 export function ManageGroupsPage() {
     const [groups, setGroups] = useState<SimpleGroupT[]>([]);

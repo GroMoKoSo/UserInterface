@@ -1,8 +1,8 @@
-import { AggregatedUserT, SimpleGroupT, SimpleUserT } from '../../types/Types';
-import { userMockData } from '../mockData/userMock';
-import { notificationError, notificationLoading, notificationSuccess } from '../NotificationService';
-import { getAllApis } from './ApiApiService';
-import { groupMockData } from '../mockData/groupMock';
+import { AggregatedUserT, SimpleGroupT, SimpleUserT } from '../../types/Types.js';
+import { userMockData } from '../mockData/userMock.js';
+import { notificationLoading, notificationSuccess } from '../NotificationService.js';
+import { getAllApis } from './ApiApiService.js';
+import { groupMockData } from '../mockData/groupMock.js';
 
 // Users
 

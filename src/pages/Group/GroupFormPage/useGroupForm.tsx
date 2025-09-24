@@ -1,7 +1,5 @@
-import { AggregatedGroupT } from "@/types/Types";
+import { AggregatedGroupT } from "@/types/Types.js";
 import { useForm } from "@mantine/form";
-
-
 
 export function useAggregatedGroupForm(existingGroup: AggregatedGroupT | null) {
 
@@ -21,11 +19,11 @@ export function useAggregatedGroupForm(existingGroup: AggregatedGroupT | null) {
         },
 
         validate: {
-            name: (v) => (!v ? 'Required' : null),
-            description: (v) => (!v ? 'Required' : null),
-            type: (v) => (!v ? 'Required' : null),
-            groupMembers: (members) =>
-                members.every((m) => m.user && m.roleInGroup)
+            name: (v: any) => (!v ? 'Required' : null),
+            description: (v: any) => (!v ? 'Required' : null),
+            type: (v: any) => (!v ? 'Required' : null),
+            groupMembers: (members: any) =>
+                members.every((m: any) => m.user && m.roleInGroup)
                     ? null
                     : 'Each group member must have both user and role filled',
         },

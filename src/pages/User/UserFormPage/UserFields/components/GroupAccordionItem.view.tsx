@@ -1,10 +1,7 @@
-import { SimpleUserT, SimpleGroupT, AggregatedUserT, GroupRolesT, GROUP_ROLES } from '@/types/Types';
-import { getAllGroups } from '@/utils/api/GroupApiService';
+import { GROUP_ROLES } from '@/types/Types.js';
 import { Accordion, Button, Group, Select } from '@mantine/core';
-import { Key, useEffect, useState } from 'react';
-import { UserGroupMembershipT } from './UserGroupsField.view';
-import { MyLoader } from '@/components/MyLoader/MyLoader.view';
-
+import { UserGroupMembershipT } from './UserGroupsField.view.js';
+import { MyLoader } from '@/components/MyLoader/MyLoader.view.js';
 
 export function renderGroupAccordionItems({ form }: { form: any }) {
 

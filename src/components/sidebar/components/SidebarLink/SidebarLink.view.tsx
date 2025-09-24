@@ -1,23 +1,20 @@
-import { useState } from 'react';
-import { IconCalendarStats, IconChevronRight } from '@tabler/icons-react';
-import { Box, Collapse, Group, Text, ThemeIcon, UnstyledButton } from '@mantine/core';
+import { Box, Group, ThemeIcon, UnstyledButton } from '@mantine/core';
 import classes from './SidebarLink.module.css';
 import { useNavigate } from 'react-router-dom';
 
 interface LinksGroupProps {
     icon: React.FC<any>;
     label: string;
-    initiallyOpened?: boolean;
-    link: string;
+    path: string;
 }
 
-export function LinksGroup({ icon: Icon, label, initiallyOpened, link }: LinksGroupProps) {
+export function LinksGroup({ icon: Icon, label, path }: LinksGroupProps) {
 
     const navigate = useNavigate()
 
     return (
         <>
-            <UnstyledButton onClick={() => navigate(link)} className={classes.control}>
+            <UnstyledButton onClick={() => navigate(path)} className={classes.control}>
                 <Group justify="space-between" gap={0}>
                     <Box style={{ display: 'flex', alignItems: 'center' }}>
                         <ThemeIcon variant="light" size={30}>

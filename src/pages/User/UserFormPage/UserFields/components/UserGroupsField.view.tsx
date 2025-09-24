@@ -1,16 +1,12 @@
-import { SimpleGroupT, AggregatedUserT, GROUP_ROLES, GroupRolesT, SimpleUserT } from '@/types/Types';
-import { getAllGroups } from '@/utils/api/GroupApiService';
-import { Accordion, Button, Group, Select, Skeleton, Space } from '@mantine/core';
+import { MyLoader } from '@/components/MyLoader/MyLoader.view.js';
+import { AggregatedUserT, SimpleGroupT } from '@/types/Types.js';
+import { getAllGroups } from '@/utils/api/GroupApiService.js';
+import { Accordion, Skeleton } from '@mantine/core';
 import { useContext, useEffect, useState } from 'react';
-
-import accordionClasses from "./UserGroupsField.module.css"
-import { getAggregatedUser } from '@/utils/api/UserApiService';
-
-import { MyLoader } from '@/components/MyLoader/MyLoader.view';
-import { useAggregatedUserForm } from '../../useUserForm';
-import { renderGroupAccordionItems } from './GroupAccordionItem.view';
-import { AddGroupAccordion } from './AddGroupAccordion';
-import { userFormContext } from '../../UserFormPage';
+import { userFormContext } from '../../UserFormPage.js';
+import { AddGroupAccordion } from './AddGroupAccordion.js';
+import { renderGroupAccordionItems } from './GroupAccordionItem.view.js';
+import accordionClasses from "./UserGroupsField.module.css";
 
 
 export type UserGroupMembershipT = NonNullable<AggregatedUserT['groupMemberships']>[number];

@@ -1,20 +1,7 @@
-import { GROUP_ROLES, AggregatedUserT, SYSTEM_ROLES, SystemRolesT } from "@/types/Types";
-import { Button, Fieldset, Group, Select, Skeleton, TextInput } from "@mantine/core";
-import UserGroupsField from "./components/UserGroupsField.view";
-import { createContext } from "react";
-import { MyLoader } from "@/components/MyLoader/MyLoader.view";
-import { UserInformationField } from "./components/UserInformationField.view";
-import { useAggregatedUserForm } from "../useUserForm";
-
-function enumToSelectData<T extends string>(values: T[]) {
-    return values.map((v) => ({ value: v, label: v }));
-}
-
-import { UseFormReturnType } from "@mantine/form";
-import { DeleteSaveButtonGroup } from "@/components/deleteSaveButtonGroup/DeleteSaveButtonGroup.view";
-import { Notifications } from "@mantine/notifications";
-import { deleteUser, updateUser } from "@/utils/api/UserApiService";
-import { useNavigate } from "react-router-dom";
+import { AggregatedUserT } from "@/types/Types.js";
+import { Fieldset } from "@mantine/core";
+import UserGroupsField from "./components/UserGroupsField.view.js";
+import { UserInformationField } from "./components/UserInformationField.view.js";
 
 export default function UserFields({ user }: { user: AggregatedUserT | null }) {
 

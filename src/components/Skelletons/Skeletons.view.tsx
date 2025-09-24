@@ -1,7 +1,5 @@
 import { Space, Skeleton, Group } from "@mantine/core";
 
-
-
 export function GroupInformationSkeleton() {
     return (
         <>

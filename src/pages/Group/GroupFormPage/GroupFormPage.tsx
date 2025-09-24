@@ -1,11 +1,11 @@
-import GroupFields from "@/pages/Group/GroupFormPage/components/GroupFields.container";
-import { AggregatedGroupT, SimpleGroupT } from "@/types/Types";
-import { DeleteSaveButtonGroup } from "../../../components/deleteSaveButtonGroup/DeleteSaveButtonGroup.view";
-import Header from "../../../components/Header/Header.view";
-import { TwoColumnLayout } from "../../../components/TwoColumnLayout/TwoColumnLayout.container";
-import { useAggregatedGroupForm } from "./useGroupForm";
+import GroupFields from "@/pages/Group/GroupFormPage/components/GroupFields.container.js";
+import { AggregatedGroupT, SimpleGroupT } from "@/types/Types.js";
+import { DeleteSaveButtonGroup } from "../../../components/deleteSaveButtonGroup/DeleteSaveButtonGroup.view.js";
+import Header from "../../../components/Header/Header.view.js";
+import { TwoColumnLayout } from "../../../components/TwoColumnLayout/TwoColumnLayout.container.js";
+import { useAggregatedGroupForm } from "./useGroupForm.js";
 import { createContext, useEffect } from "react";
-import { MyLoader } from "@/components/MyLoader/MyLoader.view";
+import { MyLoader } from "@/components/MyLoader/MyLoader.view.js";
 import { UseFormReturnType } from "@mantine/form";
 
 

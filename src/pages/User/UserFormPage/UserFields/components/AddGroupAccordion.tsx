@@ -1,12 +1,9 @@
-import { GROUP_ROLES, GroupMemershipT, GroupRolesT, SimpleGroupT } from '@/types/Types';
+import { GROUP_ROLES, GroupMemershipT, GroupRolesT, SimpleGroupT } from '@/types/Types.js';
 import { Accordion, Button, Group, Select } from '@mantine/core';
-import accordionClasses from "./UserGroupsField.module.css"
-import { useContext, useEffect, useState } from 'react';
-import { GroupMembersField } from '@/pages/Group/GroupFormPage/components/GroupMembersField.view';
+import accordionClasses from "./UserGroupsField.module.css";
+import { useContext } from 'react';
 import { useForm } from '@mantine/form';
-import { getGroup } from '@/utils/api/GroupApiService';
-import { group } from 'console';
-import { userFormContext } from '../../UserFormPage';
+import { userFormContext } from '../../UserFormPage.js';
 
 export function AddGroupAccordion({ possibleGroups }: { possibleGroups: SimpleGroupT[] }) {
 
@@ -19,8 +16,8 @@ export function AddGroupAccordion({ possibleGroups }: { possibleGroups: SimpleGr
             roleInGroup: null
         },
         validate: {
-            group: (v) => (v ? null : "Group is required"),
-            roleInGroup: (v) => (v ? null : "Role is required")
+            group: (v: any) => (v ? null : "Group is required"),
+            roleInGroup: (v: any) => (v ? null : "Role is required")
         }
     })
 

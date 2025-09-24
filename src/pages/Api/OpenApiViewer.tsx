@@ -1,4 +1,3 @@
-
 import { Title, useMantineColorScheme } from '@mantine/core';
 import SwaggerUI from "swagger-ui-react"
 

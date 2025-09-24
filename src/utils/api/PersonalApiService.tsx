@@ -1,11 +1,11 @@
-import { AggregatedUserT, ApiSpecT } from '@/types/Types';
-import { addApiToUser, getAggregatedUser } from './UserApiService';
-import { createApi } from './ApiApiService';
+import { AggregatedUserT, ApiSpecT } from '@/types/Types.js';
+import { addApiToUser, getAggregatedUser } from './UserApiService.js';
+import { createApi } from './ApiApiService.js';
 import {
     notificationLoading,
     notificationSuccess,
     notificationError,
-} from '../NotificationService';
+} from '../NotificationService.js';
 
 export function getPersonalDetails(): Promise<AggregatedUserT | null> {
     const id = notificationLoading(

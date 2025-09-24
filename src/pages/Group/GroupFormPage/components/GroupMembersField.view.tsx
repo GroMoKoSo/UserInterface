@@ -1,13 +1,13 @@
-import { MyTable } from "@/components/MyTable/MyTable";
-import { Button, Fieldset, Group, Skeleton, Space } from "@mantine/core";
-import { EditDeleteActions } from "@/components/MyTable/components/EditDeleteActions";
-import { AggregatedGroupT, COLORS_GROUP_ROLES, GroupMemberT } from "@/types/Types";
+import { MyTable } from "@/components/MyTable/MyTable.js";
+import { Button } from "@mantine/core";
+import { EditDeleteActions } from "@/components/MyTable/components/EditDeleteActions.js";
+import { AggregatedGroupT, COLORS_GROUP_ROLES, GroupMemberT } from "@/types/Types.js";
 import { useContext, useState } from "react";
-import { useAddModal } from "../hooks/UseAddModal";
-import { useEditModal } from "../hooks/UseEditModal";
-import { MyLoader } from "@/components/MyLoader/MyLoader.view";
-import { groupFormContext } from "../GroupFormPage";
-import { GroupMembersSkeleton } from "@/components/Skelletons/Skeletons.view";
+import { useAddModal } from "../hooks/UseAddModal.js";
+import { useEditModal } from "../hooks/UseEditModal.js";
+import { MyLoader } from "@/components/MyLoader/MyLoader.view.js";
+import { groupFormContext } from "../GroupFormPage.js";
+import { GroupMembersSkeleton } from "@/components/Skelletons/Skeletons.view.js";
 
 export type TableGroupMemberT = GroupMemberT[number] & {
     memberName: string;

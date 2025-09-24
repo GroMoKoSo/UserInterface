@@ -1,6 +1,6 @@
-import { UserFormPage } from "@/pages/User/UserFormPage/UserFormPage";
-import { AggregatedUserT } from "@/types/Types";
-import { getAggregatedUser, deleteUser, updateUser } from "@/utils/api/UserApiService";
+import { UserFormPage } from "@/pages/User/UserFormPage/UserFormPage.js";
+import { AggregatedUserT } from "@/types/Types.js";
+import { getAggregatedUser, deleteUser, updateUser } from "@/utils/api/UserApiService.js";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 

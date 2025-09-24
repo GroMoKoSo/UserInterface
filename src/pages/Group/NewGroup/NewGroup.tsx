@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { SimpleGroupT } from "../../../types/Types";
-import { createGroup } from "@/utils/api/GroupApiService";
-import { GroupFormPage } from "@/pages/Group/GroupFormPage/GroupFormPage";
+import { SimpleGroupT } from "../../../types/Types.js";
+import { createGroup } from "@/utils/api/GroupApiService.js";
+import { GroupFormPage } from "@/pages/Group/GroupFormPage/GroupFormPage.js";
 
 export function NewGroupPage() {
     const navigate = useNavigate();

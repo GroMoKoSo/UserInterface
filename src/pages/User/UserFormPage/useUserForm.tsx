@@ -1,6 +1,5 @@
-import { AggregatedUserT, ApiSpecT, GroupMemberT, GroupMemershipT, GroupRolesT, SimpleGroupT } from '@/types/Types';
+import { AggregatedUserT, ApiSpecT, SimpleGroupT } from '@/types/Types.js';
 import { useForm } from '@mantine/form';
-import { group } from 'console';
 
 type GroupOption = { value: string; label: string; group: SimpleGroupT };
 type ApiOption   = { value: number; label: string; spec: ApiSpecT };
@@ -38,7 +37,7 @@ export function useAggregatedUserForm(existingUser: AggregatedUserT | null, allG
             accessibleApis: []
         },
         validate: {
-            username: (v) => {
+            username: (v: string) => {
                 if (!v) return 'Required';
                 if (v.length < 3) return 'Too short';
                 if (v.toLowerCase() === 'admin') return 'Username cannot be admin';
@@ -46,11 +45,11 @@ export function useAggregatedUserForm(existingUser: AggregatedUserT | null, allG
 
                 return null
             },
-            firstName: (v) => (!v ? 'Required' : null),
-            lastName: (v) => (!v ? 'Required' : null),
-            email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-            systemrole: (v) => (!v ? 'Required' : null),
-            groupMemberships: (memberships) =>
+            firstName: (v: any) => (!v ? 'Required' : null),
+            lastName: (v: any) => (!v ? 'Required' : null),
+            email: (value: string) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+            systemrole: (v: any) => (!v ? 'Required' : null),
+            groupMemberships: (memberships: any[]) =>
                 memberships.every((m) => m.group && m.roleInGroup)
                     ? null
                     : 'Each group membership must have both group and role filled',

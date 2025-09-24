@@ -1,6 +1,5 @@
-import { ActionIcon, Button, Group, Tooltip } from "@mantine/core";
-import { useConfirm } from "@/components/useConfirm/useConfirm";
-import { IconRestore } from "@tabler/icons-react";
+import { useConfirm } from "@/components/useConfirm/useConfirm.js";
+import { Button, Group } from "@mantine/core";
 
 export function DeleteSaveButtonGroup(
     {

@@ -1,10 +1,6 @@
-import { MyTable } from "@/components/MyTable/MyTable";
-import { TableSkeleton } from "@/components/Skelletons/Skeletons.view";
-import { ApiSpecT } from "@/types/Types";
-import { Fieldset } from "@mantine/core";
-
-
-
+import { MyTable } from "@/components/MyTable/MyTable.js";
+import { TableSkeleton } from "@/components/Skelletons/Skeletons.view.js";
+import { ApiSpecT } from "@/types/Types.js";
 
 export function MyApisTable({data}: {data: ApiSpecT[] | null}) {
 

@@ -1,28 +1,20 @@
-import {
-    IconUser,
-    IconGauge,
-    IconApi,
-    IconUsersGroup,
-    IconUsersPlus,
-} from '@tabler/icons-react';
-import { Code, Group, ScrollArea, Title } from '@mantine/core';
-import { LinksGroup } from './components/SidebarLink/SidebarLink.view';
-import { UserButton } from './components/UserButton/UserButton.view';
+import { ScrollArea } from '@mantine/core';
+import { LinksGroup } from './components/SidebarLink/SidebarLink.view.js';
+import { UserButton } from './components/UserButton/UserButton.view.js';
 import classes from './Sidebar.module.css';
-import { link } from 'fs';
-import { SidebarTitle } from './components/SidebarTitle/SidebarTitle.view';
+import { SidebarTitle } from './components/SidebarTitle/SidebarTitle.view.js';
+import { MenuItemT, routes, RouteT } from '@/utils/authentication/routes.js';
+import { SessionContext } from '@/utils/authentication/Authwrapper.js';
+import { useContext } from 'react';
 
-const mockdata = [
-    { label: 'Dashboard', icon: IconGauge, link: '/' },
-    { label: "My Api's", icon: IconApi, link: '/apis' },
-    { label: 'Public Groups', icon: IconUsersPlus, link: '/groups/public' },
-    { label: 'Manage Users', icon: IconUser, link: '/users' },
-    { label: 'Manage Groups', icon: IconUsersGroup, link: '/groups' },
-    
-];
 
 export function Sidebar() {
-    const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />);
+
+    const sessionContext = useContext(SessionContext);
+
+    const links = sessionContext?.permittedRoutes
+        .filter((r): r is RouteT & { menu: MenuItemT } => r.menu !== undefined)
+        .map((item, index) => <LinksGroup key={index} icon={item.menu.icon} label={item.menu.label} path={item.path} />);
 
     return (
         <nav className={classes.navbar}>

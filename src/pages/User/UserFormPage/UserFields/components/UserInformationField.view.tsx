@@ -1,8 +1,8 @@
-import { MyLoader } from "@/components/MyLoader/MyLoader.view";
-import { UserInformationSkeleton } from "@/components/Skelletons/Skeletons.view";
-import { userFormContext } from "@/pages/User/UserFormPage/UserFormPage";
-import { AggregatedUserT, COLORS_SYSTEM_ROLES, SYSTEM_ROLES, SystemRolesT } from "@/types/Types";
-import { Badge, Group, Select, Skeleton, Space, TextInput } from "@mantine/core";
+import { MyLoader } from "@/components/MyLoader/MyLoader.view.js";
+import { UserInformationSkeleton } from "@/components/Skelletons/Skeletons.view.js";
+import { userFormContext } from "@/pages/User/UserFormPage/UserFormPage.js";
+import { AggregatedUserT, SYSTEM_ROLES } from "@/types/Types.js";
+import { Group, Select, TextInput } from "@mantine/core";
 import { useContext } from "react";
 
 export function UserInformationField({ user }: { user: AggregatedUserT | null }) {

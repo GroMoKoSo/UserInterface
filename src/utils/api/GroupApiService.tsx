@@ -1,8 +1,8 @@
-import { AggregatedGroupT, ApiAccessT, GroupMemberT, SimpleGroupT } from '../../types/Types';
-import { groupMockData } from './../mockData/groupMock';
-import { getAllUsers } from './UserApiService';
-import { getAllApis } from './ApiApiService';
-import { notificationError, notificationSuccess, notificationLoading } from '../NotificationService';
+import { AggregatedGroupT, ApiAccessT, GroupMemberT, SimpleGroupT } from '../../types/Types.js';
+import { groupMockData } from './../mockData/groupMock.js';
+import { getAllUsers } from './UserApiService.js';
+import { getAllApis } from './ApiApiService.js';
+import { notificationSuccess, notificationLoading } from '../NotificationService.js';
 
 // Groups
 

@@ -1,4 +1,4 @@
-import type { ApiSpecT } from "@/types/Types";
+import type { ApiSpecT } from "@/types/Types.js";
 
 export const apiMockData: ApiSpecT[] = [
     {

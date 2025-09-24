@@ -1,10 +1,10 @@
-import Header from '@/components/Header/Header.view';
-import { TwoColumnLayout } from '@/components/TwoColumnLayout/TwoColumnLayout.container';
-import { Button, Fieldset, Group, Text, useMantineColorScheme } from '@mantine/core';
-import { MyApisTable } from './components/MyApisTable';
-import { MyGroupsTable } from './components/MyGroupsTable';
+import Header from '@/components/Header/Header.view.js';
+import { TwoColumnLayout } from '@/components/TwoColumnLayout/TwoColumnLayout.container.js';
+import { Button, Fieldset, Group, Text } from '@mantine/core';
+import { MyApisTable } from './components/MyApisTable.js';
+import { MyGroupsTable } from './components/MyGroupsTable.js';
 import { useNavigate } from 'react-router-dom';
-import { ColorToggleButton } from '@/components/ColorToggleButton/ColorToggleButton';
+import { ColorToggleButton } from '@/components/ColorToggleButton/ColorToggleButton.js';
 
 export function DashboardPage() {
 

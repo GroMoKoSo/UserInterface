@@ -1,9 +1,8 @@
-import { AggregatedGroupT, GROUP_ROLES, GroupMemberT, SimpleUserT } from "@/types/Types";
-import { getAllUsers } from "@/utils/api/UserApiService";
+import { AggregatedGroupT, GROUP_ROLES, GroupMemberT, SimpleUserT } from "@/types/Types.js";
+import { getAllUsers } from "@/utils/api/UserApiService.js";
 import { Button, Modal, Select } from "@mantine/core";
 import { UseFormReturnType } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
-import { group } from "console";
 import { useEffect, useState } from "react";
 
 
@@ -16,7 +15,7 @@ export function useAddModal(form: UseFormReturnType<AggregatedGroupT, (values: A
     useEffect(() => {
         const fetchUsers = async () => {
             await getAllUsers().then(res => {
-                const filtered = res.filter(u => form.values.groupMembers.map(gm => gm.user.username).includes(u.username) === false);
+                const filtered = res.filter(u => form.values.groupMembers.map((gm: { user: { username: any; }; }) => gm.user.username).includes(u.username) === false);
                 setPossibleUsers(filtered);
             });
         };

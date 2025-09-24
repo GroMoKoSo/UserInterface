@@ -1,6 +1,6 @@
-import { MyLoader } from "@/components/MyLoader/MyLoader.view";
-import { UserInformationSkeleton } from "@/components/Skelletons/Skeletons.view";
-import { SimpleUserT, SYSTEM_ROLES } from "@/types/Types";
+import { MyLoader } from "@/components/MyLoader/MyLoader.view.js";
+import { UserInformationSkeleton } from "@/components/Skelletons/Skeletons.view.js";
+import { SimpleUserT, SYSTEM_ROLES } from "@/types/Types.js";
 import { Group, TextInput, Select } from "@mantine/core";
 
 

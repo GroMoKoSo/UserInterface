@@ -1,6 +1,6 @@
-import { ApiSpecT } from "@/types/Types";
-import { apiMockData } from "../mockData/apiMock";
-import { notificationLoading, notificationSuccess, notificationError } from "../NotificationService";
+import { ApiSpecT } from "@/types/Types.js";
+import { apiMockData } from "../mockData/apiMock.js";
+import { notificationLoading, notificationSuccess, notificationError } from "../NotificationService.js";
 
 export function getAllApis(): ApiSpecT[] {
     console.log('Fetching all apis');

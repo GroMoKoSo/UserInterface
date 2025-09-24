@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { AggregatedGroupT, SimpleGroupT } from "../../../types/Types";
-import { deleteGroup, getAggregatedGroup, getGroup, updateGroup } from "@/utils/api/GroupApiService";
-import { GroupFormPage } from "@/pages/Group/GroupFormPage/GroupFormPage";
+import { AggregatedGroupT, SimpleGroupT } from "../../../types/Types.js";
+import { deleteGroup, getAggregatedGroup, updateGroup } from "@/utils/api/GroupApiService.js";
+import { GroupFormPage } from "@/pages/Group/GroupFormPage/GroupFormPage.js";
 
 export function GroupDetailsPage() {
     const [group, setGroup] = useState<AggregatedGroupT | null>(null);

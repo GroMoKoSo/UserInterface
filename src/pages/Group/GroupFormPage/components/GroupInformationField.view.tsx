@@ -1,9 +1,9 @@
-import { MyLoader } from "@/components/MyLoader/MyLoader.view";
-import { AggregatedGroupT, GROUP_TYPES, GroupTypesT } from "@/types/Types";
-import { Fieldset, Group, Select, Skeleton, Space, Textarea, TextInput } from "@mantine/core";
+import { MyLoader } from "@/components/MyLoader/MyLoader.view.js";
+import { AggregatedGroupT, GROUP_TYPES } from "@/types/Types.js";
+import { Select, Textarea, TextInput } from "@mantine/core";
 import { useContext } from "react";
-import { groupFormContext } from "../GroupFormPage";
-import { GroupInformationSkeleton } from "@/components/Skelletons/Skeletons.view";
+import { groupFormContext } from "../GroupFormPage.js";
+import { GroupInformationSkeleton } from "@/components/Skelletons/Skeletons.view.js";
 
 export function GroupInformationField({ group }: { group: AggregatedGroupT | null }) {
 

@@ -1,6 +1,6 @@
 import { Group, Title } from "@mantine/core";
-import BackButton from "../backButtons/BackButton.view";
-import { MyLoader } from "../MyLoader/MyLoader.view";
+import BackButton from "../backButtons/BackButton.view.js";
+import { MyLoader } from "../MyLoader/MyLoader.view.js";
 
 
 
