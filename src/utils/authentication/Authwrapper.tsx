@@ -54,14 +54,14 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
             .then(authenticated => {
                 (keycloak as any).initialized = true;
                 if (authenticated) {
-                    keycloak.loadUserInfo().then((userInfo: { preferred_username?: string; [key: string]: any }) => {
-                        console.log("User Info:", userInfo);
+                    keycloak.loadUserInfo().then((userInfo: { preferred_username?: string;[key: string]: any }) => {
+                        console.log("Got username from keycloak");
                         const username = userInfo.preferred_username || "unknown";
                         fetchAggregatedUserInfo(username)
                             .then(fetchedUser => {
                                 setUser(fetchedUser);
                                 setPermittedRoutes(routes.filter((r) => r.adminOnly ? fetchedUser.systemrole === "admin" : true))
-                                console.log("Fetched User:", fetchedUser);
+                                console.log("Fetched User details from backend");
                             })
                             .catch(err => {
                                 console.error("Failed to fetch user info from backend", err);
@@ -76,9 +76,10 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
             });
     }, [])
 
+    if (!user) {return (<></>)}
 
     return (
-        <SessionContext.Provider value={{ user, keycloak, setUser, permittedRoutes}}>
+        <SessionContext.Provider value={{ user, keycloak, setUser, permittedRoutes }}>
             {children}
         </SessionContext.Provider>
     );
