@@ -24,13 +24,19 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
 
     async function fetchAggregatedUserInfo(username: string): Promise<AggregatedUserT> {
         // Mocked user info TODO: replace with actual API call
+
+        let role = sessionStorage.getItem("role");
+        if (role !== "admin" && role !== "member") {
+            sessionStorage.setItem("role", "member");
+            role = "member";
+        }
         return Promise.resolve({
             firstName: "Mock",
             lastName: "User",
             name: "Mock User",
             username: "mockuser",
             email: "mockuser@example.com",
-            systemrole: "system-member",
+            systemrole: role === "admin" ? "system-admin" : "system-member",
             accessibleApis: [],
             groupMemberships: [],
         });
