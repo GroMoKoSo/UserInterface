@@ -53,6 +53,7 @@ export function GroupMembersField({ group }: { group: AggregatedGroupT | null })
                         },
                     },
                 ]}
+                initialSortKey="roleInGroup"
                 height={"auto"}
                 showActions
                 renderActions={(row, index) => (

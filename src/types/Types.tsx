@@ -1,17 +1,17 @@
-export const GROUP_ROLES = ["group-member", "group-editor", "group-admin"] as const;
+export const GROUP_ROLES = ["member", "editor", "admin"] as const;
 export type GroupRolesT = typeof GROUP_ROLES[number];
 export const COLORS_GROUP_ROLES: Record<GroupRolesT, string> = {
-    "group-member": "#2980B9",
-    "group-editor": "#27AE60",
-    "group-admin": "#E74C3C",
+    "member": "#2980B9",
+    "editor": "#27AE60",
+    "admin": "#E74C3C",
 };
 
 
-export const SYSTEM_ROLES = ["system-member", "system-admin"] as const;
+export const SYSTEM_ROLES = ["member", "admin"] as const;
 export type SystemRolesT = typeof SYSTEM_ROLES[number];
 export const COLORS_SYSTEM_ROLES: Record<SystemRolesT, string> = {
-    "system-admin": "#8E44AD",  // purple
-    "system-member": "#16A085", // teal
+    "admin": "#8E44AD",  // purple
+    "member": "#16A085", // teal
 };
 
 

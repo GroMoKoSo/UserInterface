@@ -51,8 +51,8 @@ async function getGroupMembers(name: string): Promise<GroupMemberT> {
         .sort(() => 0.5 - Math.random()) // Shuffle users
         .slice(0, Math.floor(Math.random() * (12 - 4 + 1)) + 4) // 4–12 random members
         .map((user) => ({
-            roleInGroup: (['group-admin', 'group-editor', 'group-member'][Math.floor(Math.random() * 3)] ||
-                'group-member') as 'group-admin' | 'group-editor' | 'group-member',
+            roleInGroup: (['admin', 'editor', 'member'][Math.floor(Math.random() * 3)] ||
+                'member') as 'admin' | 'editor' | 'member',
             user,
         }));
 }

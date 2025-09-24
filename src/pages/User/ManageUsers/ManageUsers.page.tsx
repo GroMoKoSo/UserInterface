@@ -67,6 +67,7 @@ export function ManageUsersPage() {
                                 },
                                 { key: 'email', label: 'Email' },
                             ]}
+                            initialSortKey='systemrole'
                             renderActions={(row, index) => (
                                 <EditDeleteActions
                                     onEdit={(row) => navigate(row.username.toString())}

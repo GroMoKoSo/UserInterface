@@ -36,7 +36,7 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
             name: "Mock User",
             username: "mockuser",
             email: "mockuser@example.com",
-            systemrole: role === "admin" ? "system-admin" : "system-member",
+            systemrole: role === "admin" ? "admin" : "member",
             accessibleApis: [],
             groupMemberships: [],
         });
@@ -60,7 +60,7 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
                         fetchAggregatedUserInfo(username)
                             .then(fetchedUser => {
                                 setUser(fetchedUser);
-                                setPermittedRoutes(routes.filter((r) => r.adminOnly ? fetchedUser.systemrole === "system-admin" : true))
+                                setPermittedRoutes(routes.filter((r) => r.adminOnly ? fetchedUser.systemrole === "admin" : true))
                                 console.log("Fetched User:", fetchedUser);
                             })
                             .catch(err => {

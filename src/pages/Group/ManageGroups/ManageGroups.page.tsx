@@ -65,7 +65,7 @@ export function ManageGroupsPage() {
                                     },
                                 },
                             ]}
-                            initialSortKey='name'
+                            initialSortKey='type'
                             renderActions={(row, index) => (
                                 <EditDeleteActions
                                     onEdit={(row) => navigate(row.name.toString())}

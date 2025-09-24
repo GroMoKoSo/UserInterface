@@ -55,9 +55,9 @@ export async function getAggregatedUser(username: string): Promise<AggregatedUse
                         .sort(() => 0.5 - Math.random())
                         .slice(0, Math.floor(Math.random() * (3 - 1 + 1)) + 1)
                         .map((group: SimpleGroupT) => ({
-                            roleInGroup: (['group-admin', 'group-editor', 'group-member'][
+                            roleInGroup: (['admin', 'editor', 'member'][
                                 Math.floor(Math.random() * 3)
-                            ] || 'group-member') as 'group-admin' | 'group-editor' | 'group-member',
+                            ] || 'member') as 'admin' | 'editor' | 'member',
                             group,
                         })),
                     accessibleApis: getAllApis(),
