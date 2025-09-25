@@ -5,9 +5,24 @@ import { useContext } from "react";
 import { groupFormContext } from "../GroupFormPage.js";
 import { GroupInformationSkeleton } from "@/components/Skelletons/Skeletons.view.js";
 
-export function GroupInformationField({ group }: { group: AggregatedGroupT | null }) {
+export function GroupInformationField({ group, systemRole, groupRole }: { group: AggregatedGroupT | null, systemRole: string, groupRole: string }) {
 
     const { form, mode } = useContext(groupFormContext)
+
+    const fieldDisabled = () => {
+        if (mode === "edit") {
+            if (systemRole === "admin") {
+                return false
+            }
+
+            if (groupRole === "admin") {
+                return false
+            }
+            
+            return true
+        }
+        return true
+    }
 
     if (!form) {
         return <MyLoader />
@@ -26,6 +41,7 @@ export function GroupInformationField({ group }: { group: AggregatedGroupT | nul
                 disabled={mode === "edit"}
             />
 
+
             <Textarea
                 label="Description"
                 
@@ -39,6 +55,7 @@ export function GroupInformationField({ group }: { group: AggregatedGroupT | nul
                         paddingTop: 6,
                     }
                 }}
+                disabled={fieldDisabled()}
             />
 
             <Select
@@ -47,6 +64,7 @@ export function GroupInformationField({ group }: { group: AggregatedGroupT | nul
                 data={GROUP_TYPES}
                 mt={"md"}
                 {...form.getInputProps('type' as keyof AggregatedGroupT)}
+                disabled={fieldDisabled()}
             />
         </>
     )

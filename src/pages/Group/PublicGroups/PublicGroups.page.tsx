@@ -1,5 +1,5 @@
 import Header from "@/components/Header/Header.view.js";
-import { JoinActions } from "@/components/MyTable/components/JoinActions.js";
+import { JoinViewActions } from "@/components/MyTable/components/JoinViewActions.js";
 import { MyTable } from "@/components/MyTable/MyTable.js";
 import { TwoColumnLayout } from "@/components/TwoColumnLayout/TwoColumnLayout.container.js";
 import { COLORS_GROUP_TYPES, SimpleGroupT } from "@/types/Types.js";
@@ -31,8 +31,9 @@ export function PublicGroupsPage() {
                     ]}
                     initialSortKey='name'
                     renderActions={(row, index) => (
-                        <JoinActions
+                        <JoinViewActions
                             onJoin={(row) => console.log("join", row)}
+                            onView={(row) => navigate(`/groups/${row.name}`)}
                             row={row}
                             rowIndex={index}
                         />

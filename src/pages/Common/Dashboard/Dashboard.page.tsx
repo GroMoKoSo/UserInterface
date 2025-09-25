@@ -5,16 +5,19 @@ import { MyApisTable } from './components/MyApisTable.js';
 import { MyGroupsTable } from './components/MyGroupsTable.js';
 import { useNavigate } from 'react-router-dom';
 import { ColorToggleButton } from '@/components/ColorToggleButton/ColorToggleButton.js';
+import { useContext } from 'react';
+import { SessionContext } from '@/utils/authentication/Authwrapper.js';
 
 export function DashboardPage() {
 
     const navigate = useNavigate();
-
+    const sessionContext = useContext(SessionContext);
+    const user = sessionContext?.user;
 
     return (
         <>
             <TwoColumnLayout
-                headerContent={<Header title='Dashboard' />}
+                headerContent={<Header title={user? `Welcome ${user.name}!` : "Dashboard"} />}
                 leftContent={
                     <>
                         <Fieldset legend="My APIs">

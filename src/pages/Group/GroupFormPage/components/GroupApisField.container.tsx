@@ -7,14 +7,16 @@ import { GroupMembersSkeleton, TableSkeleton } from "@/components/Skelletons/Ske
 import { MyLoader } from "@/components/MyLoader/MyLoader.view.js";
 import { EditDeleteActions } from "@/components/MyTable/components/EditDeleteActions.js";
 import { useEditModalApis } from "../hooks/UseEditModal.js";
+import { OpenAction } from "@/components/MyTable/components/OpenAction.js";
+import { useNavigate } from "react-router-dom";
 
 
 
-export function GroupApisField({ group }: { group: AggregatedGroupT | null }) {
+export function GroupApisField({ group, systemRole, groupRole }: { group: AggregatedGroupT | null, systemRole: string, groupRole: string }) {
 
-    const FormContext = useContext(groupFormContext);
-    const form = FormContext.form;
+    const { form, mode } = useContext(groupFormContext)
 
+    const navigate = useNavigate();
     const [currentlyEditingApiIndex, setCurrentlyEditingApiIndex] = useState<number | null>(null);
     const [currentlyEditingApi, setCurrentlyEditingApi] = useState<ApiSpecT | null>(null);
     const { open: openEditModal, element: editModalElement } = useEditModalApis(currentlyEditingApiIndex, currentlyEditingApi);
@@ -25,6 +27,25 @@ export function GroupApisField({ group }: { group: AggregatedGroupT | null }) {
         setCurrentlyEditingApiIndex(index);
         setCurrentlyEditingApi(row);
         openEditModal();
+    }
+
+    const fieldDisabled = () => {
+        if (mode === "edit") {
+            if (systemRole === "admin") {
+                return false
+            }
+
+            if (groupRole === "admin") {
+                return false
+            }
+
+            if (groupRole === "editor") {
+                return false
+            }
+
+            return true
+        }
+        return true
     }
 
     if (!form) {
@@ -45,7 +66,7 @@ export function GroupApisField({ group }: { group: AggregatedGroupT | null }) {
                     { key: 'version', label: 'Version' },
                     {
                         key: 'activationStatus',
-                        label: 'Status', 
+                        label: 'Status',
                         badge: {
                             colorMap: COLORS_PI_ACTIVATION_TYPES,
                             fallbackColor: 'gray',
@@ -54,21 +75,30 @@ export function GroupApisField({ group }: { group: AggregatedGroupT | null }) {
 
                 ]}
                 initialSortKey="name"
-                renderActions={(row, index) => (
-                    <EditDeleteActions
-                        onEdit={(row, index) => handleEditClick(row, index)}
-                        onDelete={(row, index) => form.removeListItem("accessibleApis", index)}
-                        row={row}
-                        rowIndex={index}
-                    />
-                )}
+                renderActions={fieldDisabled() ?
+                    (row, index) => (
+                        <OpenAction
+                            onOpen={(row, index) => navigate(`/apis/${row.id}`)}
+                            row={row}
+                            rowIndex={index}
+                        />
+                    ) : (row, index) => (
+                        <EditDeleteActions
+                            onEdit={(row, index) => handleEditClick(row, index)}
+                            onDelete={(row, index) => form.removeListItem("accessibleApis", index)}
+                            row={row}
+                            rowIndex={index}
+                        />
+                    )}
                 height={"auto"}
             />
 
-            <AddNewButton
-                onClick={() => alert("Add new API")}
-                label="Add API"
-            />
+            {fieldDisabled() ? null : (
+                <AddNewButton
+                    onClick={() => alert("Add new API")}
+                    label="Add API"
+                />
+            )}
         </>
     )
 }

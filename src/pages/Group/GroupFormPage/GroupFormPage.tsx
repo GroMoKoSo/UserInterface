@@ -1,4 +1,4 @@
-import { GroupFieldsLeft, GroupFieldsRight } from "@/pages/Group/GroupFormPage/components/GroupFields.container.js";
+import { GroupFieldsLeft, GroupFieldsRight, useGroupSession } from "@/pages/Group/GroupFormPage/components/GroupFields.container.js";
 import { AggregatedGroupT, SimpleGroupT } from "@/types/Types.js";
 import { DeleteSaveButtonGroup } from "../../../components/deleteSaveButtonGroup/DeleteSaveButtonGroup.view.js";
 import Header from "../../../components/Header/Header.view.js";
@@ -27,6 +27,28 @@ export function GroupFormPage({
 
     const form: UseFormReturnType<AggregatedGroupT, (values: AggregatedGroupT) => AggregatedGroupT> = useAggregatedGroupForm(initialGroup ?? null);
 
+    const { systemRole, groupRole } = initialGroup ? useGroupSession(initialGroup) : { systemRole: "member", groupRole: "member" };
+
+    const fieldDisabled = () => {
+        if (mode === "edit") {
+            if (systemRole === "admin") {
+                return false
+            }
+
+            if (groupRole === "admin") {
+                return false
+            }
+
+            if (groupRole === "editor") {
+                return false
+            }
+
+            return true
+        }
+        return true
+    }
+
+
     useEffect(() => {
         if (initialGroup) {
             form.setValues(initialGroup);
@@ -53,18 +75,20 @@ export function GroupFormPage({
                         />
                     }
                     leftContent={<GroupFieldsLeft group={initialGroup ?? null} />}
-                    rightContent= {<GroupFieldsRight group={initialGroup ?? null} />}
+                    rightContent={<GroupFieldsRight group={initialGroup ?? null} />}
                     bottomContent={
-                        <DeleteSaveButtonGroup
-                            deleteLabel="Delete Group"
-                            saveLabel={mode === "edit" ? "Save Changes" : "Create Group"}
-                            nameLabel={initialGroup?.name ?? ""}
-                            onDelete={
-                                mode === "edit" && onDelete ? () => onDelete(initialGroup!) : () => console.log("no delete function provided")
-                            }
-                            onSave={() => form.setSubmitting(true)}
-                            showDelete={mode === "edit"}
-                        />
+                        fieldDisabled() ? null : (
+                            <DeleteSaveButtonGroup
+                                deleteLabel="Delete Group"
+                                saveLabel={mode === "edit" ? "Save Changes" : "Create Group"}
+                                nameLabel={initialGroup?.name ?? ""}
+                                onDelete={
+                                    mode === "edit" && onDelete ? () => onDelete(initialGroup!) : () => console.log("no delete function provided")
+                                }
+                                onSave={() => form.setSubmitting(true)}
+                                showDelete={mode === "edit"}
+                            />
+                        )
                     }
                 />
             </form>
