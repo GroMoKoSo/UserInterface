@@ -12,7 +12,7 @@ type SessionContextType = {
     permittedRoutes: RouteT[];
 };
 
-export const SessionContext = createContext<SessionContextType | null>({
+export const SessionContext = createContext<SessionContextType>({
     keycloak: null,
     user: null,
     setUser: () => { },

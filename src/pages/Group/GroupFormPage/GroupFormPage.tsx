@@ -1,12 +1,15 @@
 import { GroupFieldsLeft, GroupFieldsRight, useGroupSession } from "@/pages/Group/GroupFormPage/components/GroupFields.container.js";
-import { AggregatedGroupT, SimpleGroupT } from "@/types/Types.js";
+import { AggregatedGroupT, COLORS_GROUP_ROLES, GroupRolesT, SimpleGroupT } from "@/types/Types.js";
 import { DeleteSaveButtonGroup } from "../../../components/deleteSaveButtonGroup/DeleteSaveButtonGroup.view.js";
 import Header from "../../../components/Header/Header.view.js";
 import { TwoColumnLayout } from "../../../components/TwoColumnLayout/TwoColumnLayout.container.js";
 import { useAggregatedGroupForm } from "./useGroupForm.js";
-import { createContext, useEffect } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { MyLoader } from "@/components/MyLoader/MyLoader.view.js";
 import { UseFormReturnType } from "@mantine/form";
+import { SessionContext } from "@/utils/authentication/Authwrapper.js";
+import { notificationInfoWithColor } from "@/utils/NotificationService.js";
+import { group } from "console";
 
 
 type GroupFormPageProps = {
@@ -27,7 +30,10 @@ export function GroupFormPage({
 
     const form: UseFormReturnType<AggregatedGroupT, (values: AggregatedGroupT) => AggregatedGroupT> = useAggregatedGroupForm(initialGroup ?? null);
 
-    const { systemRole, groupRole } = initialGroup ? useGroupSession(initialGroup) : { systemRole: "member", groupRole: "member" };
+    const { systemRole, groupRole } = initialGroup
+        ? useGroupSession(initialGroup)
+        : { systemRole: "member", groupRole: "member" as keyof typeof COLORS_GROUP_ROLES };
+    const { user } = useContext(SessionContext);
 
     const fieldDisabled = () => {
         if (mode === "edit") {
@@ -50,8 +56,15 @@ export function GroupFormPage({
 
 
     useEffect(() => {
-        if (initialGroup) {
-            form.setValues(initialGroup);
+        if (initialGroup && groupRole && user) {
+            const color = COLORS_GROUP_ROLES[groupRole as keyof typeof COLORS_GROUP_ROLES] || "blue";
+
+            notificationInfoWithColor(
+                "Your role in this group is",
+                groupRole ? groupRole.charAt(0).toUpperCase() + groupRole.slice(1) : "Undefined",
+                color
+            );
+
         }
     }, [initialGroup]);
 
