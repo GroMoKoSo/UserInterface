@@ -1,5 +1,5 @@
 import { GroupFieldsLeft, GroupFieldsRight, useGroupSession } from "@/pages/Group/GroupFormPage/components/GroupFields.container.js";
-import { AggregatedGroupT, COLORS_GROUP_ROLES, GroupRolesT, SimpleGroupT } from "@/types/Types.js";
+import { AggregatedGroupT, COLORS_GROUP_ROLES, COLORS_SYSTEM_ROLES, GroupRolesT, SimpleGroupT } from "@/types/Types.js";
 import { DeleteSaveButtonGroup } from "../../../components/deleteSaveButtonGroup/DeleteSaveButtonGroup.view.js";
 import Header from "../../../components/Header/Header.view.js";
 import { TwoColumnLayout } from "../../../components/TwoColumnLayout/TwoColumnLayout.container.js";
@@ -30,10 +30,12 @@ export function GroupFormPage({
 
     const form: UseFormReturnType<AggregatedGroupT, (values: AggregatedGroupT) => AggregatedGroupT> = useAggregatedGroupForm(initialGroup ?? null);
 
-    const { systemRole, groupRole } = initialGroup
-        ? useGroupSession(initialGroup)
-        : { systemRole: "member", groupRole: "member" as keyof typeof COLORS_GROUP_ROLES };
-    const { user } = useContext(SessionContext);
+    const session = useGroupSession(initialGroup ?? null);
+    const { systemRole, groupRole } = session ?? {
+        systemRole: "member",
+        groupRole: "member" as keyof typeof COLORS_GROUP_ROLES,
+    };
+    const { user } = useContext(SessionContext)
 
     const fieldDisabled = () => {
         if (mode === "edit") {
@@ -56,6 +58,10 @@ export function GroupFormPage({
 
 
     useEffect(() => {
+        if (initialGroup) {
+            form.setValues(initialGroup);
+        }
+
         if (initialGroup && groupRole && user) {
             const color = COLORS_GROUP_ROLES[groupRole as keyof typeof COLORS_GROUP_ROLES] || "blue";
 
@@ -65,6 +71,14 @@ export function GroupFormPage({
                 color
             );
 
+            const color2 = COLORS_SYSTEM_ROLES[systemRole as keyof typeof COLORS_SYSTEM_ROLES] || "blue";
+
+            notificationInfoWithColor(
+                "Your system role is",
+                systemRole ? systemRole.charAt(0).toUpperCase() + systemRole.slice(1) : "Undefined",
+                color2
+            );
+
         }
     }, [initialGroup]);
 
@@ -72,6 +86,7 @@ export function GroupFormPage({
     if (!form) {
         return <MyLoader />;
     }
+
 
     return (
         <groupFormContext.Provider value={{ form, mode }}>
@@ -99,7 +114,7 @@ export function GroupFormPage({
                                     mode === "edit" && onDelete ? () => onDelete(initialGroup!) : () => console.log("no delete function provided")
                                 }
                                 onSave={() => form.setSubmitting(true)}
-                                showDelete={mode === "edit"}
+                                showDelete={mode === "edit" && systemRole === "admin" || groupRole === "admin"}
                             />
                         )
                     }

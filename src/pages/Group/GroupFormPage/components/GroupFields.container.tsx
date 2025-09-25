@@ -9,14 +9,11 @@ import { SessionContext } from "@/utils/authentication/Authwrapper.js";
 // kleine Hilfsfunktion / Hook direkt in dieser Datei
 export function useGroupSession(group: AggregatedGroupT | null) {
   const sessionContext = useContext(SessionContext);
-  //const systemRole = sessionContext?.user?.systemrole ?? "member";
-  //const groupRole =
-    //sessionContext?.user?.groupMemberships.find(
-    //  (gr) => gr.group.name === group?.name
-    //)?.roleInGroup ?? "member";
-
-    const systemRole = "member";
-    const groupRole = "editor";
+  const systemRole = sessionContext?.user?.systemrole ?? "member";
+  const groupRole =
+    sessionContext?.user?.groupMemberships.find(
+      (gr) => gr.group.name === group?.name
+    )?.roleInGroup ?? "member";
 
   return { systemRole, groupRole };
 }

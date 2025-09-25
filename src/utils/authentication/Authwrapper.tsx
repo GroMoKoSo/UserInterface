@@ -1,4 +1,4 @@
-import { AggregatedUserT } from "@/types/Types.js";
+import { AggregatedUserT, SystemRolesT } from "@/types/Types.js";
 import { createContext, useEffect, useState } from "react";
 import keycloak from "./keycloak.js";
 import { routes, RouteT } from "./routes.js";
@@ -45,7 +45,10 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
             const user = await getAggregatedUser(username);
             if (user) {
                 console.log("Using fetched user", user);
-                return user;
+                return {
+                    ...user,
+                    systemrole: role as SystemRolesT
+                };
             }
         } catch (err) {
             console.error("Error fetching aggregated user:", err);
