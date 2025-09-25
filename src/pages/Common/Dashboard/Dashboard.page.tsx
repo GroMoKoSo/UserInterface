@@ -100,7 +100,7 @@ export function DashboardPage() {
                                 mt={"md"}
                                 color='green'
                                 variant='outline'
-                                onClick={() => navigate('/groups/new')}
+                                onClick={() => {}}
                             >
                                 Create Api
                             </Button>

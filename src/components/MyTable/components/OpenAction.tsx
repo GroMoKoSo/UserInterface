@@ -16,8 +16,8 @@ export function OpenAction({ onOpen, row, rowIndex }: OpenActionProps<any> & {})
                 variant="subtle"
                 color="gray"
                 onClick={() => onOpen(row, rowIndex)}
-                aria-label="Edit"
-                title="Edit"
+                aria-label="Open"
+                title="Open"
             >
                 <IconExternalLink size={16} stroke={1.5} />
             </ActionIcon>
