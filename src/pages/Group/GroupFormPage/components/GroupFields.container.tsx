@@ -2,9 +2,10 @@ import { AggregatedGroupT } from "@/types/Types.js";
 import { Fieldset } from "@mantine/core";
 import { GroupMembersField } from "./GroupMembersField.view.js";
 import { GroupInformationField } from "./GroupInformationField.view.js";
+import { GroupApisField } from "./GroupApisField.container.js";
 
 
-export default function GroupFields({ group }: { group: AggregatedGroupT | null }) {
+export function GroupFieldsLeft({ group }: { group: AggregatedGroupT | null }) {
     return (
         <div style={{minWidth: 600}}>
             <Fieldset legend="Group Information">
@@ -16,4 +17,13 @@ export default function GroupFields({ group }: { group: AggregatedGroupT | null 
             </Fieldset>
         </div>
     );
+}
+
+
+export function GroupFieldsRight({ group }: { group: AggregatedGroupT | null }) {
+    return (
+        <Fieldset legend="Api's">
+            <GroupApisField group={group}/>
+        </Fieldset>
+    )
 }

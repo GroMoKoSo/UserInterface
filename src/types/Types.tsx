@@ -30,7 +30,12 @@ export const COLORS_API_ACCESS_TYPES: Record<ApiAccessTypesT, string> = {
     "group": "#9B59B6", // violet
 };
 
-
+export const API_ACTIVATION_TYPES = ["active", "inactive"] as const;
+export type ApiActivationTypesT = typeof API_ACTIVATION_TYPES[number];
+export const COLORS_PI_ACTIVATION_TYPES: Record<ApiActivationTypesT, string> = {
+    "active": "#2ECC71",  // green
+    "inactive": "#7F8C8D", // gray
+};
 
 export type SimpleUserT = {
     username: string;
@@ -62,6 +67,10 @@ export type ApiAccessT = {
     activated: boolean;
 }
 
+export type AggregatedApiT = ApiSpecT & ApiAccessT & {
+    activationStatus: ApiActivationTypesT;
+}
+
 export type GroupMemershipT = {
     roleInGroup: GroupRolesT;
     group: SimpleGroupT;
@@ -79,5 +88,5 @@ export type GroupMemberT = {
 
 export type AggregatedGroupT = SimpleGroupT & {
     groupMembers: GroupMemberT;
-    accessibleApis: ApiAccessT[];
+    accessibleApis: AggregatedApiT[];
 }

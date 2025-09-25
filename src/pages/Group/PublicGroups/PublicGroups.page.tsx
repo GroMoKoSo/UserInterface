@@ -28,14 +28,6 @@ export function PublicGroupsPage() {
                     data={groups}
                     columns={[
                         { key: 'name', label: 'Name' },
-                        {
-                            key: 'type',
-                            label: 'Type',
-                            badge: {
-                                colorMap: COLORS_GROUP_TYPES,
-                                fallbackColor: 'gray',
-                            },
-                        },
                     ]}
                     initialSortKey='name'
                     renderActions={(row, index) => (

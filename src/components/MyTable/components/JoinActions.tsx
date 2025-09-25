@@ -1,4 +1,5 @@
-import { Button, Group } from "@mantine/core";
+import { ActionIcon, Button, Group } from "@mantine/core";
+import { IconExternalLink } from "@tabler/icons-react";
 
 
 type EditDeleteActionProps<T> = {
@@ -7,9 +8,20 @@ type EditDeleteActionProps<T> = {
     rowIndex: number
 }
 
-export function JoinActions({onJoin, row, rowIndex}: EditDeleteActionProps<any> & {}) {
+export function JoinActions({ onJoin, row, rowIndex }: EditDeleteActionProps<any> & {}) {
     return (
         <Group gap={0} justify="flex-end">
+
+            <Button
+                variant="light"
+                color="blue"
+                size="xs"
+                onClick={() => onJoin(row, rowIndex)}
+                aria-label="View"
+                title="View"
+            >
+                View
+            </Button>
 
             <Button
                 variant="light"
@@ -18,6 +30,7 @@ export function JoinActions({onJoin, row, rowIndex}: EditDeleteActionProps<any> 
                 onClick={() => onJoin(row, rowIndex)}
                 aria-label="Join"
                 title="Join"
+                ml={"md"}
             >
                 Join
             </Button>

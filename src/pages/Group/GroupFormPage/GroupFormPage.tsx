@@ -1,4 +1,4 @@
-import GroupFields from "@/pages/Group/GroupFormPage/components/GroupFields.container.js";
+import { GroupFieldsLeft, GroupFieldsRight } from "@/pages/Group/GroupFormPage/components/GroupFields.container.js";
 import { AggregatedGroupT, SimpleGroupT } from "@/types/Types.js";
 import { DeleteSaveButtonGroup } from "../../../components/deleteSaveButtonGroup/DeleteSaveButtonGroup.view.js";
 import Header from "../../../components/Header/Header.view.js";
@@ -52,7 +52,8 @@ export function GroupFormPage({
                             backButton={true}
                         />
                     }
-                    leftContent={<GroupFields group={initialGroup ?? null} />}
+                    leftContent={<GroupFieldsLeft group={initialGroup ?? null} />}
+                    rightContent= {<GroupFieldsRight group={initialGroup ?? null} />}
                     bottomContent={
                         <DeleteSaveButtonGroup
                             deleteLabel="Delete Group"

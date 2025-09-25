@@ -17,6 +17,7 @@ import {
     IconSelector,
 } from '@tabler/icons-react';
 import React from 'react';
+import { debug } from 'console';
 
 /** --- Types ---------------------------------------------------------------- */
 
@@ -203,6 +204,9 @@ export function MyTable<T>({
     height = '70vh',
     badgeByIndex,
 }: MyTableProps<T>) {
+
+    const safeData = Array.isArray(data) ? data : [];
+
     const columnDefs = useMemo(() => toColumnDefs(columns), [columns]);
 
     // apply badgeByIndex overrides (non-destructive)
@@ -226,10 +230,9 @@ export function MyTable<T>({
         // 1) filter
         const lc = search.toLowerCase().trim();
         const searchableCols = columnDefsWithBadges.filter((c) => c.searchable !== false);
-        const filtered =
-            !enableSearch || lc === ''
-                ? data
-                : data.filter((row) =>
+        const filtered = !enableSearch || lc === ''
+                ? safeData
+                : safeData.filter((row) =>
                     searchableCols.some((c) => {
                         const v = getCellValue(c, row);
                         return v != null && String(v).toLowerCase().includes(lc);
@@ -244,7 +247,7 @@ export function MyTable<T>({
 
         const sorted = [...filtered].sort((a, b) => compare(getCellValue(col, a), getCellValue(col, b)));
         return reverse ? sorted.reverse() : sorted;
-    }, [data, columnDefsWithBadges, search, enableSearch, sortKey, enableSort, reverse]);
+    }, [safeData, columnDefsWithBadges, search, enableSearch, sortKey, enableSort, reverse]);
 
     const handleSort = (key: ColumnKey<T>) => {
         if (!enableSort) return;

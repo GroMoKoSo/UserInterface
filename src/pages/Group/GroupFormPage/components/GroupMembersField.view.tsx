@@ -3,8 +3,8 @@ import { Button } from "@mantine/core";
 import { EditDeleteActions } from "@/components/MyTable/components/EditDeleteActions.js";
 import { AggregatedGroupT, COLORS_GROUP_ROLES, GroupMemberT } from "@/types/Types.js";
 import { useContext, useState } from "react";
-import { useAddModal } from "../hooks/UseAddModal.js";
-import { useEditModal } from "../hooks/UseEditModal.js";
+import { useAddModalGroupMember } from "../hooks/UseAddModal.js";
+import { useEditModalGroupMember } from "../hooks/UseEditModal.js";
 import { MyLoader } from "@/components/MyLoader/MyLoader.view.js";
 import { groupFormContext } from "../GroupFormPage.js";
 import { GroupMembersSkeleton } from "@/components/Skelletons/Skeletons.view.js";
@@ -17,8 +17,8 @@ export function GroupMembersField({ group }: { group: AggregatedGroupT | null })
 
     const [currentlyEditingMemberIndex, setCurrentlyEditingMemberIndex] = useState<number | null>(null);
     const { form, mode } = useContext(groupFormContext)
-    const { open: openAddModal, element: addModalElement } = useAddModal(form);
-    const { open: openEditModal, element: editModalElement } = useEditModal(currentlyEditingMemberIndex, form);
+    const { open: openAddModal, element: addModalElement } = useAddModalGroupMember();
+    const { open: openEditModal, element: editModalElement } = useEditModalGroupMember(currentlyEditingMemberIndex, form);
 
     function handleEditClick(row: TableGroupMemberT, index: number) {
         console.log(row)

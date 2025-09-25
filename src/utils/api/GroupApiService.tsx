@@ -1,4 +1,4 @@
-import { AggregatedGroupT, ApiAccessT, GroupMemberT, SimpleGroupT } from '../../types/Types.js';
+import { AggregatedApiT, AggregatedGroupT, ApiAccessT, ApiSpecT, GroupMemberT, SimpleGroupT } from '../../types/Types.js';
 import { groupMockData } from './../mockData/groupMock.js';
 import { getAllUsers } from './UserApiService.js';
 import { getAllApis } from './ApiApiService.js';
@@ -57,7 +57,7 @@ async function getGroupMembers(name: string): Promise<GroupMemberT> {
         }));
 }
 
-function getGroupApis(_name: string): ApiAccessT[] {
+function getGroupApiAccess(_name: string): ApiAccessT[] {
     return getAllApis()
         .sort(() => 0.5 - Math.random()) // Shuffle APIs
         .slice(0, Math.floor(Math.random() * (10 - 2 + 1)) + 2) // 2–10 random APIs
@@ -67,6 +67,7 @@ function getGroupApis(_name: string): ApiAccessT[] {
             activated: Math.random() < 0.8, // 80% chance
         }));
 }
+
 
 export function getAggregatedGroup(name: string): Promise<AggregatedGroupT | null> {
     //const id = notificationLoading('Fetching Aggregated Group ...', `Trying to fetch aggregated data for group "${name}" ...`);
@@ -80,10 +81,27 @@ export function getAggregatedGroup(name: string): Promise<AggregatedGroupT | nul
                     return resolve(null);
                 }
 
+                const apiAccesses: ApiAccessT[] = getGroupApiAccess(name);
+                const allApis: ApiSpecT[] = getAllApis(); //.filter(api => apiAccesses.some(access => access.api === api.id));
+                const mappedApis: AggregatedApiT[] = apiAccesses
+                    .map(access => {
+                        const api = allApis.find(api => api.id === access.api);
+                        if (!api || api.id === undefined) {
+                            console.warn(`API with ID ${access.api} not found or has undefined ID`);
+                            return null; // Skip invalid API
+                        }
+                        return {
+                            ...access,
+                            ...api,
+                            activationStatus: access.activated ? 'active' : 'inactive',
+                        };
+                    })
+                    .filter((api): api is AggregatedApiT => api !== null); // Filter out null values
+
                 const aggregated: AggregatedGroupT = {
                     ...grp,
                     groupMembers: await getGroupMembers(name),
-                    accessibleApis: getGroupApis(name),
+                    accessibleApis: mappedApis,
                 };
 
                 //notificationSuccess(id,'Success!', `Aggregated data for group "${name}" has been fetched!` );

@@ -11,7 +11,7 @@ export function GroupDetailsPage() {
 
     useEffect(() => {
         if (name) {
-            getAggregatedGroup(name).then(setGroup);
+            getAggregatedGroup(name).then(setGroup).then(console.log);
         }
     }, [name]);
 
