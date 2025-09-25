@@ -1,4 +1,4 @@
-import { AggregatedUserT, SimpleGroupT, SimpleUserT } from '../../types/Types.js';
+import { AggregatedApiT, AggregatedUserT, ApiAccessT, GroupMemershipT, SimpleGroupT, SimpleUserT } from '../../types/Types.js';
 import { userMockData } from '../mockData/userMock.js';
 import { notificationLoading, notificationSuccess } from '../NotificationService.js';
 import { getAllApis } from './ApiApiService.js';
@@ -39,7 +39,6 @@ export function getUser(username: string): Promise<SimpleUserT | null> {
 
 export async function getAggregatedUser(username: string): Promise<AggregatedUserT | null> {
     //const id = notificationLoading('Fetching Aggregated User ...', `Trying to fetch aggregated data for ${username} ...`);
-
     return new Promise(async (resolve) => {
         setTimeout(async () => {
             try {
@@ -60,11 +59,11 @@ export async function getAggregatedUser(username: string): Promise<AggregatedUse
                             ] || 'member') as 'admin' | 'editor' | 'member',
                             group,
                         })),
-                    accessibleApis: getAllApis(),
+                    accessibleApis: await getAggregatedApiForUser(username),
                 };
 
                 //notificationSuccess(id, 'Success!', `Aggregated data for ${username} has been fetched!`);
-                console.log('Fetching aggregated user: ', username);
+                console.log('Fetching aggregated user: ', aggregatedUser);
                 resolve(aggregatedUser);
             } catch (error) {
                 //notificationError(id, 'Error', `An error occurred while trying to fetch aggregated user ${username}`);
@@ -146,3 +145,19 @@ export function removeApiFromUser(username: string, apiId: number): Promise<bool
         }, 2000);
     });
 }
+
+
+export function getAggregatedApiForUser(username: string): Promise<AggregatedApiT[]> {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            // fake success
+            const accessibleApis= getAllApis().map(a => ({
+                ...a,
+                api: a.id,
+                accessVia: "user" as "user",
+                activated: true,
+                activationStatus: "active" as "active"
+            }));
+            resolve(accessibleApis);
+        }, 500);
+    })}

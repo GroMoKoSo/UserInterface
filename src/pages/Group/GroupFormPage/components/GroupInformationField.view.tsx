@@ -21,7 +21,7 @@ export function GroupInformationField({ group, systemRole, groupRole }: { group:
             
             return true
         }
-        return true
+        return false
     }
 
     if (!form) {

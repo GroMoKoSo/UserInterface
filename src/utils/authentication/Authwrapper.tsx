@@ -2,6 +2,7 @@ import { AggregatedUserT } from "@/types/Types.js";
 import { createContext, useEffect, useState } from "react";
 import keycloak from "./keycloak.js";
 import { routes, RouteT } from "./routes.js";
+import { getAggregatedUser } from "../api/UserApiService.js";
 
 
 type SessionContextType = {
@@ -23,14 +24,13 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
     const [permittedRoutes, setPermittedRoutes] = useState<RouteT[]>([]);
 
     async function fetchAggregatedUserInfo(username: string): Promise<AggregatedUserT> {
-        // Mocked user info TODO: replace with actual API call
-
         let role = sessionStorage.getItem("role");
         if (role !== "admin" && role !== "member") {
             sessionStorage.setItem("role", "member");
             role = "member";
         }
-        return Promise.resolve({
+    
+        let fallbackUser: AggregatedUserT = {
             firstName: "Mock",
             lastName: "User",
             name: "Mock User",
@@ -39,8 +39,21 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
             systemrole: role === "admin" ? "admin" : "member",
             accessibleApis: [],
             groupMemberships: [],
-        });
+        };
+    
+        try {
+            const user = await getAggregatedUser(username);
+            if (user) {
+                console.log("Using fetched user", user);
+                return user;
+            }
+        } catch (err) {
+            console.error("Error fetching aggregated user:", err);
+        }
+    
+        return fallbackUser; // nur falls API fehlschlägt
     }
+    
 
     useEffect(() => {
         // Prevent multiple initializations
@@ -76,7 +89,7 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
             });
     }, [])
 
-    if (!user) {return (<></>)}
+    if (!user) { return (<></>) }
 
     return (
         <SessionContext.Provider value={{ user, keycloak, setUser, permittedRoutes }}>

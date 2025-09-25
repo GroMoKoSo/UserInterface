@@ -41,7 +41,7 @@ export function GroupMembersField({ group, systemRole, groupRole }: { group: Agg
 
             return true
         }
-        return true
+        return false
     }
 
 

@@ -78,7 +78,7 @@ export type GroupMemershipT = {
 
 export type AggregatedUserT = SimpleUserT & {
     groupMemberships: GroupMemershipT;
-    accessibleApis: ApiSpecT[];
+    accessibleApis: AggregatedApiT[];
 }
 
 export type GroupMemberT = {

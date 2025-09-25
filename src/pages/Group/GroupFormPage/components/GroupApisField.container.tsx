@@ -45,14 +45,14 @@ export function GroupApisField({ group, systemRole, groupRole }: { group: Aggreg
 
             return true
         }
-        return true
+        return false
     }
 
     if (!form) {
         return <MyLoader />
     }
 
-    if (!group) {
+    if (!group && mode === "edit" ) {
         return (<GroupMembersSkeleton />)
     }
 

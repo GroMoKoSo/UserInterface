@@ -1,16 +1,17 @@
 import { MyTable } from "@/components/MyTable/MyTable.js";
 import { TableSkeleton } from "@/components/Skelletons/Skeletons.view.js";
-import { ApiSpecT, SimpleGroupT } from "@/types/Types.js";
+import { ApiSpecT, GroupMemershipT, SimpleGroupT } from "@/types/Types.js";
 
-export function MyGroupsTable({data}: {data: ApiSpecT[] | null}) {
+export function MyGroupsTable({data}: {data: GroupMemershipT | null}) {
 
     if (!data) {
         return <TableSkeleton />;
     }
     return (
-        <MyTable<SimpleGroupT>
+        <MyTable<GroupMemershipT[number]>
             data={[]}
             columns={[]}
+            height={"auto"}
         />
     )
 }

@@ -161,4 +161,12 @@ export const userMockData: SimpleUserT[] = [
         systemrole: "member",
         email: "tina.schmitt@example.com",
     },
+    {
+        username: "max.mustermann",
+        name: "Max Mustermann",
+        firstName: "Max",
+        lastName: "Mustermann",
+        systemrole: "member",
+        email: "max.mustermann@example.com",
+    },
 ];
