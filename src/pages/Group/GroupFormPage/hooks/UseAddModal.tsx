@@ -16,16 +16,27 @@ export function useAddModalGroupMember() {
 
     const [selectedMember, setSelectedMember] = useState<GroupMemberT[number] | null>(null);
     const [possibleUsers, setPossibleUsers] = useState<SimpleUserT[]>([]);
+    const [allUsers, setAllUsers] = useState<SimpleUserT[]>([]);
 
     useEffect(() => {
         const fetchUsers = async () => {
             await getAllUsers().then(res => {
-                const filtered = res.filter(u => form.values.groupMembers.map((gm: { user: { username: any; }; }) => gm.user.username).includes(u.username) === false);
-                setPossibleUsers(filtered);
+                setAllUsers(res);
             });
         };
         fetchUsers();
     }, []);
+
+    useEffect(() => {   
+        const filtered = allUsers
+            .filter(u => form.getValues().groupMembers
+                .map((gm: { user: { username: any; }; }) => gm.user.username)
+                .includes(u.username) === false
+            );
+
+        setPossibleUsers(filtered);
+        console.log("possible users", filtered);
+    }, [allUsers, form.getValues().groupMembers]);
 
 
     const element = (

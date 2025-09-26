@@ -22,22 +22,26 @@ export function GroupFieldsLeft({ group }: { group: AggregatedGroupT | null }) {
   const { systemRole, groupRole } = useGroupSession(group);
 
   return (
-    <div style={{ minWidth: 600 }}>
-      <Fieldset legend="Group Information">
-        <GroupInformationField
-          group={group}
-          systemRole={systemRole}
-          groupRole={groupRole}
-        />
-      </Fieldset>
+    <div style={{ display: "inline-block", width: "100%" }}>
+      <div style={{ minWidth: 600 }}>
+        <Fieldset legend="Group Information">
+          <GroupInformationField
+            group={group}
+            systemRole={systemRole}
+            groupRole={groupRole}
+          />
+        </Fieldset>
+      </div>
 
-      <Fieldset legend="Group Members" mt="md" w="100%" maw={1000}>
-        <GroupMembersField
-          group={group}
-          systemRole={systemRole}
-          groupRole={groupRole}
-        />
-      </Fieldset>
+      <div style={{ minWidth: 600 }}>
+        <Fieldset legend="Group Members">
+          <GroupMembersField
+            group={group}
+            systemRole={systemRole}
+            groupRole={groupRole}
+          />
+        </Fieldset>
+      </div>
     </div>
   );
 }
